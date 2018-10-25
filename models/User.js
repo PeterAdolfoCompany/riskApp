@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
-const passportLocalMongoose = require('passport-local-mongoose'); //Requiere la libreria passport-local-mongoose
+const passportLocalMongoose = require('passport-local-mongoose');
+
+//IDEA: Los usuarios no se van a registrar con email ni nada... solo el Admin los da de alta, razon, para no tenerlo expuesto al pùblico general...
 
 const userSchema = new Schema({
   username: String,
@@ -9,10 +11,13 @@ const userSchema = new Schema({
     type: String,
     enum:["ADMIN", "USER"],
     default: "USER"
+  },
+}, {timestamps: {
+    createdAt: "created_at",
+    updatedAt: "updated_at"
   }
 });
 
-//Darle la posibilidad a passport-local-mongoose y usar sus modelos
 userSchema.plugin(passportLocalMongoose)
 
-module.exports = mongoose.model("User", userSchema); //Recordar que User es la colleccion
+module.exports = mongoose.model("User", userSchema);
