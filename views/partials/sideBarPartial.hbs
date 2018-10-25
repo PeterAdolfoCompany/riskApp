@@ -29,8 +29,9 @@
       <!-- ADD PROJECT  -->
       <div class="sidebar-search">
         <span>-------</span>
-        <span class="badge badge-pill badge-success"><a class="text-light" href="">Add new project</a></span>
-      </div>
+        <button type="button" class="btn btn-yellow btn-sm" data-toggle="modal" data-target="#newProjectModalPr">
+          Add new project
+        </button> </div>
 
       <!-- PROYECTOS  -->
       <div class="sidebar-menu">
@@ -50,8 +51,9 @@
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <span class="badge badge-pill badge-success"><a class="text-light" href="">Add Event</a></span>
-                </li>
+                  <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#newEventModalPr">
+                    Add new event +
+                  </button> </li>
                 <li>
                   <a href="#">FireBall 01</a>
                 </li>
@@ -76,7 +78,9 @@
             <div class="sidebar-submenu">
               <ul>
                 <li>
-                  <span class="badge badge-pill badge-success"><a class="text-light" href="">Add Event</a></span>
+                  <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#newEventModalPr">
+                    Add new event +
+                  </button>
                   </a>
                 </li>
                 <li>
@@ -112,9 +116,13 @@
           </div>
   </nav>
 
+{{!-- MODAL ADD EVENT --}}
+  {{>modalNewEventPr}}
 
+  
   <!-- LADO DEL MAPA  -->
   <main class="page-content">
+
     <h1>MAPA GOOGLE MAPS</h1>
   </main>
   <!-- page-content" -->
