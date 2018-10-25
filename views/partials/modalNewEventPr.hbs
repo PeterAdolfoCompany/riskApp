@@ -90,26 +90,117 @@
             </div>
 
             {{!-- ATMOSPHERIC --}}
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <div  class="row">
-                <input class="form-control col-sm-6 text-right" type="text" placeholder="Medium input">
-                <select class="browser-default custom-select col-sm-6">
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+            <div class="tab-pane fade container " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="row justify-content-center mt-2">
+                <label class="col-6 text-center" for="">Wind velocity</label>
+                <input class="form-control col-3 text-center" type="text" placeholder="">
+                <select class="browser-default custom-select col-3">
+                  <option value="1">m/s</option>
+                  <option value="2">km/h</option>
+                  <option value="3">mph</option>
+                </select>
+              </div>
+              <div class="row justify-content-center mt-2">
+                <label class="col-6 text-center" for="">Air Temperature</label>
+                <input class="form-control col-3 text-center" type="text" placeholder="">
+                <select class="browser-default custom-select col-3">
+                  <option value="1">C</option>
+                  <option value="2">K</option>
+                  <option value="3">F</option>
+                </select>
+              </div>
+              <div class="row justify-content-center mt-2">
+                <label class="col-6 text-center" for="">Humidity (%)</label>
+                <input class="form-control col-3 text-center" type="text" placeholder="">
+                <select class="browser-default custom-select col-3">
+                  <option value="1">%</option>
+                </select>
+              </div>
+              <div class="row justify-content-center mt-2">
+                <label class="col-6 text-center" for="">Altitude (msnm)</label>
+                <input class="form-control col-3 text-center" type="text" placeholder="">
+                <select class="browser-default custom-select col-3">
+                  <option value="1">msnm</option>
                 </select>
               </div>
 
             </div>
 
             {{!-- SOURCE --}}
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Etsy mixtape
-              wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi
-              farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore
-              carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit
-              cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro
-              mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown.
-              Pitchfork sustainable tofu synth chambray yr.</div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+              <hr>
+              <h5>Type of Leak </h5>
+              <!-- Default inline 1-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="continuosLeak" name="radioTypeLeak" checked>
+                <label class="custom-control-label" for="continuosLeak">Continuos leak</label>
+              </div>
+
+              <!-- Default inline 2-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="massiveLeak" name="radioTypeLeak">
+                <label class="custom-control-label" for="massiveLeak">Massive leak</label>
+              </div>
+
+              <!-- Default inline 3-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="circularDike" name="radioTypeLeak">
+                <label class="custom-control-label" for="circularDike">Circular dike</label>
+              </div>
+
+              <!-- Default inline 4-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="noCircularDike" name="radioTypeLeak">
+                <label class="custom-control-label" for="noCircularDike">No Circular dike</label>
+              </div>
+              <hr>
+
+              <h5>Burning Rate Method </h5>
+              <!-- Default inline 1-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="strasser" name="radioBurningRateMethod"
+                  checked>
+                <label class="custom-control-label" for="strasser">Strasser</label>
+              </div>
+
+              <!-- Default inline 2-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="mudan" name="radioBurningRateMethod">
+                <label class="custom-control-label" for="mudan">Mudan</label>
+              </div>
+              <hr>
+
+              <h5>Flame Height Method </h5>
+              <!-- Default inline 1-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="thomas" name="radioFlameHeightMethod"
+                  checked>
+                <label class="custom-control-label" for="thomas">Thomas</label>
+              </div>
+
+              <!-- Default inline 2-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="pritchard" name="radioFlameHeightMethod">
+                <label class="custom-control-label" for="pritchard">Pritchard</label>
+              </div>
+              <hr>
+
+              <h5>Calculation Method </h5>
+              <!-- Default inline 1-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="pointSource" name="radioCalcMethod"
+                  checked>
+                <label class="custom-control-label" for="pointSource">Point Source</label>
+              </div>
+
+              <!-- Default inline 2-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="solidSource" name="radioCalcMethod">
+                <label class="custom-control-label" for="solidSource">Solid Source</label>
+              </div>
+              <hr>
+
+            </div>
           </div>
 
         </div>
