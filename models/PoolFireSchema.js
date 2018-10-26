@@ -19,7 +19,6 @@ const poolFireSchema = new Schema({
     anchoDiqueNoCircular: Number,
     largoDiqueNoCircular: Number,
     diametroDiqueCircular: Number,
-    //DE LA BASE DE DATOS
 
     //RESULTADOS
     poolFireArray:[Number], //Array para graficar y reporte
