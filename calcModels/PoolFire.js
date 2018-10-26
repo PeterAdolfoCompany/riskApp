@@ -311,9 +311,9 @@ class PoolFire {
       humedadRelativa = 0.001;
     }
     let pHR = humedadRelativa / 100.00; //La humedad relativa se convierte a parcial numerado entre 0 y 1
-    let radio = this.poolDiameter() / 2.0;
+    //let radio = this.poolDiameter() / 2.0;
     let c4 = 2.02;
-    //Calculo de la Presion Parcial de Vapor de Agua (PA)
+    //Calculo de la Presion Parcial de Vapor de Agua (PA) se puede usar la CCPS 2.2.43?
     let pwo = Math.exp(77.3450 + 0.0057 * (tAmbK) - 7235.0 / (tAmbK)) / Math.pow((tAmbK), 8.2); //(PA)
     let pw = pHR * pwo; //(PA)
 
