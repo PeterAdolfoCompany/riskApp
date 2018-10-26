@@ -1,0 +1,130 @@
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a href="#">Risk App</a>
+        <div id="close-sidebar">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg"
+            alt="User picture">
+        </div>
+        <div class="user-info">
+          <span class="user-name">Jhon
+            <strong>Smith</strong>
+          </span>
+          <span class="user-role">User Risk App Basic</span>
+          <span class="user-status">
+            <a href=""><i class="fa fa-gear" aria-hidden="true"></i>--Settings</a>
+          </span>
+        </div>
+      </div>
+      <!-- ADD PROJECT  -->
+        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+          <button type="button" class="btn btn-amber ml-3"><i class="fa fa-fire" aria-hidden="true"></i>--- Pool Fire
+            Model</button>
+          <button type="button" class="btn btn-amber ml-3"><i class="fa fa-bomb" aria-hidden="true"></i>--- Fire Ball Model</button>
+          <button type="button" class="btn btn-amber ml-3"><i class="fa fa-podcast" aria-hidden="true"></i>--- Explosion
+            Model</button>
+        </div>
+      <!-- PROYECTOS  -->
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>EVENTS</span>
+          </li>
+
+          {{!-- COMIENZA UN PROYECTO --}}
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Project 01</span>
+            </a>
+
+            {{!-- Submenu de eventos del proyecto --}}
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#newEventModalPr">
+                    Add new event +
+                  </button> </li>
+                <li>
+                  <a href="#">FireBall 01</a>
+                </li>
+                <li>
+                  <a href="#">Explosion 01</a>
+                </li>
+                <li>
+                  <a href="#">Explosion gas</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          {{!-- TERMINA PROYECTO --}}
+
+          {{!-- COMIENZA UN PROYECTO --}}
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Estacion servicio</span>
+            </a>
+            {{!-- SUBMENU DE EVENTOS DEL PROYECTO --}}
+            <div class="sidebar-submenu">
+              <ul>
+                <li>
+                  <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#newEventModalPr">
+                    Add new event +
+                  </button>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">FireBall Gasera</a>
+                </li>
+                <li>
+                  <a href="#">Explosion en Tq de gas fs dsafg dsfg dfg df g dfg g</a>
+                </li>
+                <li>
+                  <a href="#">Explosion gas</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          {{!-- TERMINA PROYECTO --}}
+
+
+
+          <!-- sidebar-content  -->
+          <div class="sidebar-footer">
+            <a href="#">
+              <i class="fa fa-bell"></i>
+              <span class="badge badge-pill badge-warning notification">3</span>
+            </a>
+            <a href="#">
+              <i class="fa fa-envelope"></i>
+              <span class="badge badge-pill badge-success notification">7</span>
+            </a>
+            <a href="#">
+              <i class="fa fa-cog"></i>
+              <span class="badge-sonar"></span>
+            </a>
+          </div>
+  </nav>
+
+  {{!-- MODAL ADD EVENT --}}
+  {{>modalNewEventPr}}
+
+
+  <!-- LADO DEL MAPA  -->
+  <main class="page-content">
+
+    <h1>MAPA GOOGLE MAPS</h1>
+  </main>
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
