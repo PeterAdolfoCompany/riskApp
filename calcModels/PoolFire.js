@@ -1,5 +1,5 @@
 /* PoolFire.js */
-const data = require("../db/DBCHEM")
+const data = require("./DBCHEM")
 
 //---------- CONSTANTES --------------------------------------------
 const G = 9.80665; //Aceleración de la gravedad (m/s2)
@@ -256,7 +256,7 @@ class PoolFire {
  - tiltAngle - Angulo de la flama determinado por la acion del viento Metodo flameTiltAngle() (RADIANES)
  - diameter - diametro de la alberca de fuego (m)
  - alturaFlama - Altura de la flama (m) del metodo heightFlame(Thomas o Pitchard)()
- FIXME: TRUENA CUENDO X ES MENOR AL RADIO DEL POOLFIRE*/
+ FIXME: TRUENA CUANDO X ES MENOR AL RADIO DEL POOLFIRE*/
   viewFactor(x) {
     if (this.isSolidPlumeModel) {
       let poolRadio = this.poolDiameter() / 2.0;
@@ -341,6 +341,41 @@ class PoolFire {
     return this.SEP() * this.viewFactor(x) * this.ta(x);
   }
 
+  /* ---------------- DISTANCIA A UNA RADIACION TERMICA DADA (m) (kW/m2) --------------
+ - HR - Humedad relativa en (%) se debe convertir entre 0 y 1
+ - qTerm - Radiación térmica (kW/m2).
+ - diameter - diametro de la alberca de fuego (m)
+ - tAmb - Temperatura Ambiente (C)
+ - sEP - Poder de emisión, se toma del método "Sep"
+ - alturaDeFlama - Altura maxima alcanzada por la flama (m) depende del metodo a usar Thomas o Pitchard
+ - tiltAngle - Angulo de inclinación de la flama por acción del viento (Radianes)
+ - tolerance - tolerancia para la iteración.
+ */
+  //FIXME: Revisar resultados
+  xTerm(qTerm) {
+    //Valor de inicio del calculo de distancia x (m) a la de radiación térmica indicada (qTerm);
+    let xCalc = 1;
+
+    //Radiación Térmica Inicial (kW/m2)
+    let qi = 40.0;
+
+    //Tolerancia o precisión del resultado
+    let tolerance = 0.01
+
+    //Cálculo de la distancia por iteración
+    for (xCalc; qi > qTerm; xCalc = xCalc + tolerance) {
+      qi = this.SEP() * this.viewFactor(xCalc) * this.ta(xCalc);
+      // console.log("qi: "+qi+" qTerm: "+qTerm+" xCalc: "+xCalc);
+
+    }
+
+    return xCalc;
+  }
+
+  xTermAtQNivelPiso(qterm) {
+    let x = this.xTerm(qterm)
+  }
+
   /*TODO: ---------------- PROBIT - Eisenberg CCPS 269 ----------------
  - Intensidad = qTermAtX (kW/m2)
  - t - Tiempo de exposision (s)
@@ -369,9 +404,9 @@ class PoolFire {
 
   probitPrcFatalidades(te, x) {
     let probit = this.probit(te, x);
-    if(probit < 0) {
+    if (probit < 0) {
       return 0.00;
-    } else if(probit > 8.09) {
+    } else if (probit > 8.09) {
       return 100.00
     }
     return 50 * (1 + ((probit - 5) / Math.abs(probit - 5)) * this.erf(Math.abs(probit - 5) / Math.sqrt(2)));
@@ -428,12 +463,15 @@ console.log(`SEP: ${newPF.SEP()} kW/m2`)
 // console.log(`ta: ${newPF.ta(20.64)} kW/m2`)
 // console.log(`View factor: ${newPF.viewFactor(20.64)}`)
 
- var xnp = 40; //Distancia a nivel de piso
+//Distancia a nivel de piso
+//var xnp = 40; 
 // var x = Math.sqrt(Math.pow(xnp,2)+Math.pow(newPF.poolDiameter()/2,2));
 
 var tiempoExpos = 120 //seg
 // for (xnp = 1; xnp < 50; xnp = xnp + 1) {
-  var x = Math.sqrt(Math.pow(xnp,2)+Math.pow(newPF.poolDiameter()/2,2));
+//var x = Math.sqrt(Math.pow(xnp, 2) + Math.pow(newPF.poolDiameter() / 2, 2));
 
-  console.log(`Radiación térmica: ${parseFloat(xnp).toFixed(1)} m - ${parseFloat(newPF.qTermAtX(x)).toFixed(2)} kW/m2 - Probit: ${parseFloat(newPF.probit(tiempoExpos,x).toFixed(3))} - Porcentaje = ${newPF.probitPrcFatalidades(tiempoExpos,x)}`)
+console.log("Distancia a una radiacion: ", newPF.xTerm(1))
+
+//console.log(`Radiación térmica: ${parseFloat(xnp).toFixed(1)} m - ${parseFloat(newPF.qTermAtX(x)).toFixed(2)} kW/m2 - Probit: ${parseFloat(newPF.probit(tiempoExpos,x).toFixed(3))} - Porcentaje = ${newPF.probitPrcFatalidades(tiempoExpos,x)}`)
 // }
