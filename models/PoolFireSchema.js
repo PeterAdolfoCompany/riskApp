@@ -8,6 +8,7 @@ const poolFireSchema = new Schema({
     altitud: Number,
     humedad: Number,
     user_id: Objectid, //FIXME: Duda en relacionar con user
+    chem_id: Objectid, //FIXME: Duda en relacionar con la tabla de las sustancias
     combFractionPointSource: {
       type: Number,
       min: [0.15, "Out of range (0.15 to 0.40)"],
@@ -18,6 +19,9 @@ const poolFireSchema = new Schema({
     anchoDiqueNoCircular: Number,
     largoDiqueNoCircular: Number,
     diametroDiqueCircular: Number,
+    //DE LA BASE DE DATOS
+
+    //RESULTADOS
     poolFireArray:[Number], //Array para graficar y reporte
     radio01: Number, //Radios calculados en base a los datos de radiación del User Campos poolFireQX
     radio02: Number,
