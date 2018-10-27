@@ -8,11 +8,11 @@ const R_DRY_AIR = 287.05; //Constante específica del aire (J/kg*K)
 
 //---DATOS DE CLIMA ----
 // - tAmb - Temperatura ambiente (C) - API
-var tAmbC = 25;
-var tAmbK = tAmbC + 273.15;
-var velocidadVientoMSEG = 0; //Velocidad del viento (m/s)
-var altitudMSNM = 0; //Altitud (msnm)
-var humedadRelativa = 50; //(%)
+//var tAmbC = 25;
+// var this.tempAmbiK = tAmbC + 273.15;
+// var this.velVientomSeg = 0; //Velocidad del viento (m/s)
+// var this.altitud = 0; //Altitud (msnm)
+// var humedadRel = 50; //(%)
 
 /* TODO: A MEJORAR:
    - Para fugas continuas revisar Kakosimos pp51
@@ -23,23 +23,31 @@ var humedadRelativa = 50; //(%)
 
 class PoolFire {
   constructor(sustancia, obj) {
+    //DATOS DEL CLIMA
+    this.tempAmbiK = obj.tempAmbC+273.15;
+    this.velVientomSeg = obj.velVientomseg;
+    this.altitud = obj.altitudM;
+    this.humedad = obj.humedadRel;
+
     this.obj = obj; //Objeto que contiene la informacion a pasar en la clase
     //Sustancia
     this.sustancia = sustancia;
     // Entalpia de vaporizacion (kJ/kg) - a la temperatura ambiente dada YAWS - pp109 f(t)
-    this.hVapKJKG = ((this.sustancia.hva * Math.pow(1 - (tAmbK / this.sustancia.tc), this.sustancia.hvn)) / this.sustancia.mw) * 1000;
+    this.hVapKJKG = ((this.sustancia.hva * Math.pow(1 - (this.tempAmbiK / this.sustancia.tc), this.sustancia.hvn)) / this.sustancia.mw) * 1000;
     // Entalpia de Combustion (kJ/kg) - YAWS - pp582 
     this.hCombKJKG = this.sustancia.hckjkg;
     // Temperatura de ebullicion (K)
     this.tEbullK = parseFloat(this.sustancia.tb);
     // - cP - Capacidad calorica (KJ/kg*K) - DB f(T)
-    this.cPKJKGK = (parseFloat(this.sustancia.cpla) + parseFloat(this.sustancia.cplb * tAmbK) + parseFloat(this.sustancia.cplc * Math.pow(tAmbK, 2)) + parseFloat(this.sustancia.cpld * Math.pow(tAmbK, 3))) / (this.sustancia.mw)
+    this.cPKJKGK = (parseFloat(this.sustancia.cpla) + parseFloat(this.sustancia.cplb * this.tempAmbiK) + parseFloat(this.sustancia.cplc * Math.pow(this.tempAmbiK, 2)) + parseFloat(this.sustancia.cpld * Math.pow(this.tempAmbiK, 3))) / (this.sustancia.mw)
     //- densLiquid - Densidad del liquido a temperatura de ebullición (kg/m3) - DB f(t) YAWS-pp185
     this.densLiquidATB = this.sustancia.dliqa * Math.pow(this.sustancia.dliqb, -1 * Math.pow((1 - this.sustancia.tb / this.sustancia.tc), this.sustancia.dliqn)) * 1000;
     // Entalpia de vaporizacion (kJ/kg) - a la temperatura de ebullicion CCPS 234 ej
-    this.hVapKJKGTB = parseFloat(this.hVapKJKG) + parseFloat(this.cPKJKGK) * (this.tEbullK - tAmbK);
+    this.hVapKJKGTB = parseFloat(this.hVapKJKG) + parseFloat(this.cPKJKGK) * (this.tEbullK - this.tempAmbiK);
     // Formula para SEP verifica si es o no hidrocarburo
     this.name = this.sustancia.name;
+
+    
 
     //-------DATOS DENTRO DEL OBJETO --------
     //¿Fuga continua o masiva, dique circular no circular?
@@ -82,12 +90,12 @@ class PoolFire {
   burningRate() {
     if (this.isBRateStrasser) {
       let c1 = 0.00000127; // m/s KAKOSIMOS pp82
-      let brate = this.densLiquidATB * c1 * (this.hCombKJKG / (this.hVapKJKGTB + this.cPKJKGK * (this.tEbullK - (tAmbK))));
+      let brate = this.densLiquidATB * c1 * (this.hCombKJKG / (this.hVapKJKGTB + this.cPKJKGK * (this.tEbullK - (this.tempAmbiK))));
       return brate; //(kg/m2*s)
     }
     //Metodo Mudan
     let c1 = 0.001; // kg/m2*s KAKOSIMOS pp83
-    let brate = (c1 * this.hCombKJKG) / (this.hVapKJKGTB + this.cPKJKGK * (this.tEbullK - (tAmbK)));
+    let brate = (c1 * this.hCombKJKG) / (this.hVapKJKGTB + this.cPKJKGK * (this.tEbullK - (this.tempAmbiK)));
     return brate; //(kg/m2*s)
   }
 
@@ -162,11 +170,11 @@ class PoolFire {
   */
   ux() {
     // Presion atmosferica (Pa) A nivel del mar = 101325 Pa
-    let pressureLevel = 101325.0 * Math.pow(1 - 2.5577E-5 * altitudMSNM, 5.25588); //(Pa)
+    let pressureLevel = 101325.0 * Math.pow(1 - 2.5577E-5 * this.altitud, 5.25588); //(Pa)
     //Calculo de la Densidad del Aire para aire seco (kg/m3)
-    let densAir = pressureLevel / (R_DRY_AIR * tAmbK);
+    let densAir = pressureLevel / (R_DRY_AIR * this.tempAmbiK);
     //Calculo de velocidad del viento adimensional   
-    let ux = velocidadVientoMSEG * Math.pow((G * this.burningRate() * this.poolDiameter()) / densAir, -1.0 / 3.0);
+    let ux = this.velVientomSeg * Math.pow((G * this.burningRate() * this.poolDiameter()) / densAir, -1.0 / 3.0);
     if (ux < 1.0) {
       ux = 1.0;
     }
@@ -199,10 +207,10 @@ class PoolFire {
    - altitude - Altitud (m)
   */
   alturaFlama() {
-    let pressureLevel = 101325.0 * Math.pow(1 - 2.5577E-5 * altitudMSNM, 5.25588); //(Pa)
-    var densAir = pressureLevel / (R_DRY_AIR * (tAmbK)); //(kg/m3)
+    let pressureLevel = 101325.0 * Math.pow(1 - 2.5577E-5 * this.altitud, 5.25588); //(Pa)
+    var densAir = pressureLevel / (R_DRY_AIR * (this.tempAmbiK)); //(kg/m3)
     if (this.isAlturaFlamaThomas) {
-      if (velocidadVientoMSEG == 0) {
+      if (this.velVientomSeg == 0) {
         //Ver MM/INFORMACION - Estimation_of_thermal_effects_on_receptor_from_poo.pdf
         return 42.0 * this.poolDiameter() * (Math.pow(this.burningRate() / (densAir * Math.sqrt(G * this.poolDiameter())), 0.61));
       }
@@ -236,15 +244,15 @@ class PoolFire {
    - windSpeed - Velocidad del viento (m/s)
    */
   anguloFlama() {
-    if (velocidadVientoMSEG <= 0.0) {
+    if (this.velVientomSeg <= 0.0) {
       return 0.0;
     }
     //Calculo de la viscosidad cinematica del aire (m2/s) tAmb en C
-    let v = 1.555E-14 * Math.pow((tAmbK), 3) + 9.5728E-11 * Math.pow(tAmbK, 2 + 3.7604E-8 * tAmbK + 3.4484E-6);
+    let v = 1.555E-14 * Math.pow((this.tempAmbiK), 3) + 9.5728E-11 * Math.pow(this.tempAmbiK, 2 + 3.7604E-8 * this.tempAmbiK + 3.4484E-6);
     //Froude 
-    let Fr = Math.pow(velocidadVientoMSEG, 2.0) / (G * this.poolDiameter());
+    let Fr = Math.pow(this.velVientomSeg, 2.0) / (G * this.poolDiameter());
     //Reynolds 
-    let Re = velocidadVientoMSEG * this.poolDiameter() / v;
+    let Re = this.velVientomSeg * this.poolDiameter() / v;
     let c = 0.666 * Math.pow(Fr, 0.333) * Math.pow(Re, 0.117);
     //CALCULO DEL ANGULO DE LA FLAMA
     let tiltAngle = Math.sin((Math.sqrt((4 * Math.pow(c, 2) + 1.0)) - 1.0) / (2.0 * c));
@@ -301,20 +309,20 @@ class PoolFire {
   }
 
   /* ---------------- TRANSMITIVIDAD ATMOSFÉRICA (ADIMENSIONAL) ----------------
- - HumedadRelativa - Humedad relativa en (%) se debe convertir entre 0 y 1
+ - this.humedadRel - Humedad relativa en (%) se debe convertir entre 0 y 1
  - x - Distancia a la que se requiere el calculo o se adiciona distacia.
  - poolDiameter - diametro de la alberca de fuego (m)
  - tAmb - Temperatura Ambiente (C)
 */
   ta(x) {
-    if (humedadRelativa == 0) {
-      humedadRelativa = 0.001;
+    if (this.humedadRel == 0) {
+      this.humedadRel = 0.001;
     }
-    let pHR = humedadRelativa / 100.00; //La humedad relativa se convierte a parcial numerado entre 0 y 1
+    let pHR = this.humedadRel / 100.00; //La humedad relativa se convierte a parcial numerado entre 0 y 1
     //let radio = this.poolDiameter() / 2.0;
     let c4 = 2.02;
     //Calculo de la Presion Parcial de Vapor de Agua (PA) se puede usar la CCPS 2.2.43?
-    let pwo = Math.exp(77.3450 + 0.0057 * (tAmbK) - 7235.0 / (tAmbK)) / Math.pow((tAmbK), 8.2); //(PA)
+    let pwo = Math.exp(77.3450 + 0.0057 * (this.tempAmbiK) - 7235.0 / (this.tempAmbiK)) / Math.pow((this.tempAmbiK), 8.2); //(PA)
     let pw = pHR * pwo; //(PA)
 
     //Calculo de la Transmitividad atmosferica a la distancia x
@@ -323,7 +331,7 @@ class PoolFire {
 
 
   /* ---------------- RADIACION TERMICA (kW/m2) A UNA DISTANCIA DADA (m) ----------------
- - humedadRelativa - Humedad relativa en (%) se debe convertir entre 0 y 1
+ - this.humedadRel - Humedad relativa en (%) se debe convertir entre 0 y 1
  - xTerm - Distancia a la que se requiere el calculo de la radiación térmica (m).
  - diameter - diametro de la alberca de fuego (m)
  - tAmb - Temperatura Ambiente (C)
@@ -423,6 +431,11 @@ class PoolFire {
 }
 
 var objeto = {
+  //DATOS DE CLIMA
+  tempAmbC: 25, //Temperatura ambiente C
+  velVientomseg: 0, //Velocidad del viento m/s
+  altitudM: 0, //Altitud en msnm
+  humedadRel: 50, //Humedad Relativa %
   //Datos para calculo del diametro del PoolFire
   //Solo uno es verdadero, los demas falsos
   isfugaContinua: false,
