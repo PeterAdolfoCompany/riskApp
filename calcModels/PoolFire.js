@@ -8,11 +8,11 @@ const R_DRY_AIR = 287.05; //Constante específica del aire (J/kg*K)
 
 //---DATOS DE CLIMA ----
 // - tAmb - Temperatura ambiente (C) - API
-var tAmbC = 30;
+var tAmbC = 25;
 var tAmbK = tAmbC + 273.15;
 var velocidadVientoMSEG = 0; //Velocidad del viento (m/s)
 var altitudMSNM = 0; //Altitud (msnm)
-var humedadRelativa = 80; //(%)
+var humedadRelativa = 50; //(%)
 
 /* TODO: A MEJORAR:
    - Para fugas continuas revisar Kakosimos pp51
@@ -338,6 +338,7 @@ class PoolFire {
       return this.ta(x) * this.combustionFractionPointSource * this.burningRate() * this.hCombKJKG * this.viewFactor(x) * poolArea
     }
     //Calculo para SOLID PLUME MODEL
+    //TODO: Ver ec 2.2.59 CCPS para posible correccion
     return this.SEP() * this.viewFactor(x) * this.ta(x);
   }
 
@@ -351,26 +352,29 @@ class PoolFire {
  - tiltAngle - Angulo de inclinación de la flama por acción del viento (Radianes)
  - tolerance - tolerancia para la iteración.
  */
-  //FIXME: Revisar resultados
   xTerm(qTerm) {
+   
+   
     //Valor de inicio del calculo de distancia x (m) a la de radiación térmica indicada (qTerm);
-    let xCalc = 1;
+    let xCalc = 0.1;
 
     //Radiación Térmica Inicial (kW/m2)
-    let qi = 40.0;
+    let qi = 60.0;
 
     //Tolerancia o precisión del resultado
     let tolerance = 0.01
 
     //Cálculo de la distancia por iteración
     for (xCalc; qi > qTerm; xCalc = xCalc + tolerance) {
-      qi = this.SEP() * this.viewFactor(xCalc) * this.ta(xCalc);
-      // console.log("qi: "+qi+" qTerm: "+qTerm+" xCalc: "+xCalc);
-
+      qi = this.qTermAtX(xCalc)
     }
 
     return xCalc;
   }
+
+  // qi = this.SEP() * this.viewFactor(xCalc) * this.ta(xCalc);
+  //     console.log("qi: "+qi+" qTerm: "+qTerm+" xCalc: "+xCalc);
+
 
   xTermAtQNivelPiso(qterm) {
     let x = this.xTerm(qterm)
@@ -422,19 +426,19 @@ var objeto = {
   //Datos para calculo del diametro del PoolFire
   //Solo uno es verdadero, los demas falsos
   isfugaContinua: false,
-  isfugaMasiva: true,
-  isDiqueCircular: false,
+  isfugaMasiva: false,
+  isDiqueCircular: true,
   isDiqueNoCircular: false,
   //Datos para tipo de ecuacion del Burning Rate
-  isburningRateStrasser: false,
-  isburningRateMudan: true,
+  isburningRateStrasser: true,
+  isburningRateMudan: false,
   //Datos Altura de la flama - 2 metodos
-  isAlturaFlamaThomas: true,
-  isAlturaFlamaPritchard: false,
+  isAlturaFlamaThomas: false,
+  isAlturaFlamaPritchard: true,
   //Modelo de point source o solid plume model
-  isPointSourceModel: true,
+  isPointSourceModel: false,
   combustionFractionPointSource: 0.35, //CCPS 230-232 Tabla 2.27 (de 0.15 a 0.40)
-  isSolidPlumeModel: false,
+  isSolidPlumeModel: true,
   //Volumenes de fuga
   spillRate: 0.55, //0.000833333333, // En caso de FUGA CONTINUA (m3/s)
   massRelease: .1, //En caso de FUGA INSTANTANEA (m3)
@@ -448,7 +452,7 @@ var objeto = {
   lon: 19.4332
 }
 
-var newPF = new PoolFire(data[1361 - 1], objeto); //1361 - Gasolina - 127 Ethane  -130 Ethanol 598 - n-Hexane : 1364-DISEL : 1366-BIODIESEL : 1365-TURBOSINA TODO: Verificar parametros de turbosina
+var newPF = new PoolFire(data[1364 - 1], objeto); //1361 - Gasolina - 127 Ethane  -130 Ethanol 598 - n-Hexane : 1364-DISEL : 1366-BIODIESEL : 1365-TURBOSINA TODO: Verificar parametros de turbosina
 
 
 console.log(`El Burning Rate de ${newPF.sustancia.name} es: ${newPF.burningRate()} kg/m2*s`)
@@ -460,18 +464,24 @@ console.log(`Duración del fuego: ${newPF.timeDurationPoolFire(1)} s`)
 console.log(`Altura de la flama: ${parseFloat(newPF.alturaFlama().toFixed(3))} m`)
 console.log(`Angulo de la flama: ${parseFloat((newPF.anguloFlama()*180/Math.PI+90).toFixed(10))} Grados`)
 console.log(`SEP: ${newPF.SEP()} kW/m2`)
-// console.log(`ta: ${newPF.ta(20.64)} kW/m2`)
-// console.log(`View factor: ${newPF.viewFactor(20.64)}`)
+console.log(`ta: ${newPF.ta(20.64)} kW/m2`)
+console.log(`View factor: ${newPF.viewFactor(20.64)}`)
+console.log(`Entalpia de vap a tb: ${newPF.hVapKJKGTB}`)
+console.log(`Capacidad calorifica kj/kg: ${newPF.cPKJKGK}`)
+
+
+
 
 //Distancia a nivel de piso
-//var xnp = 40; 
-// var x = Math.sqrt(Math.pow(xnp,2)+Math.pow(newPF.poolDiameter()/2,2));
+var xnp = 50; 
 
 var tiempoExpos = 120 //seg
-// for (xnp = 1; xnp < 50; xnp = xnp + 1) {
-//var x = Math.sqrt(Math.pow(xnp, 2) + Math.pow(newPF.poolDiameter() / 2, 2));
+// for (xnp = 1; xnp < 60; xnp = xnp + 1) {
+  // Del teorema de pitagoras 
+var x = Math.sqrt(Math.pow(xnp+(newPF.poolDiameter()/2), 2) + Math.pow(newPF.alturaFlama()/2, 2));
 
-console.log("Distancia a una radiacion: ", newPF.xTerm(1))
 
-//console.log(`Radiación térmica: ${parseFloat(xnp).toFixed(1)} m - ${parseFloat(newPF.qTermAtX(x)).toFixed(2)} kW/m2 - Probit: ${parseFloat(newPF.probit(tiempoExpos,x).toFixed(3))} - Porcentaje = ${newPF.probitPrcFatalidades(tiempoExpos,x)}`)
+console.log(`Radiación térmica: ${parseFloat(xnp).toFixed(1)} m ${x} m- ${parseFloat(newPF.qTermAtX(x)).toFixed(2)} kW/m2 - Probit: ${parseFloat(newPF.probit(tiempoExpos,x).toFixed(3))} - Porcentaje = ${newPF.probitPrcFatalidades(tiempoExpos,x)}`)
 // }
+
+console.log("Distancia a una radiacion: ", newPF.xTerm(5))
