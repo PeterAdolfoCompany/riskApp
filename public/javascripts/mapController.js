@@ -1,4 +1,4 @@
-    var map, infoWindow;
+    var map, infoWindow, pos;
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -12,8 +12,22 @@
 
         infoWindow = new google.maps.InfoWindow;
 
+        
 
-        // creates a draggable marker to the given coords
+
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            'Error: The Geolocation service failed.' :
+            'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+    }
+
+    //Funcion ADD EVENT QUE ACTIVA DEL BOTON ADD EVENT DEL MENU LATERAL
+    function addEvent() {
+        // crea un Mark en las coordenadas dadas
         var vMarker = new google.maps.Marker({
             position: new google.maps.LatLng(pos.lat, pos.lng),
             draggable: true
@@ -35,17 +49,45 @@
         // adds the marker on the map
         vMarker.setMap(map);
 
+        vMarker.addListener("rightclick", function(e) {
+            for (prop in e) {
+              if (e[prop] instanceof MouseEvent) {
+                mouseEvt = e[prop];
+                var left = mouseEvt.clientX;
+                var top = mouseEvt.clientY;
+        
+                menuBox = document.getElementById("menu");
+                menuBox.style.left = left + "px";
+                menuBox.style.top = top + "px";
+                menuBox.style.display = "block";
+        
+                mouseEvt.preventDefault();
+        
+                menuDisplayed = true;
+              }
+            }
+        
+          });
+          map.addListener("click", function(e) {
+            if (menuDisplayed == true) {
+              menuBox.style.display = "none";
+            }
+          });
+    }
+
+    //TRAE LA POSICION ACTUAL LIGADA AL BOTON ACTUAL POSITION
+    function actualPosition() {
         // Try HTML5 geolocation ----------------------
         if (navigator.geolocation) {
+            console.log("Soporta geolocalizacion")
             navigator.geolocation.getCurrentPosition(function (position) {
-                var pos = {
+                pos = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-
-                infoWindow.setPosition(pos);
-                infoWindow.setContent('Location found.');
-                infoWindow.open(map);
+                // infoWindow.setPosition(pos);
+                // infoWindow.setContent('Location found.');
+                // infoWindow.open(map);
                 map.setCenter(pos);
             }, function () {
                 handleLocationError(true, infoWindow, map.getCenter());
@@ -56,16 +98,6 @@
         }
         // Geolocation Browser end-------------------
 
-
     }
-
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-            'Error: The Geolocation service failed.' :
-            'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-    }
-
 
     // initMap()

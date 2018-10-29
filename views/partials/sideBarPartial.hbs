@@ -27,72 +27,38 @@
       </div>
       <!-- ADD PROJECT  -->
       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-        <button type="button" class="btn btn-amber ml-3"><i class="fa fa-fire" aria-hidden="true"></i>--- Add Event</button>
-      
+        <button onclick=addEvent() type="button" class="btn btn-amber ml-3">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          --- Add Event</button>
+        <button onclick=actualPosition() type="button" class="btn btn-amber ml-3"><i class="fa fa-fire" aria-hidden="true"></i>Actual
+          Position</button>
       </div>
-      <!-- PROYECTOS  -->
+      <!-- EVENTOS  -->
       <div class="sidebar-menu">
         <ul>
           <li class="header-menu">
             <span>EVENTS</span>
           </li>
 
-          {{!-- COMIENZA UN PROYECTO --}}
+          {{!-- COMIENZA UN EVENTO --}}
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fa fa-tachometer-alt"></i>
-              <span>Project 01</span>
+              <span>Pool Fire Estacion de Servicio ES-13456</span>
             </a>
 
-            {{!-- Submenu de eventos del proyecto --}}
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#newEventModalPr">
-                    Add new event +
-                  </button> </li>
-                <li>
-                  <a href="#">FireBall 01</a>
-                </li>
-                <li>
-                  <a href="#">Explosion 01</a>
-                </li>
-                <li>
-                  <a href="#">Explosion gas</a>
-                </li>
-              </ul>
-            </div>
           </li>
-          {{!-- TERMINA PROYECTO --}}
+          {{!-- TERMINA EVENTO --}}
 
-          {{!-- COMIENZA UN PROYECTO --}}
+          {{!-- COMIENZA UN EVENTO --}}
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fa fa-tachometer-alt"></i>
-              <span>Estacion servicio</span>
+              <span>Fire Ball Tanque de Gas Tortilelria 2</span>
             </a>
-            {{!-- SUBMENU DE EVENTOS DEL PROYECTO --}}
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <button type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#newEventModalPr">
-                    Add new event +
-                  </button>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">FireBall Gasera</a>
-                </li>
-                <li>
-                  <a href="#">Explosion en Tq de gas fs dsafg dsfg dfg df g dfg g</a>
-                </li>
-                <li>
-                  <a href="#">Explosion gas</a>
-                </li>
-              </ul>
-            </div>
+
           </li>
-          {{!-- TERMINA PROYECTO --}}
+          {{!-- TERMINA EVENTO --}}
 
 
 
@@ -121,7 +87,11 @@
   <main class="page-content">
 
     <div id="map"></div>
-    
+    <div class="menu" id="menu">
+      <div class="menu-item"><i class="glyphicon glyphicon-file"></i>Manage files</div>
+    </div>
+
+
   </main>
   <!-- page-content" -->
 </div>
