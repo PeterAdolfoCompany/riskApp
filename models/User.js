@@ -1,12 +1,21 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
-//IDEA: Los usuarios no se van a registrar con email ni nada... solo el Admin los da de alta, razon, para no tenerlo expuesto al pùblico general...
-
 const userSchema = new Schema({
-  username: String,
-  hash: String, // IMPORTANTE PASSPORT LOCAL MONGOOSE LE PONE "HASH" Y NO PASSWORD
+  username: {
+      type: String,
+      required: 'Debes mandar un nombre de usuario',
+      unique: true,
+      min: 8
+  },
+  email: {
+      type: String,
+      unique: 'El email debe de ser unico',
+      required: true,
+  },
+  profile_pic : String,
+  password: String,
   role: {
     type: String,
     enum:["ADMIN", "USER"],
@@ -36,6 +45,6 @@ const userSchema = new Schema({
   }
 });
 
-userSchema.plugin(passportLocalMongoose)
+userSchema.plugin(passportLocalMongoose, {usernameField: 'email'});
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);
