@@ -25,14 +25,25 @@
           </span>
         </div>
       </div>
-      <!-- ADD PROJECT  -->
+      <!-- ADD EVENT  -->
       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-        <button onclick=addEvent() type="button" class="btn btn-amber ml-3">
+        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#poolFireEvent">
+          Pool Fire Model
+        </button>
+        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#poolFireEvent">
+          Fire Ball Model
+        </button>
+        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#poolFireEvent">
+          TNT Explosion Model
+        </button>
+        {{!-- <button onclick=addEvent() type="button" class="btn btn-amber ml-3">
           <i class="fa fa-map-marker" aria-hidden="true"></i>
-          --- Add Event</button>
-        <button onclick=actualPosition() type="button" class="btn btn-amber ml-3"><i class="fa fa-fire" aria-hidden="true"></i>Actual
-          Position</button>
+          --- Add Event</button> --}}
+        {{!-- <button onclick=actualPosition() type="button" class="btn btn-amber ml-3"><i class="fa fa-fire"
+            aria-hidden="true"></i>Actual
+          Position</button> --}}
       </div>
+
       <!-- EVENTOS  -->
       <div class="sidebar-menu">
         <ul>
@@ -80,19 +91,10 @@
   </nav>
 
   {{!-- MODAL ADD EVENT --}}
-  {{>modalNewEventPr}}
+  {{>modalPoolFireEventPr}}
+  {{>mapSidePr}}
 
-
-  <!-- LADO DEL MAPA  -->
-  <main class="page-content">
-
-    <div id="map"></div>
-    <div class="menu" id="menu">
-      <div class="menu-item"><i class="glyphicon glyphicon-file"></i>Manage files</div>
-    </div>
-
-
-  </main>
+  
   <!-- page-content" -->
 </div>
 <!-- page-wrapper -->

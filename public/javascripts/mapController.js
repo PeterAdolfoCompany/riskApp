@@ -1,4 +1,5 @@
     var map, infoWindow, pos;
+    var markers = [];
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -12,7 +13,8 @@
 
         infoWindow = new google.maps.InfoWindow;
 
-        
+        actualPosition()
+
 
 
     }
@@ -25,7 +27,7 @@
         infoWindow.open(map);
     }
 
-    //Funcion ADD EVENT QUE ACTIVA DEL BOTON ADD EVENT DEL MENU LATERAL
+    //Funcion ADD EVENT QUE ACTIVA DEL BOTON DEL MODAL
     function addEvent() {
         // crea un Mark en las coordenadas dadas
         var vMarker = new google.maps.Marker({
@@ -49,30 +51,35 @@
         // adds the marker on the map
         vMarker.setMap(map);
 
-        vMarker.addListener("rightclick", function(e) {
+        markers.push(vMarker);
+        console.log(markers);
+
+
+        vMarker.addListener("rightclick", function (e) {
             for (prop in e) {
-              if (e[prop] instanceof MouseEvent) {
-                mouseEvt = e[prop];
-                var left = mouseEvt.clientX;
-                var top = mouseEvt.clientY;
-        
-                menuBox = document.getElementById("menu");
-                menuBox.style.left = left + "px";
-                menuBox.style.top = top + "px";
-                menuBox.style.display = "block";
-        
-                mouseEvt.preventDefault();
-        
-                menuDisplayed = true;
-              }
+                if (e[prop] instanceof MouseEvent) {
+                    mouseEvt = e[prop];
+                    var left = mouseEvt.clientX;
+                    var top = mouseEvt.clientY;
+
+                    menuBox = document.getElementById("menuev");
+                    menuBox.style.left = left + "px";
+                    menuBox.style.top = top + "px";
+                    menuBox.style.display = "block";
+
+                    mouseEvt.preventDefault();
+
+                    menuDisplayed = true;
+                }
             }
-        
-          });
-          map.addListener("click", function(e) {
+
+        });
+        map.addListener("click", function (e) {
             if (menuDisplayed == true) {
-              menuBox.style.display = "none";
+                menuBox.style.display = "none";
             }
-          });
+        });
+
     }
 
     //TRAE LA POSICION ACTUAL LIGADA AL BOTON ACTUAL POSITION
@@ -100,4 +107,15 @@
 
     }
 
+    // Deletes all markers in the array by removing references to them.
+    function deleteMarker() {
+        setMapOnAll(null);
+        markers = [];
+    }
+
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }
     // initMap()

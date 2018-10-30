@@ -1,6 +1,6 @@
 <!-- Modal -->
-<div class="modal fade" id="newEventModalPr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true" data-backdrop="false">
+<div class="modal fade" id="poolFireEvent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-backdrop="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
@@ -158,8 +158,7 @@
               <h5>Burning Rate Method </h5>
               <!-- Default inline 1-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="strasser" name="radioBurningRateMethod"
-                  checked>
+                <input type="radio" class="custom-control-input" id="strasser" name="radioBurningRateMethod" checked>
                 <label class="custom-control-label" for="strasser">Strasser</label>
               </div>
 
@@ -173,8 +172,7 @@
               <h5>Flame Height Method </h5>
               <!-- Default inline 1-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="thomas" name="radioFlameHeightMethod"
-                  checked>
+                <input type="radio" class="custom-control-input" id="thomas" name="radioFlameHeightMethod" checked>
                 <label class="custom-control-label" for="thomas">Thomas</label>
               </div>
 
@@ -188,8 +186,7 @@
               <h5>Calculation Method </h5>
               <!-- Default inline 1-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="pointSource" name="radioCalcMethod"
-                  checked>
+                <input type="radio" class="custom-control-input" id="pointSource" name="radioCalcMethod" checked>
                 <label class="custom-control-label" for="pointSource">Point Source</label>
               </div>
 
@@ -199,17 +196,27 @@
                 <label class="custom-control-label" for="solidSource">Solid Plume</label>
               </div>
               <hr>
-
+              <div class="container">
+                <div class="row justify-content-md-center">
+                  <div class="col-12 col-md-auto">
+                    <button type="button" class="btn btn-light-blue" data-toggle="modal" onclick=addEvent() data-dismiss="modal">
+                      Add Point
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+
           </div>
 
         </div>
-        <div class="modal-footer">
+
+        {{!-- <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">NEXT</button>
+        </div> --}}
       </form>
 
     </div>
   </div>
-</div>
 </div>
