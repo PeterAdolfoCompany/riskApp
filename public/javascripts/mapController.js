@@ -28,13 +28,21 @@
     }
 
     //Funcion ADD EVENT QUE ACTIVA DEL BOTON DEL MODAL
-    function addEvent() {
+    function addEvent(varName) {
         // crea un Mark en las coordenadas del ususario
         var vMarker = new google.maps.Marker({
             position: new google.maps.LatLng(pos.lat, pos.lng),
             draggable: true,
             animation: google.maps.Animation.DROP
         });
+
+        //Agregar html
+        $(".sidebar-menu ul").append("<li class='sidebar-dropdown'>\n" +
+            "            <a href='#'>\n" +
+            "              <i class='fa fa-tachometer-alt'></i>\n" +
+            "              <span>"+ varName +"</span>\n" +
+            "            </a>\n" +
+            "          </li>");
 
         // adds a listener to the marker
         // gets the coords when drag event ends
@@ -89,6 +97,7 @@
 
     //TRAE LA POSICION ACTUAL LIGADA AL BOTON ACTUAL POSITION
     function actualPosition() {
+
         if (navigator.geolocation) {
             console.log("Soporta geolocalizacion")
             navigator.geolocation.getCurrentPosition(function (position) {
