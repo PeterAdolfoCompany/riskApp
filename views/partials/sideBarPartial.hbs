@@ -1,0 +1,105 @@
+<div class="page-wrapper chiller-theme toggled">
+  <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a href="#">Risk App</a>
+        <div id="close-sidebar">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg"
+            alt="User picture">
+        </div>
+        <div class="user-info">
+          <span class="user-name">Jhon
+            <strong>Smith</strong>
+          </span>
+          <span class="user-role">User Risk App Basic</span>
+          <span class="user-status">
+            <a href=""><i class="fa fa-gear" aria-hidden="true"></i>--Settings</a>
+          </span>
+        </div>
+      </div>
+      <!-- ADD EVENT  -->
+      <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#poolFireEvent">
+          Pool Fire Model
+        </button>
+        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#fireBallEvent">
+          Fire Ball Model
+        </button>
+        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#tntExplosionEvent">
+          TNT Explosion Model
+        </button>
+        {{!-- <button onclick=addEvent() type="button" class="btn btn-amber ml-3">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          --- Add Event</button> --}}
+        {{!-- <button onclick=actualPosition() type="button" class="btn btn-amber ml-3"><i class="fa fa-fire"
+            aria-hidden="true"></i>Actual
+          Position</button> --}}
+      </div>
+
+      <!-- EVENTOS  -->
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>EVENTS</span>
+          </li>
+
+          {{!-- COMIENZA UN EVENTO --}}
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Pool Fire Estacion de Servicio ES-13456</span>
+            </a>
+
+          </li>
+          {{!-- TERMINA EVENTO --}}
+
+          {{!-- COMIENZA UN EVENTO --}}
+          <li class="sidebar-dropdown">
+            <a href="#">
+              <i class="fa fa-tachometer-alt"></i>
+              <span>Fire Ball Tanque de Gas Tortilleria 2</span>
+            </a>
+
+          </li>
+          {{!-- TERMINA EVENTO --}}
+
+
+
+          <!-- sidebar-content  -->
+          <div class="sidebar-footer">
+            <a href="#">
+              <i class="fa fa-bell"></i>
+              <span class="badge badge-pill badge-warning notification">3</span>
+            </a>
+            <a href="#">
+              <i class="fa fa-envelope"></i>
+              <span class="badge badge-pill badge-success notification">7</span>
+            </a>
+            <a href="#">
+              <i class="fa fa-cog"></i>
+              <span class="badge-sonar"></span>
+            </a>
+          </div>
+  </nav>
+
+  {{>mapSidePr}}
+
+  {{!-- MODAL ADD EVENT --}}
+  {{>modalPoolFireEventPr}}
+  {{>modalFireBallEventPr}}
+  {{>modalTntExplosionEventPr}}
+
+
+
+
+  <!-- page-content" -->
+</div>
+<!-- page-wrapper -->
