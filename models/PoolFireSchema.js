@@ -7,8 +7,15 @@ const poolFireSchema = new Schema({
     velViento: Number,
     altitud: Number,
     humedad: Number,
+    //RELACION CON OTRAS COLECCIONES
     user_id: Objectid, //FIXME: Duda en relacionar con user
     chem_id: Objectid, //FIXME: Duda en relacionar con la tabla de las sustancias
+    //DATOS SOURCE
+    isFugaContinua: Boolean,
+    isFugaMasiva: Boolean,
+    isDiqueCircular: Boolean,
+    isDiqueNoCircular: Boolean,
+    //Fraccion de combustion en PointSource
     combFractionPointSource: {
       type: Number,
       min: [0.15, "Out of range (0.15 to 0.40)"],
