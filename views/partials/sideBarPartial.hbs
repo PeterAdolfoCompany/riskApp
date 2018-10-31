@@ -30,10 +30,10 @@
         <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#poolFireEvent">
           Pool Fire Model
         </button>
-        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#poolFireEvent">
+        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#fireBallEvent">
           Fire Ball Model
         </button>
-        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#poolFireEvent">
+        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#tntExplosionEvent">
           TNT Explosion Model
         </button>
         {{!-- <button onclick=addEvent() type="button" class="btn btn-amber ml-3">
@@ -65,7 +65,7 @@
           <li class="sidebar-dropdown">
             <a href="#">
               <i class="fa fa-tachometer-alt"></i>
-              <span>Fire Ball Tanque de Gas Tortilelria 2</span>
+              <span>Fire Ball Tanque de Gas Tortilleria 2</span>
             </a>
 
           </li>
@@ -90,11 +90,16 @@
           </div>
   </nav>
 
-  {{!-- MODAL ADD EVENT --}}
-  {{>modalPoolFireEventPr}}
   {{>mapSidePr}}
 
-  
+  {{!-- MODAL ADD EVENT --}}
+  {{>modalPoolFireEventPr}}
+  {{>modalFireBallEventPr}}
+  {{>modalTntExplosionEventPr}}
+
+
+
+
   <!-- page-content" -->
 </div>
 <!-- page-wrapper -->

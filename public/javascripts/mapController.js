@@ -1,4 +1,4 @@
-    var map, infoWindow, pos;
+    var map, infoWindow, pos, id;
     var markers = [];
 
     function initMap() {
@@ -29,10 +29,11 @@
 
     //Funcion ADD EVENT QUE ACTIVA DEL BOTON DEL MODAL
     function addEvent() {
-        // crea un Mark en las coordenadas dadas
+        // crea un Mark en las coordenadas del ususario
         var vMarker = new google.maps.Marker({
             position: new google.maps.LatLng(pos.lat, pos.lng),
-            draggable: true
+            draggable: true,
+            animation: google.maps.Animation.DROP
         });
 
         // adds a listener to the marker
@@ -51,8 +52,12 @@
         // adds the marker on the map
         vMarker.setMap(map);
 
+        id = vMarker.__gm_id;
+
         markers.push(vMarker);
         console.log(markers);
+        console.log(id);
+
 
 
         vMarker.addListener("rightclick", function (e) {
@@ -84,7 +89,6 @@
 
     //TRAE LA POSICION ACTUAL LIGADA AL BOTON ACTUAL POSITION
     function actualPosition() {
-        // Try HTML5 geolocation ----------------------
         if (navigator.geolocation) {
             console.log("Soporta geolocalizacion")
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -92,22 +96,17 @@
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                // infoWindow.setPosition(pos);
-                // infoWindow.setContent('Location found.');
-                // infoWindow.open(map);
                 map.setCenter(pos);
             }, function () {
                 handleLocationError(true, infoWindow, map.getCenter());
             });
         } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
+            handleLocationError("No soporta geolocalizacion");
         }
-        // Geolocation Browser end-------------------
 
     }
 
-    // Deletes all markers in the array by removing references to them.
+    // FUNCION QUE BORRA TODOS LOS MARKERS.
     function deleteMarker() {
         setMapOnAll(null);
         markers = [];
@@ -115,7 +114,7 @@
 
     function setMapOnAll(map) {
         for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
+            markers[i].setMap(map);
         }
-      }
+    }
     // initMap()
