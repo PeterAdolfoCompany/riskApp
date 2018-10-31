@@ -22,6 +22,7 @@ const userSchema = new Schema({
   altFlamaPritchard: Boolean,
   pointSourceModel: Boolean,
   solidPlumeModel: Boolean,
+  //S
   //Radiaciones termicas(Q) y sobrepresiones(P) que escoge el usuario paraa dibujar en google maps
   poolFireQ1: Number,
   poolFireQ2: Number,
