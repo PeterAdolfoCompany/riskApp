@@ -3,6 +3,11 @@ const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
 
 const userSchema = new Schema({
+  username: {
+      type: String,
+      unique: 'Este usuario ya no está disponible',
+      required: true,
+  },
   email: {
       type: String,
       unique: 'El email debe de ser unico',
