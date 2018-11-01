@@ -35,7 +35,7 @@ function dataTableFireBall() {
 
   $('#data-tableFireBall tbody').on('click', 'tr', function () {
 
-    document.getElementById("name-chem").innerHTML = dataForFireBall[table.row(this).index()].name;
+    document.getElementById("name-chemFireBall").innerHTML = dataForFireBall[table.row(this).index()].name;
     $('#modal-chemicals-db').modal('hide');
 
     $('#modal-second').modal('show');

@@ -30,12 +30,12 @@ function dataTableTntExplosion() {
       },
     ]
   });
-  
+
   var table = $('#data-tableTntExplosion').DataTable();
 
   $('#data-tableTntExplosion tbody').on('click', 'tr', function () {
 
-    document.getElementById("name-chem").innerHTML = dataForTntExplosion[table.row(this).index()].name;
+    document.getElementById("name-chemTnt").innerHTML = dataForTntExplosion[table.row(this).index()].name;
     $('#modal-chemicals-db').modal('hide');
 
     $('#modal-second').modal('show');

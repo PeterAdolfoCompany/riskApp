@@ -11,6 +11,9 @@
               <input type="text" id="inputSMEx" class="form-control form-control-sm">
               <label for="inputSMEx">Event name</label>
             </div>
+            {{!-- Nombre de la sustancia en el modal --}}
+            <label id="name-chemPoolFire"></label>
+
           </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -153,7 +156,8 @@
               <div class="container">
                 <div class="row justify-content-md-center">
                   <div class="col-12 col-md-auto">
-                    <button type="button" class="btn btn-light-blue" data-toggle="modal" onclick=addEvent($('#inputSMEx').val()) data-dismiss="modal">
+                    <button type="button" class="btn btn-light-blue" data-toggle="modal" onclick=addEvent($('#inputSMEx').val())
+                      data-dismiss="modal">
                       Add Point
                     </button>
                   </div>
