@@ -18,10 +18,15 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
   <!-- Material Design Bootstrap -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.13/css/mdb.min.css" rel="stylesheet">
+  {{!-- JS PARA EL NAVBAR --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <!-- Libreria para DataTables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/sl-1.2.6/datatables.min.css" />
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/sl-1.2.6/datatables.min.js"></script>
   <!-- MDBootstrap Datatables  -->
   {{!--
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" /> --}}
-  
+
 </head>
 
 <body>
@@ -29,7 +34,13 @@
 
   {{{body}}}
 
-  {{!-- JS MDB --}}
+  <!-- ----------------------------- -->
+  <!-- ----SCRIPTS -APPRISK--------- -->
+  <!-- ----------------------------- -->
+  <script src="/javascripts/DBCHEM.js"></script>
+  <script src="/javascripts/data-tableFireBall.js"></script>
+  <script src="/javascripts/data-tablePoolFire.js"></script>
+  <script src="/javascripts/data-tableTntExplosion.js"></script>
 
   <!-- JQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -42,8 +53,7 @@
   <!-- MDBootstrap Datatables  -->
   {{!--
   <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script> --}}
-  {{!-- JS PARA EL NAVBAR --}}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+
   {{!--
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/esm/popper.js"></script> --}}
   {{!--
@@ -51,7 +61,7 @@
   {{!-- --------------------- --}}
   <script src="/javascripts/script.js"></script>
   <script src="/javascripts/mapController.js"></script>
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHbjOpf5fcJI5XBdjpEe4JJT7sCeN1gXM&callback=initMap"
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHbjOpf5fcJI5XBdjpEe4JJT7sCeN1gXM&callback=initMap"
     async defer></script>
 </body>
 
