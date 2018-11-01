@@ -11,30 +11,26 @@
         </div>
       </div>
       <div class="sidebar-header">
-        <div class="user-pic">
-          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg"
-            alt="User picture">
-        </div>
         <div class="user-info">
-          <span class="user-name">Jhon
-            <strong>Smith</strong>
+          <span class="user-name">User
           </span>
           <span class="user-role">User Risk App Basic</span>
-          <span class="user-status">
-            <a href=""><i class="fa fa-gear" aria-hidden="true"></i>--Settings</a>
-          </span>
         </div>
       </div>
       <!-- ADD EVENT  -->
       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+        <button type="button" class="btn btn-light ml-3" data-toggle="modal" data-target="#settings">
+          <i class="fa fa-gear" aria-hidden="true"></i> User Settings
+        </button>
+        <hr>
         <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#poolFireEvent">
-          Pool Fire Model
+          <i class="fa fa-fire" aria-hidden="true"></i> Pool Fire
         </button>
         <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#fireBallEvent">
-          Fire Ball Model
+          <i class="fa fa-sun-o" aria-hidden="true"></i> Fire Ball
         </button>
         <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#tntExplosionEvent">
-          TNT Explosion Model
+          <i class="fa fa-stop-circle-o" aria-hidden="true"></i> TNT Explosion
         </button>
         {{!-- <button onclick=addEvent() type="button" class="btn btn-amber ml-3">
           <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -42,6 +38,7 @@
         {{!-- <button onclick=actualPosition() type="button" class="btn btn-amber ml-3"><i class="fa fa-fire"
             aria-hidden="true"></i>Actual
           Position</button> --}}
+
       </div>
 
       <!-- EVENTOS  -->
@@ -52,24 +49,17 @@
           </li>
 
 
-
-
-
-          <!-- sidebar-content  -->
+          <!-- sidebar-FOOTER - CALC BUTTON  -->
           <div class="sidebar-footer">
-            <a href="#">
-              <i class="fa fa-bell"></i>
-              <span class="badge badge-pill badge-warning notification">3</span>
-            </a>
-            <a href="#">
-              <i class="fa fa-envelope"></i>
-              <span class="badge badge-pill badge-success notification">7</span>
-            </a>
-            <a href="#">
-              <i class="fa fa-cog"></i>
-              <span class="badge-sonar"></span>
-            </a>
+            <div class="container">
+
+              <div class="col-12 col-md-auto">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#tntExplosionEvent">
+                  Calculation
+                </button> </div>
+            </div>
           </div>
+      </div>
   </nav>
 
   {{>mapSidePr}}
