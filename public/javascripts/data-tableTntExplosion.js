@@ -3,14 +3,14 @@
 //----------------------------------------
 
 //Se presenta en la tabla solo valores de gases inflamables:
-var dataForTntExplosion = data.filter(function(el){
+var dataForTntExplosion = data.filter(function (el) {
   return el.hckjkg > 1000 && el.uel !== "9999.0" && el.hcstate == "G"
 });
 
 function dataTableTntExplosion() {
   $('#data-tableTntExplosion').DataTable({
     data: dataForTntExplosion,
-    
+
     "ordering": false,
     "scrollY": "500px", //Aqui se puede modificar para moviles
     "scrollCollapse": true,
@@ -30,11 +30,12 @@ function dataTableTntExplosion() {
       },
     ]
   });
-  var table = $('#data-table').DataTable();
+  
+  var table = $('#data-tableTntExplosion').DataTable();
 
-  $('#data-table tbody').on('click', 'tr', function () {
+  $('#data-tableTntExplosion tbody').on('click', 'tr', function () {
 
-    document.getElementById("name-chem").innerHTML = data[table.row(this).index()].name;
+    document.getElementById("name-chem").innerHTML = dataForTntExplosion[table.row(this).index()].name;
     $('#modal-chemicals-db').modal('hide');
 
     $('#modal-second').modal('show');

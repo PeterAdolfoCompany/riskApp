@@ -31,11 +31,11 @@ function dataTableFireBall() {
       },
     ]
   });
-  var table = $('#data-table').DataTable();
+  var table = $('#data-tableFireBall').DataTable();
 
-  $('#data-table tbody').on('click', 'tr', function () {
+  $('#data-tableFireBall tbody').on('click', 'tr', function () {
 
-    document.getElementById("name-chem").innerHTML = data[table.row(this).index()].name;
+    document.getElementById("name-chem").innerHTML = dataForFireBall[table.row(this).index()].name;
     $('#modal-chemicals-db').modal('hide');
 
     $('#modal-second').modal('show');

@@ -32,9 +32,9 @@ function dataTablePoolFire() {
   });
   var table = $('#data-table').DataTable();
 
-  $('#data-table tbody').on('click', 'tr', function () {
+  $('#data-tablePoolFire tbody').on('click', 'tr', function () {
 
-    document.getElementById("name-chem").innerHTML = data[table.row(this).index()].name;
+    document.getElementById("name-chem").innerHTML = dataForPoolFire[table.row(this).index()].name;
     $('#modal-chemicals-db').modal('hide');
 
     $('#modal-second').modal('show');
