@@ -1,3 +1,7 @@
+* {
+  margin: 0;
+  padding: 0; }
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
@@ -84,10 +88,10 @@ body {
 
 /*----------------page-wrapper----------------*/
 .page-wrapper {
-  height: 100vh; }
+  height: 10vh; }
 
 .page-wrapper .theme {
-  width: 40px;
+  width: 140px;
   height: 40px;
   display: inline-block;
   border-radius: 4px;

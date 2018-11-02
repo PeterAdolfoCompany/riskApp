@@ -27,10 +27,19 @@
 
     //Funcion ADD EVENT QUE ACTIVA DEL BOTON DEL MODAL
     function addEvent(varName) {
+        // Cambio de color del Pin para diferentes eventos
+        if($('#poolFireEvent').is(':visible')) {
+            var dotColor = "blue-dot.png";
+        } else if ($('#fireBallEvent').is(':visible')) {
+            var dotColor = "red-dot.png"
+        } else if ($('#tntExplosionEvent').is(':visible')) {
+            var dotColor = "yellow-dot.png"
+        }
         // crea un Mark en las coordenadas del ususario
         var vMarker = new google.maps.Marker({
             position: new google.maps.LatLng(pos.lat, pos.lng),
             draggable: true,
+            icon: "http://maps.google.com/mapfiles/ms/icons/"+dotColor,
             animation: google.maps.Animation.DROP
         });
 

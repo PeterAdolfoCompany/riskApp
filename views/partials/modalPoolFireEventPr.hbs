@@ -47,10 +47,11 @@
 
             {{!-- ATMOSPHERIC --}}
             <div class="tab-pane fade container " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Wind velocity</label>
                 <input class="form-control col-3 text-center" type="text" placeholder="">
-                <select class="browser-default custom-select col-3">
+                <select onchange="this.form.submit()" class="browser-default custom-select col-3">
                   <option value="1">m/s</option>
                   <option value="2">km/h</option>
                   <option value="3">mph</option>
@@ -59,7 +60,7 @@
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Air Temperature</label>
                 <input class="form-control col-3 text-center" type="text" placeholder="">
-                <select class="browser-default custom-select col-3">
+                <select onchange="this.form.submit()" class="browser-default custom-select col-3">
                   <option value="1">C</option>
                   <option value="2">K</option>
                   <option value="3">F</option>
@@ -88,29 +89,71 @@
               <h5>Type of Leak </h5>
               <!-- Default inline 1-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="continuosLeak" name="radioTypeLeak" checked>
+                <input type="radio" class="custom-control-input" id="continuosLeak" value="continuosLeak" name="radioTypeLeak"
+                  checked>
                 <label class="custom-control-label" for="continuosLeak">Continuos leak</label>
               </div>
 
               <!-- Default inline 2-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="massiveLeak" name="radioTypeLeak">
+                <input type="radio" class="custom-control-input" id="massiveLeak" value="massiveLeak" name="radioTypeLeak">
                 <label class="custom-control-label" for="massiveLeak">Massive leak</label>
               </div>
 
               <!-- Default inline 3-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="circularDike" name="radioTypeLeak">
+                <input type="radio" class="custom-control-input" id="circularDike" value="circularDike" name="radioTypeLeak">
                 <label class="custom-control-label" for="circularDike">Circular dike</label>
               </div>
 
               <!-- Default inline 4-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="noCircularDike" name="radioTypeLeak">
+                <input type="radio" class="custom-control-input" id="noCircularDike" value="noCircularDike" name="radioTypeLeak">
                 <label class="custom-control-label" for="noCircularDike">No Circular dike</label>
               </div>
               <hr>
-
+              {{!-- Tipo de descarga --}}
+              <div class="container">
+                <div id="continuosLakeDiv" class="row justify-content-center mt-2">
+                  <label class="col-3 text-center" for="">Flow</label>
+                  <input class="form-control col-3 text-center" type="text" placeholder="">
+                  <select class="browser-default custom-select col-3">
+                    <option value="1">m3/s</option>
+                    <option value="2">kg/s</option>
+                    <option value="3">l/s</option>
+                  </select>
+                </div>
+                <div id="massiveLeakDiv" class="row justify-content-center mt-2">
+                  <label class="col-3 text-center" for="">Mass</label>
+                  <input class="form-control col-3 text-center" type="text" placeholder="">
+                  <select class="browser-default custom-select col-3">
+                    <option value="1">m3</option>
+                    <option value="2">l</option>
+                    <option value="3">kg</option>
+                  </select>
+                </div>
+                <div id="circularDikekDiv" class="row justify-content-center mt-2">
+                  <label class="col-3 text-center" for="">Radious</label>
+                  <input class="form-control col-3 text-center" type="text" placeholder="">
+                  <select class="browser-default custom-select col-3">
+                    <option value="1">m</option>
+                  </select>
+                </div>
+                <div id="noCircularDikekDiv" class="row justify-content-center mt-2">
+                  <label class="col-4 text-center" for="">Height</label>
+                  <input class="form-control col-3 text-center" type="text" placeholder="">
+                  <select class="browser-default custom-select col-3">
+                    <option value="1">m</option>
+                  </select>
+                  <hr>
+                  <label class="col-4 text-center" for="">Width</label>
+                  <input class="form-control col-3 text-center" type="text" placeholder="">
+                  <select class="browser-default custom-select col-3">
+                    <option value="1">m</option>
+                  </select>
+                </div>
+              </div>
+              <hr>
               <h5>Burning Rate Method </h5>
               <!-- Default inline 1-->
               <div class="custom-control custom-radio custom-control-inline">
