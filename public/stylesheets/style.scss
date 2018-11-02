@@ -12,10 +12,15 @@ a {
   color: #00B7FF;
 }
 
+// MODAL
+.modal{
+  background: rgba(161,136,127, 0.8);
+}
+
 // MAP
 #map{
   width: 100%;
-  height: 800px;
+  height: 100vh;
 }
 .contextMenuDiv{
   visibility:hidden;
@@ -126,11 +131,11 @@ body {
 /*----------------page-wrapper----------------*/
 
 .page-wrapper {
-  height: 10vh;
+  height: 100vh;
 }
 
 .page-wrapper .theme {
-  width: 140px;
+  width: 40px;
   height: 40px;
   display: inline-block;
   border-radius: 4px;
@@ -149,7 +154,7 @@ body {
 
 @media screen and (min-width: 768px) {
   .page-wrapper.toggled .page-content {
-    padding-left: 300px;
+    padding-left: 250px;
   }
 }
 
@@ -481,7 +486,7 @@ body {
 /*-----------------------------chiller-theme-------------------------------------------------*/
 
 .chiller-theme .sidebar-wrapper {
-  background: #1d1d1d;
+  background: #6d4c41;
 }
 
 .chiller-theme .sidebar-wrapper .sidebar-header,

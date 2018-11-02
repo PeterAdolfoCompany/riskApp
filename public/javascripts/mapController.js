@@ -8,7 +8,7 @@
                 lat: -34.397,
                 lng: 150.644
             },
-            mapTypeId: google.maps.MapTypeId.SATELLITE
+            // mapTypeId: google.maps.MapTypeId.SATELLITE
         });
 
         infoWindow = new google.maps.InfoWindow;
