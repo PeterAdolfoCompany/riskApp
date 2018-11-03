@@ -34,11 +34,13 @@ function dataTableTntExplosion() {
   var table = $('#data-tableTntExplosion').DataTable();
 
   $('#data-tableTntExplosion tbody').on('click', 'tr', function () {
-
     document.getElementById("name-chemTnt").innerHTML = dataForTntExplosion[table.row(this).index()].name;
-    $('#modal-chemicals-db').modal('hide');
+    document.getElementById("nameChemTnt").value = dataForTntExplosion[table.row(this).index()].name;
+    document.getElementById("hckjkgChemTnt").value = dataForTntExplosion[table.row(this).index()].hckjkg;
 
-    $('#modal-second').modal('show');
+    // $('#modal-chemicals-db').modal('hide');
+
+    // $('#modal-second').modal('show');
 
     // alert('Row index: ' + table.row(this).index());
   });
