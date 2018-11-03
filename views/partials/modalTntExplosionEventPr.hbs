@@ -33,29 +33,29 @@
 
             {{!-- CHEMICAL --}}
             <div class="tab-pane fade show active" id="homeTnt" role="tabpanel" aria-labelledby="home-tab">
-
-               <div class="table">
+              <div class="table">
                 <table id="data-tableTntExplosion" class="table table-hover" width="100%"></table>
               </div>
-
             </div>
 
 
             {{!-- SOURCE --}}
-            <div class="tab-pane fade" id="contactTnt" role="tabpanel" aria-labelledby="contact-tab">
-              <hr>
-              <div class="row justify-content-center mt-2">
-                <label class="col-6 text-center" for="">Mass release</label>
-                <input class="form-control col-3 text-center" type="text" placeholder="">
-                <select class="browser-default custom-select col-3">
-                  <option value="1">kg</option>
-                  <option value="2">lb</option>
-                  <option value="3">m3</option>
-                </select>
-              </div>
-              <div class="row justify-content-center mt-2">
-                <label class="col-6 text-center" for="">Energy fraction</label>
-                <input class="form-control col-3 text-center" type="text" placeholder="">
+            <div class="container">
+              <div class="tab-pane fade" id="contactTnt" role="tabpanel" aria-labelledby="contact-tab">
+                <hr>
+                <div class="row justify-content-center mt-2">
+                  <label class="col-6 text-center" for="">Mass release</label>
+                  <input id="mass-rel-tnt" class="form-control col-3 text-center" type="text" placeholder="">
+                  <select class="browser-default custom-select col-3">
+                    <option value="1">kg</option>
+                    <option value="2">lb</option>
+                    <option value="3">m3</option>
+                  </select>
+                </div>
+                <div class="row justify-content-center mt-2">
+                  <label class="col-6 text-center" for="">Energy fraction</label>
+                  <input id="energy-fraction" class="form-control col-3 text-center" type="text" placeholder="">
+                </div>
               </div>
               <hr>
               {{!-- BOTON ADICIONA PUNTO MARKER EN EL MAPA --}}
