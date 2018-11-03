@@ -178,6 +178,16 @@ input:focus ~ .highlight {
     background: #357bd8;
 }
 
+.buttonGray {
+    background: #c0c5cc;
+    text-shadow: 1px 1px 0 rgba(39, 110, 204, .5);
+    border-bottom: 2px solid #828488;
+}
+
+.buttonGray:hover {
+    background: #d6dade;
+}
+
 /* Ripples container */
 
 .ripples {
@@ -258,4 +268,8 @@ footer img:hover {
 
 footer img:focus, footer a:focus {
     outline: none;
+}
+.center {
+    width: 380px;
+    margin: 4em auto;
 }
