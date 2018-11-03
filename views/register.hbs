@@ -1,29 +1,27 @@
-<form action="/auth/register" method="post">
-    <div>
-        <label for="">
-            Username:
-            <input type="username" name="username">
-        </label>
+<header>
+    <h1>Risk App</h1>
+    <h3>Register</h3>
+</header>
+<form class="login" action="/auth/register" method="post">
+    <div class="group">
+        <input type="username" name="username"><span class="highlight"></span><span class="bar"></span>
+        <label>Username</label>
     </div>
-    <div>
-        <label for="">
-            Email:
-            <input type="email" name="email">
-        </label>
+    <div class="group">
+        <input type="email" name="email"><span class="highlight"></span><span class="bar"></span>
+        <label>Email</label>
     </div>
-    <div>
-        <label for="">
-            Password
-            <input type="password" name="password">
-        </label>
+    <div class="group">
+        <input type="password" name="password"><span class="highlight"></span><span class="bar"></span>
+        <label>Password</label>
     </div>
-    <div>
-        <label for="">
-            Confirm Password
-            <input type="password" name="password-confirm">
-        </label>
+    <div class="group">
+        <input type="password" name="password-confirm"><span class="highlight"></span><span class="bar"></span>
+        <label>Confirm Password</label>
     </div>
-    <button type="submit">Register</button>
+    <button type="submit" class="button buttonBlue">Register
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+    </button>
 </form>
 
 <p style="color: red">

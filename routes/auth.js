@@ -27,9 +27,11 @@ router.post('/register', (req, res) => {
     User.register({username, email}, password)
         .then(user => {
             const options = {
+                username: user.username,
                 email: user.email,
                 subject: 'Welcome to Risk App.',
                 from: 'Risk App',
+                filename: 'verify',
                 message: 'Please confirm your email address to complete your subscription'
             };
             mail.send(options);
