@@ -124,7 +124,7 @@
                   </select>
                 </div>
                 <div id="massiveLeakDiv" class="row justify-content-center mt-2">
-                  <label class="col-3 text-center" for="">Mass</label>
+                  <label class="col-3 text-center" for="">Mass release</label>
                   <input class="form-control col-3 text-center" type="text" placeholder="">
                   <select class="browser-default custom-select col-3">
                     <option value="1">m3</option>
@@ -133,7 +133,7 @@
                   </select>
                 </div>
                 <div id="circularDikekDiv" class="row justify-content-center mt-2">
-                  <label class="col-3 text-center" for="">Radious</label>
+                  <label class="col-3 text-center" for="">Radius</label>
                   <input class="form-control col-3 text-center" type="text" placeholder="">
                   <select class="browser-default custom-select col-3">
                     <option value="1">m</option>
@@ -154,45 +154,47 @@
                 </div>
               </div>
               <hr>
-              <h5>Burning Rate Method </h5>
-              <!-- Default inline 1-->
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="strasser" name="radioBurningRateMethod" checked>
-                <label class="custom-control-label" for="strasser">Strasser</label>
-              </div>
+              <div class="container">
+                <h5>Burning Rate Method </h5>
+                <!-- Default inline 1-->
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="strasser" name="radioBurningRateMethod" checked>
+                  <label class="custom-control-label" for="strasser">Strasser</label>
+                </div>
 
-              <!-- Default inline 2-->
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="mudan" name="radioBurningRateMethod">
-                <label class="custom-control-label" for="mudan">Mudan</label>
-              </div>
-              <hr>
+                <!-- Default inline 2-->
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="mudan" name="radioBurningRateMethod">
+                  <label class="custom-control-label" for="mudan">Mudan</label>
+                </div>
+                <hr>
 
-              <h5>Flame Height Method </h5>
-              <!-- Default inline 1-->
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="thomas" name="radioFlameHeightMethod" checked>
-                <label class="custom-control-label" for="thomas">Thomas</label>
-              </div>
+                <h5>Flame Height Method </h5>
+                <!-- Default inline 1-->
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="thomas" name="radioFlameHeightMethod" checked>
+                  <label class="custom-control-label" for="thomas">Thomas</label>
+                </div>
 
-              <!-- Default inline 2-->
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="pritchard" name="radioFlameHeightMethod">
-                <label class="custom-control-label" for="pritchard">Pritchard</label>
-              </div>
-              <hr>
+                <!-- Default inline 2-->
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="pritchard" name="radioFlameHeightMethod">
+                  <label class="custom-control-label" for="pritchard">Pritchard</label>
+                </div>
+                <hr>
 
-              <h5>Calculation Method </h5>
-              <!-- Default inline 1-->
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="pointSource" name="radioCalcMethod" checked>
-                <label class="custom-control-label" for="pointSource">Point Source</label>
-              </div>
+                <h5>Calculation Method </h5>
+                <!-- Default inline 1-->
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="pointSource" name="radioCalcMethod" checked>
+                  <label class="custom-control-label" for="pointSource">Point Source</label>
+                </div>
 
-              <!-- Default inline 2-->
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="solidSource" name="radioCalcMethod">
-                <label class="custom-control-label" for="solidSource">Solid Plume</label>
+                <!-- Default inline 2-->
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="solidSource" name="radioCalcMethod">
+                  <label class="custom-control-label" for="solidSource">Solid Plume</label>
+                </div>
               </div>
               <hr>
               {{!-- BOTON ADICIONA PUNTO MARKER EN EL MAPA --}}

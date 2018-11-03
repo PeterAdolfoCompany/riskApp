@@ -30,10 +30,13 @@
         // Cambio de color del Pin para diferentes eventos
         if($('#poolFireEvent').is(':visible')) {
             var dotColor = "blue-dot.png";
+            var iconEvent = "'fa fa-fire'";
         } else if ($('#fireBallEvent').is(':visible')) {
             var dotColor = "red-dot.png"
+            var iconEvent = "'fa fa-sun-o'";
         } else if ($('#tntExplosionEvent').is(':visible')) {
             var dotColor = "yellow-dot.png"
+            var iconEvent = "'fa fa-stop-circle-o'";
         }
         // crea un Mark en las coordenadas del ususario
         var vMarker = new google.maps.Marker({
@@ -44,9 +47,9 @@
         });
 
         //Agregar html
-        $(".sidebar-menu ul").append("<li class='sidebar-dropdown'>\n" +
+        $(".sidebar-menu ul").append("<li>\n" +
             "            <a href='#'>\n" +
-            "              <i class='fa fa-tachometer-alt'></i>\n" +
+            "              <i class="+iconEvent+" aria-hidden='true'></i>\n" +
             "              <span>"+ varName +"</span>\n" +
             "            </a>\n" +
             "          </li>");
