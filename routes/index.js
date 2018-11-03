@@ -1,13 +1,17 @@
 const express = require('express');
 const router  = express.Router();
 
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) return next();
+    res.redirect('/auth/login');
+}
+
 /* GET home page */
 router.get('/', (req, res, next) => {
   res.redirect('/auth/login');
 });
 
-/* Ruta Home - Aqui debe entrar cuando ya esté autenticado el usuario */
-router.get('/home', (req, res, next) => {
+router.get('/home',  isLoggedIn, (req, res, next) => {
   res.render('home');
 });
 
