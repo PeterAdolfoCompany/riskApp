@@ -22,32 +22,32 @@ const R_DRY_AIR = 287.05; //Constante específica del aire (J/kg*K)
 */
 
 class PoolFire {
-  constructor(sustancia, obj) {
+  constructor(obj) {
     //DATOS DEL CLIMA
-    this.tempAmbiK = obj.tempAmbC+273.15;
+    this.tempAmbiK = obj.tempAmbC + 273.15;
     this.velVientomSeg = obj.velVientomseg;
     this.altitud = obj.altitudM;
-    this.humedad = obj.humedadRel;
+    this.humedadRel = obj.humedadRel;
 
     this.obj = obj; //Objeto que contiene la informacion a pasar en la clase
     //Sustancia
-    this.sustancia = sustancia;
+    this.sustancia = obj;
     // Entalpia de vaporizacion (kJ/kg) - a la temperatura ambiente dada YAWS - pp109 f(t)
-    this.hVapKJKG = ((this.sustancia.hva * Math.pow(1 - (this.tempAmbiK / this.sustancia.tc), this.sustancia.hvn)) / this.sustancia.mw) * 1000;
+    this.hVapKJKG = ((this.obj.hva * Math.pow(1 - (this.tempAmbiK / this.obj.tc), this.obj.hvn)) / this.obj.mw) * 1000;
     // Entalpia de Combustion (kJ/kg) - YAWS - pp582 
-    this.hCombKJKG = this.sustancia.hckjkg;
+    this.hCombKJKG = this.obj.hckjkg;
     // Temperatura de ebullicion (K)
-    this.tEbullK = parseFloat(this.sustancia.tb);
+    this.tEbullK = parseFloat(this.obj.tb);
     // - cP - Capacidad calorica (KJ/kg*K) - DB f(T)
-    this.cPKJKGK = (parseFloat(this.sustancia.cpla) + parseFloat(this.sustancia.cplb * this.tempAmbiK) + parseFloat(this.sustancia.cplc * Math.pow(this.tempAmbiK, 2)) + parseFloat(this.sustancia.cpld * Math.pow(this.tempAmbiK, 3))) / (this.sustancia.mw)
+    this.cPKJKGK = (parseFloat(this.obj.cpla) + parseFloat(this.obj.cplb * this.tempAmbiK) + parseFloat(this.obj.cplc * Math.pow(this.tempAmbiK, 2)) + parseFloat(this.obj.cpld * Math.pow(this.tempAmbiK, 3))) / (this.obj.mw)
     //- densLiquid - Densidad del liquido a temperatura de ebullición (kg/m3) - DB f(t) YAWS-pp185
-    this.densLiquidATB = this.sustancia.dliqa * Math.pow(this.sustancia.dliqb, -1 * Math.pow((1 - this.sustancia.tb / this.sustancia.tc), this.sustancia.dliqn)) * 1000;
+    this.densLiquidATB = this.obj.dliqa * Math.pow(this.obj.dliqb, -1 * Math.pow((1 - this.obj.tb / this.obj.tc), this.obj.dliqn)) * 1000;
     // Entalpia de vaporizacion (kJ/kg) - a la temperatura de ebullicion CCPS 234 ej
     this.hVapKJKGTB = parseFloat(this.hVapKJKG) + parseFloat(this.cPKJKGK) * (this.tEbullK - this.tempAmbiK);
     // Formula para SEP verifica si es o no hidrocarburo
-    this.name = this.sustancia.name;
+    this.name = this.obj.name;
 
-    
+
 
     //-------DATOS DENTRO DEL OBJETO --------
     //¿Fuga continua o masiva, dique circular no circular?
@@ -319,6 +319,7 @@ class PoolFire {
       this.humedadRel = 0.001;
     }
     let pHR = this.humedadRel / 100.00; //La humedad relativa se convierte a parcial numerado entre 0 y 1
+    console.log("ERROR COSOLE: ", this.humedadRel)
     //let radio = this.poolDiameter() / 2.0;
     let c4 = 2.02;
     //Calculo de la Presion Parcial de Vapor de Agua (PA) se puede usar la CCPS 2.2.43?
@@ -361,8 +362,8 @@ class PoolFire {
  - tolerance - tolerancia para la iteración.
  */
   xTerm(qTerm) {
-   
-   
+
+
     //Valor de inicio del calculo de distancia x (m) a la de radiación térmica indicada (qTerm);
     let xCalc = 0.1;
 
@@ -436,6 +437,21 @@ var objeto = {
   velVientomseg: 0, //Velocidad del viento m/s
   altitudM: 0, //Altitud en msnm
   humedadRel: 50, //Humedad Relativa %
+  // DATOS DE LA SUSTANCIA
+  name: "GASOLINE",
+  hva: 61.1,
+  hvn: 0.38,
+  tc: 469.7,
+  mw: 115.0,
+  hckjkg: 47391.0,
+  tb: 333.0,
+  cpla: 147.085,
+  cplb: 0.3657,
+  cplc: 0.0,
+  cpld: 0.0,
+  dliqa: 78.59,
+  dliqb: 84.21,
+  dliqn: -0.05357,
   //Datos para calculo del diametro del PoolFire
   //Solo uno es verdadero, los demas falsos
   isfugaContinua: false,
@@ -460,16 +476,21 @@ var objeto = {
   largoDiqueNoCircular: 5, // (m)
   //Diamtero de un dique circular (m)
   diametroDiqueCircular: 25, // (m)
+  // Settings
+  rad01: 10,
+  rad02: 5,
+  rad03: 1.4,
+  timeExposition: 10,
   //Localizacion geografica del punto de fuga
   lat: -99.212,
   lon: 19.4332
 }
 
-var newPF = new PoolFire(data[1364 - 1], objeto); //1361 - Gasolina - 127 Ethane  -130 Ethanol 598 - n-Hexane : 1364-DISEL : 1366-BIODIESEL : 1365-TURBOSINA TODO: Verificar parametros de turbosina
+var newPF = new PoolFire(objeto); //1361 - Gasolina - 127 Ethane  -130 Ethanol 598 - n-Hexane : 1364-DISEL : 1366-BIODIESEL : 1365-TURBOSINA TODO: Verificar parametros de turbosina
 
 
-console.log(`El Burning Rate de ${newPF.sustancia.name} es: ${newPF.burningRate()} kg/m2*s`)
-console.log(`Calor de combustion ${newPF.sustancia.hckjkg}`)
+console.log(`El Burning Rate de ${newPF.name} es: ${newPF.burningRate()} kg/m2*s`)
+console.log(`Calor de combustion ${newPF.hCombKJKG}`)
 console.log(`Diametro Pool Fire ${newPF.poolDiameter()} m`)
 console.log(`Velocidad Adimensional del viento: ${newPF.ux()}`);
 console.log(`Tiempo para alcanzar diametro en equilibrio ${newPF.timeToReachPoolSize()} s`)
@@ -486,12 +507,12 @@ console.log(`Capacidad calorifica kj/kg: ${newPF.cPKJKGK}`)
 
 
 //Distancia a nivel de piso
-var xnp = 50; 
+var xnp = 20;
 
 var tiempoExpos = 120 //seg
 // for (xnp = 1; xnp < 60; xnp = xnp + 1) {
-  // Del teorema de pitagoras 
-var x = Math.sqrt(Math.pow(xnp+(newPF.poolDiameter()/2), 2) + Math.pow(newPF.alturaFlama()/2, 2));
+// Del teorema de pitagoras 
+var x = Math.sqrt(Math.pow(xnp + (newPF.poolDiameter() / 2), 2) + Math.pow(newPF.alturaFlama() / 2, 2));
 
 
 console.log(`Radiación térmica: ${parseFloat(xnp).toFixed(1)} m ${x} m- ${parseFloat(newPF.qTermAtX(x)).toFixed(2)} kW/m2 - Probit: ${parseFloat(newPF.probit(tiempoExpos,x).toFixed(3))} - Porcentaje = ${newPF.probitPrcFatalidades(tiempoExpos,x)}`)

@@ -7,13 +7,18 @@ const fireBallSchema = new Schema({
   altitud: Number,
   humedad: Number,
   user_id: Objectid, //FIXME: Duda en relacionar con user
-  chem_id: Objectid, //FIXME: Duda en relacionar con la tabla de las sustancias
   radiationFraction: Number,
   massRelease: Number,
-  
+  // SUSTANCIA
+  name: String,
+  hckjkg: Number,
+  // SETTINGS
+  termalRad01: Number,
+  termalRad02: Number,
+  termalRad03: Number,
   //RESULTADOS
   fireBallArray: [Number], //Array para graficar y reporte
-  radio01: Number, //Radios calculados en base a los datos de radiación del User Campos fireBallQ1 2 o 3
+  radio01: Number, //Radios calculados en base a los datos de radiación del settings fireBallQ1 2 o 3
   radio02: Number,
   radio03: Number,
   location: {
