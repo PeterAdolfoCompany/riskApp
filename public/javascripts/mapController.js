@@ -77,7 +77,6 @@
         console.log(id);
 
 
-
         vMarker.addListener("rightclick", function (e) {
             for (prop in e) {
                 if (e[prop] instanceof MouseEvent) {
