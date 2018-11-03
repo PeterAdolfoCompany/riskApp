@@ -36,9 +36,8 @@ function dataTableFireBall() {
   $('#data-tableFireBall tbody').on('click', 'tr', function () {
 
     document.getElementById("name-chemFireBall").innerHTML = dataForFireBall[table.row(this).index()].name;
-    $('#modal-chemicals-db').modal('hide');
-
-    $('#modal-second').modal('show');
+    document.getElementById("nameChemFB").value = dataForTntExplosion[table.row(this).index()].name;
+    document.getElementById("hckjkgChemFB").value = dataForTntExplosion[table.row(this).index()].hckjkg;
 
     // alert('Row index: ' + table.row(this).index());
   });

@@ -8,7 +8,7 @@
         <div class="modal-header" style="background-color: #fbc02c">
           <h5 class="modal-title" id="modalEventNameTnt">
             <div class="md-form form-sm">
-              <input type="text" id="inputSMExTnt" class="form-control form-control-sm">
+              <input type="text" id="inputSMExTnt" name="eventNameTnt" class="form-control form-control-sm">
               <label for="inputSMEx" style="color:black">Event name</label>
             </div>
             {{!-- Nombre de la sustancia en el modal --}}
@@ -41,7 +41,8 @@
                 <table id="data-tableTntExplosion" class="table table-hover" width="100%"></table>
               </div>
             </div>
-
+            <input id="nameChemTnt" name="nameChemTnt" type="hidden">
+            <input id="hckjkgChemTnt" name="hckjkgChemTnt" type="hidden">
 
             {{!-- SOURCE --}}
 
@@ -51,7 +52,7 @@
 
                 <div class="row justify-content-center mt-2">
                   <label class="col-6 text-center" for="">Mass release</label>
-                  <input id="mass-rel-tnt" class="form-control col-3 text-center" type="text" placeholder="">
+                  <input id="mass-rel-tnt" name="massReleaseTnt" class="form-control col-3 text-center" type="text" placeholder="">
                   <select class="browser-default custom-select col-3">
                     <option value="1">kg</option>
                     <option value="2">lb</option>
@@ -60,7 +61,7 @@
                 </div>
                 <div class="row justify-content-center mt-2">
                   <label class="col-6 text-center" for="">Energy fraction (0.01 - 0.1)</label>
-                  <input id="energy-fraction" class="form-control col-3 text-center" type="text" placeholder="">
+                  <input id="energy-fraction" name="energyFractionTNT" class="form-control col-3 text-center" type="text" placeholder="">
                 </div>
               </div>
               <hr>
@@ -80,7 +81,7 @@
             <div class="tab-pane fade container " id="settingsTNT" role="tabpanel" aria-labelledby="profile-tab">
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Overpressure 1</label>
-                <input id="rad01-valTNT" class="form-control col-3 text-center" type="text" placeholder="" value="8.0">
+                <input id="rad01-valTNT" name="rad01Tnt" class="form-control col-3 text-center" type="text" placeholder="" value="8.0">
                 <select onchange="this.form.submit()" class="browser-default custom-select col-3">
                   <option value="1">psi</option>
                   <option value="2">atm</option>
@@ -88,15 +89,15 @@
               </div>
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Overpressure 2</label>
-                <input id="rad02-valTNT" class="form-control col-3 text-center" type="text" placeholder="" value="1.0">
+                <input id="rad02-valTNT" name="rad02Tnt" class="form-control col-3 text-center" type="text" placeholder="" value="1.0">
                 <select onchange="this.form.submit()" class="browser-default custom-select col-3">
-                 <option value="1">psi</option>
+                  <option value="1">psi</option>
                   <option value="2">atm</option>
                 </select>
               </div>
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Overpressure 3</label>
-                <input id="rad03-valTNT" class="form-control col-3 text-center" type="text" placeholder="" value="0.5">
+                <input id="rad03-valTNT" name="rad03Tnt" class="form-control col-3 text-center" type="text" placeholder="" value="0.5">
                 <select onchange="this.form.submit()" class="browser-default custom-select col-3">
                   <option value="1">psi</option>
                   <option value="2">atm</option>
