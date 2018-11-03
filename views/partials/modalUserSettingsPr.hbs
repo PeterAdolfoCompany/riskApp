@@ -1,0 +1,172 @@
+<!-- Modal -->
+<div class="modal fade" id="userSettings" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  data-backdrop="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <form action="">
+        <div class="modal-header">
+          <h4>Settings</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="userSettingsAtmos" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">Atmospheric</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tabSettings" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">Atmospheric</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="contact-tabSet" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
+                aria-selected="false">Source</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+
+            {{!-- CHEMICAL --}}
+            <div class="tab-pane fade show active" id="homeset" role="tabpanel" aria-labelledby="home-tab">
+
+              <div class="table">
+                <table id="data-set" class="table table-hover" width="100%"></table>
+              </div>
+
+            </div>
+
+            {{!-- ATMOSPHERIC --}}
+            <div class="tab-pane fade container " id="profileset" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="row justify-content-center mt-2">
+                <label class="col-6 text-center" for="">Wind velocity</label>
+                <input class="form-control col-3 text-center" type="text" placeholder="">
+                <select class="browser-default custom-select col-3">
+                  <option value="1">m/s</option>
+                  <option value="2">km/h</option>
+                  <option value="3">mph</option>
+                </select>
+              </div>
+              <div class="row justify-content-center mt-2">
+                <label class="col-6 text-center" for="">Air Temperature</label>
+                <input class="form-control col-3 text-center" type="text" placeholder="">
+                <select class="browser-default custom-select col-3">
+                  <option value="1">C</option>
+                  <option value="2">K</option>
+                  <option value="3">F</option>
+                </select>
+              </div>
+              <div class="row justify-content-center mt-2">
+                <label class="col-6 text-center" for="">Humidity (%)</label>
+                <input class="form-control col-3 text-center" type="text" placeholder="">
+                <select class="browser-default custom-select col-3">
+                  <option value="1">%</option>
+                </select>
+              </div>
+              <div class="row justify-content-center mt-2">
+                <label class="col-6 text-center" for="">Altitude (msnm)</label>
+                <input class="form-control col-3 text-center" type="text" placeholder="">
+                <select class="browser-default custom-select col-3">
+                  <option value="1">msnm</option>
+                </select>
+              </div>
+
+            </div>
+
+            {{!-- SOURCE --}}
+            <div class="tab-pane fade" id="contactset" role="tabpanel" aria-labelledby="contact-tab">
+              <hr>
+              <h5>Type of Leak </h5>
+              <!-- Default inline 1-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="continuosLeakset" name="radioTypeLeak" checked>
+                <label class="custom-control-label" for="continuosLeak">Continuos leak</label>
+              </div>
+
+              <!-- Default inline 2-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="massiveLeakset" name="radioTypeLeak">
+                <label class="custom-control-label" for="massiveLeak">Massive leak</label>
+              </div>
+
+              <!-- Default inline 3-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="circularDikeset" name="radioTypeLeak">
+                <label class="custom-control-label" for="circularDike">Circular dike</label>
+              </div>
+
+              <!-- Default inline 4-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="noCircularDikeset" name="radioTypeLeak">
+                <label class="custom-control-label" for="noCircularDike">No Circular dike</label>
+              </div>
+              <hr>
+
+              <h5>Burning Rate Method </h5>
+              <!-- Default inline 1-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="strasserset" name="radioBurningRateMethod" checked>
+                <label class="custom-control-label" for="strasser">Strasser</label>
+              </div>
+
+              <!-- Default inline 2-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="mudanset" name="radioBurningRateMethod">
+                <label class="custom-control-label" for="mudan">Mudan</label>
+              </div>
+              <hr>
+
+              <h5>Flame Height Method </h5>
+              <!-- Default inline 1-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="thomasset" name="radioFlameHeightMethod" checked>
+                <label class="custom-control-label" for="thomas">Thomas</label>
+              </div>
+
+              <!-- Default inline 2-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="pritchardset" name="radioFlameHeightMethod">
+                <label class="custom-control-label" for="pritchard">Pritchard</label>
+              </div>
+              <hr>
+
+              <h5>Calculation Method </h5>
+              <!-- Default inline 1-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="pointSourceset" name="radioCalcMethod" checked>
+                <label class="custom-control-label" for="pointSource">Point Source</label>
+              </div>
+
+              <!-- Default inline 2-->
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="solidSourceset" name="radioCalcMethod">
+                <label class="custom-control-label" for="solidSource">Solid Plume</label>
+              </div>
+              <hr>
+              {{!-- BOTON ADICIONA PUNTO MARKER EN EL MAPA --}}
+              <div class="container">
+                <div class="row justify-content-md-center">
+                  <div class="col-12 col-md-auto">
+                    <button type="button" class="btn btn-light-blue" data-toggle="modal" onclick=addEvent($('#inputSMEx').val())
+                      data-dismiss="modal">
+                      Add Point
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        {{!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">NEXT</button>
+        </div> --}}
+      </form>
+
+    </div>
+  </div>
+</div>
