@@ -3,17 +3,17 @@ const data = require("./DBCHEM")
 
 
 class FireBall {
-  constructor(sustancia, obj) {
+  constructor(obj) {
     this.obj = obj; //Objeto que contiene la informacion a pasar en la clase
     //Sustancia
-    this.sustancia = sustancia;
+    this.sustancia = obj;
     // Entalpia de Combustion (kJ/kg) - YAWS - pp582 
-    this.hCombKJKG = this.sustancia.hckjkg;
+    this.hCombKJKG = this.obj.hckjkg;
     // Formula para SEP verifica si es o no hidrocarburo
     this.name = this.sustancia.name;
 
     //----DATOS DEL CLIMA ---
-    this.tempAmbK = obj.tempAmbC+273.15;
+    this.tempAmbK = obj.tempAmbC + 273.15;
     this.humedadRelativa = obj.humedadRelativa;
 
     //-------DATOS DENTRO DEL OBJETO --------
@@ -104,7 +104,7 @@ class FireBall {
     //Calculo de la distancia por iteracion
     for (x = 1; qi > radTermica; x = x + tolerance) {
       qi = this.qTermToDistance(x)
-     // console.log(`x ${x} qi ${qi}`)
+      // console.log(`x ${x} qi ${qi}`)
     }
     return x;
   }
@@ -115,15 +115,23 @@ var objeto = {
   //DATOS DE CLIMA
   tempAmbC: 25, //Temperatura ambiente C
   humedadRelativa: 50, // Humedad relativa %
+  // DATOS DE LA SUSTANCIA
+  name: "GAS LP",
+  hckjkg: 46088.6,
   //DATOS PARA EL SOURCE
   mass: 21973, //Masa del gas inflamable (kg)
   radiationFraction: 0.314, //Fracciòn de radiacion de 0.2 a 0.4
+  // Settings
+  rad01: 10,
+  rad02: 5,
+  rad03: 1.4,
+  timeExposition: 10,
   //DATOS DE LOCALIZACION
   lat: -99.212,
   lon: 19.4332
 }
 
-var newFB = new FireBall(data[211 - 1], objeto); //211 - PROPANO - 127 Ethane  -130
+var newFB = new FireBall(objeto); //211 - PROPANO - 127 Ethane  -130
 
 
 let distancia = 150; //(m)
