@@ -3,11 +3,16 @@ const Schema = mongoose.Schema;
 
 const tntExplosionSchema = new Schema({
   eventName: String,
-  user_id: Objectid, //FIXME: Duda en relacionar con user
-  chem_id: Objectid, //FIXME: Duda en relacionar con la tabla de las sustancias
+  user_id: ObjectId, //FIXME: Duda en relacionar con user
   energyFraction: Number,
   massRelease: Number,
-  
+  // SUSTANCIA
+  name: String,
+  hckjkg: Number,
+  // SETTINGS
+  overPressure01: Number,
+  overPressure02: Number,
+  overPressure03: Number,
   //RESULTADOS
   TntExplosionArray: [Number], //Array para graficar y reporte
   radio01: Number, //Radios calculados en base a los datos de radiación del User Campos explosionP1 2 o 3
