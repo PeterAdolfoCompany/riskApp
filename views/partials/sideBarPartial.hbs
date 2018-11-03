@@ -1,40 +1,35 @@
 <div class="page-wrapper chiller-theme toggled">
   <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
-    <i class="fas fa-bars"></i>
+    <i class="fa fa-reorder" aria-hidden="true"></i>
   </a>
   <nav id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
-      <div class="sidebar-brand">
-        <a href="#">Risk App</a>
+      <div class="sidebar-brand" style="background-color: #260e04">
+        <a href="#"><img src="/images/logo.png" alt="Imagen" width="60px"> Risk App</a>
         <div id="close-sidebar">
-          <i class="fas fa-times"></i>
+          <i class="fa fa-chevron-left" aria-hidden="true"></i>
         </div>
       </div>
-      <div class="sidebar-header">
-        <div class="user-pic">
-          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/bootstrap4/assets/img/user.jpg"
-            alt="User picture">
-        </div>
+      <div class="sidebar-header" style="background-color: #4e342e">
         <div class="user-info">
-          <span class="user-name">Jhon
-            <strong>Smith</strong>
+          <span class="user-name">User
           </span>
           <span class="user-role">User Risk App Basic</span>
-          <span class="user-status">
-            <a href=""><i class="fa fa-gear" aria-hidden="true"></i>--Settings</a>
-          </span>
         </div>
       </div>
       <!-- ADD EVENT  -->
       <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+        {{!-- <button type="button" class="btn btn-light ml-3" data-toggle="modal" data-target="#userSettings">
+          <i class="fa fa-gear" aria-hidden="true"></i> User Settings
+        </button> --}}
         <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#poolFireEvent">
-          Pool Fire Model
+          <i class="fa fa-fire" aria-hidden="true"></i> Pool Fire
         </button>
-        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#fireBallEvent">
-          Fire Ball Model
+        <button type="button" class="btn btn-deep-orange ml-3" data-toggle="modal" data-target="#fireBallEvent">
+          <i class="fa fa-sun-o" aria-hidden="true"></i> Fire Ball
         </button>
-        <button type="button" class="btn btn-light-blue ml-3" data-toggle="modal" data-target="#tntExplosionEvent">
-          TNT Explosion Model
+        <button type="button" class="btn btn-yellow ml-3" data-toggle="modal" data-target="#tntExplosionEvent">
+          <i class="fa fa-stop-circle-o" aria-hidden="true"></i> TNT Explosion
         </button>
         {{!-- <button onclick=addEvent() type="button" class="btn btn-amber ml-3">
           <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -42,34 +37,28 @@
         {{!-- <button onclick=actualPosition() type="button" class="btn btn-amber ml-3"><i class="fa fa-fire"
             aria-hidden="true"></i>Actual
           Position</button> --}}
+
       </div>
 
       <!-- EVENTOS  -->
       <div class="sidebar-menu">
         <ul>
           <li class="header-menu">
-            <span>EVENTS</span>
+            <span style="color: white">EVENTS</span>
           </li>
 
 
-
-
-
-          <!-- sidebar-content  -->
+          <!-- sidebar-FOOTER - CALC BUTTON  -->
           <div class="sidebar-footer">
-            <a href="#">
-              <i class="fa fa-bell"></i>
-              <span class="badge badge-pill badge-warning notification">3</span>
-            </a>
-            <a href="#">
-              <i class="fa fa-envelope"></i>
-              <span class="badge badge-pill badge-success notification">7</span>
-            </a>
-            <a href="#">
-              <i class="fa fa-cog"></i>
-              <span class="badge-sonar"></span>
-            </a>
+            <div class="container">
+
+              <div class="col-12 col-md-auto">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fullHeightModalRight">
+                  CALCULATION
+                </button> </div>
+            </div>
           </div>
+      </div>
   </nav>
 
   {{>mapSidePr}}
@@ -79,8 +68,7 @@
   {{>modalFireBallEventPr}}
   {{>modalTntExplosionEventPr}}
 
-
-
+  {{>modalResults}}
 
   <!-- page-content" -->
 </div>

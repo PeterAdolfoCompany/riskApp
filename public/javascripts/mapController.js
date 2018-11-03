@@ -8,14 +8,12 @@
                 lat: -34.397,
                 lng: 150.644
             },
-            mapTypeId: google.maps.MapTypeId.SATELLITE
+            // mapTypeId: google.maps.MapTypeId.SATELLITE
         });
 
         infoWindow = new google.maps.InfoWindow;
 
         actualPosition()
-
-
 
     }
 
@@ -29,17 +27,29 @@
 
     //Funcion ADD EVENT QUE ACTIVA DEL BOTON DEL MODAL
     function addEvent(varName) {
+        // Cambio de color del Pin para diferentes eventos
+        if($('#poolFireEvent').is(':visible')) {
+            var dotColor = "blue-dot.png";
+            var iconEvent = "'fa fa-fire'";
+        } else if ($('#fireBallEvent').is(':visible')) {
+            var dotColor = "red-dot.png"
+            var iconEvent = "'fa fa-sun-o'";
+        } else if ($('#tntExplosionEvent').is(':visible')) {
+            var dotColor = "yellow-dot.png"
+            var iconEvent = "'fa fa-stop-circle-o'";
+        }
         // crea un Mark en las coordenadas del ususario
         var vMarker = new google.maps.Marker({
             position: new google.maps.LatLng(pos.lat, pos.lng),
             draggable: true,
+            icon: "http://maps.google.com/mapfiles/ms/icons/"+dotColor,
             animation: google.maps.Animation.DROP
         });
 
         //Agregar html
-        $(".sidebar-menu ul").append("<li class='sidebar-dropdown'>\n" +
+        $(".sidebar-menu ul").append("<li>\n" +
             "            <a href='#'>\n" +
-            "              <i class='fa fa-tachometer-alt'></i>\n" +
+            "              <i class="+iconEvent+" aria-hidden='true'></i>\n" +
             "              <span>"+ varName +"</span>\n" +
             "            </a>\n" +
             "          </li>");
@@ -65,7 +75,6 @@
         markers.push(vMarker);
         console.log(markers);
         console.log(id);
-
 
 
         vMarker.addListener("rightclick", function (e) {
