@@ -20,7 +20,7 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
     if(req.body.password !== req.body['password-confirm']) {
-        return res.render('register', {msg: 'Tus contraseñas no son iguales'})
+        return res.render('register', {err: 'Tus contraseñas no son iguales'})
     }
 
     const {username, email, password} = req.body;
