@@ -115,6 +115,9 @@
                     lng: position.coords.longitude
                 };
                 map.setCenter(pos);
+                // Mandamos las coordenadas al partial
+                $("#latTnt").val(pos.lat);
+                $("#lngTnt").val(pos.lng);
             }, function () {
                 handleLocationError(true, infoWindow, map.getCenter());
             });

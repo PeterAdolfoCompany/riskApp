@@ -8,7 +8,13 @@ function isLoggedIn(req, res, next) {
 }
 
 router.post('/create', isLoggedIn, (req, res, next) => {
+    /* Coordinates dummy for first save */
+    let coordinates = [];
+    coordinates.push(req.body.lngTnt);
+    coordinates.push(req.body.latTnt);
+
     req.body.user = req.user._id;
+    req.body.location = {coordinates};
     TntExplosion.create(req.body)
         .then(() => {
             res.redirect('/home')
