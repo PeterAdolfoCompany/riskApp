@@ -8,6 +8,7 @@ function isLoggedIn(req, res, next) {
 }
 
 router.post('/create', isLoggedIn, (req, res, next) => {
+    req.body.user = req.user._id;
     TntExplosion.create(req.body)
         .then(() => {
             res.redirect('/home')
