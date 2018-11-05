@@ -67,9 +67,11 @@ app.locals.title = 'Risk App';
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const tnt = require('./routes/tnt');
+const poolFire = require('./routes/poolFire');
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/tnt', tnt);
+app.use('/poolFire', poolFire);
 
 
 module.exports = app;
