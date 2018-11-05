@@ -112,6 +112,8 @@ class TntExplosionModel {
 }
 
 
+
+
 var objeto = {
   massRelease: 9071.8474, //Masa del gas inflamable (kg)
   energyFraction: 0.05, //Fraccion de energía (0.01 a 0.1)
