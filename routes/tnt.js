@@ -23,21 +23,20 @@ router.post('/create', isLoggedIn, (req, res, next) => {
     };
 
     // RADIOS CALCS
-    // let obj = {
-    //     massRelease: parseFloat(req.body.massRelease),
-    //     energyFraction: parseFloat(req.body.energyFraction),
-    //     subsName: req.body.subsName,
-    //     hckjkg: parseFloat(req.body.hckjkg)
-    // }
-    // let TnT = new tntModel(obj)
-    // console.log("OBJETO: ---: ",obj)
-    // console.log("PRESION----: ", req.body.overPressure02)
-    // req.body.radio01 = TnT.overpressureToDistance(req.body.overPressure01)
-    // req.body.radio02 = TnT.overpressureToDistance(req.body.overPressure02)
-    // req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03)
+    let obj = {
+        massRelease: parseFloat(req.body.massRelease),
+        energyFraction: parseFloat(req.body.energyFraction),
+        subsName: req.body.subsName,
+        hckjkg: parseFloat(req.body.hckjkg)
+    }
+    let TnT = new tntModel(obj)
+    console.log("OBJETO: ---: ",obj)
+    console.log("PRESION----: ", req.body.overPressure02)
+    req.body.radio01 = TnT.overpressureToDistance(req.body.overPressure01)
+    req.body.radio02 = TnT.overpressureToDistance(req.body.overPressure02)
+    req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03)
 
-    // console.log("RADIO1:"+req.body.radio01+"m RADIO 2: "+req.body.radio02+"m RADIO 3: "+req.body.radio03)
-
+    console.log("El BODY: ---- ", req.body)
 
     TntExplosion.create(req.body)
         .then(() => {
