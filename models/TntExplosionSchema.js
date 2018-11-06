@@ -29,6 +29,11 @@ const tntExplosionSchema = new Schema({
     },
     coordinates: [Number]
   },
+},{
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
+    }
 });
 
 tntExplosionSchema.index({
