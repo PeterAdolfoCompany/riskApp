@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const PoolFire = require('../models/PoolFireSchema');
+const FireBall = require('../models/FireBallSchema');
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
@@ -10,12 +10,12 @@ function isLoggedIn(req, res, next) {
 router.post('/create', isLoggedIn, (req, res, next) => {
     /* Coordinates dummy for first save */
     let coordinates = [];
-    coordinates.push(req.body.pfLngTnt);
-    coordinates.push(req.body.pfLatTnt);
+    coordinates.push(req.body.lngFb);
+    coordinates.push(req.body.latFb);
 
     req.body.user = req.user._id;
     req.body.location = {coordinates};
-    PoolFire.create(req.body)
+    FireBall.create(req.body)
         .then(() => {
             res.redirect('/home')
         })

@@ -1,11 +1,11 @@
 window.onload = () => {
-    const formT = document.getElementById('tntexplosion');
-    const eventName = document.getElementById('eventName');
+    const formFb = document.getElementById('fireBallExplosion');
+    const eventName = document.getElementById('fbName');
 
-    formT.onsubmit = e => {
+    formFb.onsubmit = e => {
         e.preventDefault();
         addEvent(eventName.value);
-        formT.submit();
+        formFb.submit();
     };
 };
 

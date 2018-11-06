@@ -68,10 +68,12 @@ const index = require('./routes/index');
 const auth = require('./routes/auth');
 const tnt = require('./routes/tnt');
 const poolFire = require('./routes/poolFire');
+const fireBall = require('./routes/fireBall');
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/tnt', tnt);
 app.use('/poolFire', poolFire);
+app.use('/fireBall', fireBall);
 
 
 module.exports = app;
