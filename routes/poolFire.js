@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const PoolFire = require('../models/PoolFireSchema');
-const PFModel = require('../calcModels/PoolFire')
+const PFModel = require('../calcModels/PoolFire.js')
 
 
 function isLoggedIn(req, res, next) {
@@ -119,9 +119,16 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         rad03: parseFloat(req.body.pfRad03),
         timeExposition: parseFloat(req.body.timeExposition)
     }
-//TODO: A  CALCULAR
 
-    console.log("El BODY: ---- ", req.body)
+
+    let poolFireEvent = new PFModel(obj)
+    req.body.radio01 = poolFireEvent.xTermAtQNivelPiso(req.body.pfRad01)
+    req.body.radio02 = poolFireEvent.xTermAtQNivelPiso(req.body.pfRad02)
+    req.body.radio03 = poolFireEvent.xTermAtQNivelPiso(req.body.pfRad03)
+
+
+
+    console.log("El OBJETO: ---- ", obj)
     // ------END CALCULATIONS ---------
 
     PoolFire.create(req.body)

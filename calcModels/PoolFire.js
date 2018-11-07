@@ -319,7 +319,6 @@ class PoolFire {
       this.humedadRel = 0.001;
     }
     let pHR = this.humedadRel / 100.00; //La humedad relativa se convierte a parcial numerado entre 0 y 1
-    console.log("ERROR COSOLE: ", this.humedadRel)
     //let radio = this.poolDiameter() / 2.0;
     let c4 = 2.02;
     //Calculo de la Presion Parcial de Vapor de Agua (PA) se puede usar la CCPS 2.2.43?
@@ -385,8 +384,16 @@ class PoolFire {
   //     console.log("qi: "+qi+" qTerm: "+qTerm+" xCalc: "+xCalc);
 
 
-  xTermAtQNivelPiso(qterm) {
-    let x = this.xTerm(qterm)
+  xTermAtQNivelPiso(q) {
+    let x = this.xTerm(q);
+    console.log("Equis: ", x)
+    let a = this.alturaFlama() / 2;
+    console.log("Equisa: ", a)
+
+    //Del teorema de pitagoras
+    let b = Math.sqrt(Math.pow(x, 2) - Math.pow(a, 2))
+    console.log("Equisb: ", b)
+    return b
   }
 
   /*TODO: ---------------- PROBIT - Eisenberg CCPS 269 ----------------
@@ -454,10 +461,10 @@ var objeto = {
   dliqn: -0.05357,
   //Datos para calculo del diametro del PoolFire
   //Solo uno es verdadero, los demas falsos
-  isfugaContinua: false,
-  isfugaMasiva: false,
-  isDiqueCircular: true,
-  isDiqueNoCircular: false,
+  isfugaContinua: 0,
+  isfugaMasiva: 0,
+  isDiqueCircular: 1,
+  isDiqueNoCircular: 0,
   //Datos para tipo de ecuacion del Burning Rate
   isburningRateStrasser: true,
   isburningRateMudan: false,
@@ -465,9 +472,9 @@ var objeto = {
   isAlturaFlamaThomas: false,
   isAlturaFlamaPritchard: true,
   //Modelo de point source o solid plume model
-  isPointSourceModel: false,
+  isPointSourceModel: 1,
   combustionFractionPointSource: 0.35, //CCPS 230-232 Tabla 2.27 (de 0.15 a 0.40)
-  isSolidPlumeModel: true,
+  isSolidPlumeModel: 0,
   //Volumenes de fuga
   spillRate: 0.55, //0.000833333333, // En caso de FUGA CONTINUA (m3/s)
   massRelease: .1, //En caso de FUGA INSTANTANEA (m3)
@@ -485,6 +492,8 @@ var objeto = {
   lat: -99.212,
   lon: 19.4332
 }
+
+console.log("OBJETO EN POOLFIRE: ", objeto)
 
 var newPF = new PoolFire(objeto); //1361 - Gasolina - 127 Ethane  -130 Ethanol 598 - n-Hexane : 1364-DISEL : 1366-BIODIESEL : 1365-TURBOSINA TODO: Verificar parametros de turbosina
 
@@ -518,6 +527,9 @@ var x = Math.sqrt(Math.pow(xnp + (newPF.poolDiameter() / 2), 2) + Math.pow(newPF
 console.log(`Radiación térmica: ${parseFloat(xnp).toFixed(1)} m ${x} m- ${parseFloat(newPF.qTermAtX(x)).toFixed(2)} kW/m2 - Probit: ${parseFloat(newPF.probit(tiempoExpos,x).toFixed(3))} - Porcentaje = ${newPF.probitPrcFatalidades(tiempoExpos,x)}`)
 // }
 
-console.log("Distancia a una radiacion: ", newPF.xTerm(5))
+console.log("Distancia a una radiacion: ", newPF.xTerm(1))
+
+console.log("Distancia desde el piso a una radiacion : ", newPF.xTermAtQNivelPiso(1))
+
 
 module.exports = PoolFire;
