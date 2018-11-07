@@ -1,15 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const TntExplosion = require('../models/TntExplosionSchema');
-const TntModel = require('../calcModels/TntExplosion.js')
-
-
-
-
+const TntModel = require('../calcModels/TntExplosion.js');
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
     res.redirect('/auth/login');
+}
+
+function checkIfOwner(req, res, next) {
+    TntExplosion.findById(req.params.id)
+        .then(tnt => {
+            if (tnt.user.toString() === req.user._id.toString()) {
+                req.tnt = tnt;
+                return next();
+            }
+            res.redirect('/home');
+        })
+        .catch(err => {
+            res.render('home', {err});
+        })
 }
 
 router.post('/create', isLoggedIn, (req, res, next) => {
@@ -36,7 +46,6 @@ router.post('/create', isLoggedIn, (req, res, next) => {
     req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03)
 
 
-
     console.log("El BODY: ---- ", req.body)
     // ------END CALCULATIONS ---------
 
@@ -54,11 +63,18 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         })
 });
 
-// Delete icon in SideBar names
-// router.post('/deleteTnt', isLoggedIn, (req, res, next) =>{
-//     TntExplosion
-// }) 
-    
+router.get('/delete/:id', isLoggedIn, checkIfOwner, (req, res) => {
+    TntExplosion
+        .findByIdAndRemove(req.tnt.id)
+        .then(() => {
+            res.redirect('/home');
+        })
+        .catch(err => {
+            res.render('home', {err});
+        })
+    ;
+});
+
 
 // GET DATA FROM MONGO
 // router.get("/:id", (req, res) => {
