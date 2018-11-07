@@ -39,21 +39,16 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         energyFraction: parseFloat(req.body.energyFraction),
         subsName: req.body.subsName,
         hckjkg: parseFloat(req.body.hckjkg)
-    }
-    let TnT = new TntModel(obj)
-    req.body.radio01 = TnT.overpressureToDistance(req.body.overPressure01)
-    req.body.radio02 = TnT.overpressureToDistance(req.body.overPressure02)
-    req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03)
-
-
-    console.log("El BODY: ---- ", req.body)
+    };
+    let TnT = new TntModel(obj);
+    req.body.radio01 = TnT.overpressureToDistance(req.body.overPressure01);
+    req.body.radio02 = TnT.overpressureToDistance(req.body.overPressure02);
+    req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03);
     // ------END CALCULATIONS ---------
 
     TntExplosion.create(req.body)
-        .then(tntExplosions => {
-            res.render('./home', {
-                tntExplosions
-            });
+        .then(() => {
+            res.redirect('/home');
         })
         .catch(err => {
             res.render('home', {
