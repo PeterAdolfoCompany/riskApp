@@ -15,14 +15,6 @@ function initMap() {
         infoWindow = new google.maps.InfoWindow;
 
         actualPosition();
-        const drawRadios = new DrawCircles(
-            parseFloat($("#latTnt1").val()),
-            parseFloat($("#lngTnt1").val()),
-            parseFloat($("#radioTnt01").val()),
-            parseFloat($("#radioTnt02").val()),
-            parseFloat($("#radioTnt03").val())
-        );
-        drawRadios.draw()
     }
 }
 
@@ -35,17 +27,14 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 }
 
 //ADD MARKER TO MAP
-function addEvent(varName) {
+function addEvent(modalName) {
     // Cambio de color del Pin para diferentes eventos
-    if (document.getElementById("PFButton").onclick) {
+    if (modalName == "poolFire") {
         var dotColor = "blue-dot.png";
-        var iconEvent = "'fa fa-fire'";
-    } else if (document.getElementById("FBButton").onclick) {
+    } else if (modalName == "fireBall") {
         var dotColor = "red-dot.png"
-        var iconEvent = "'fa fa-sun-o'";
-    } else if (document.getElementById("tntButton").onclick) {
+    } else if (modalName == "tntExplosion") {
         var dotColor = "yellow-dot.png"
-        var iconEvent = "'fa fa-stop-circle-o'";
     }
     // crea un Mark en las coordenadas del ususario
     var vMarker = new google.maps.Marker({
@@ -54,14 +43,6 @@ function addEvent(varName) {
         icon: "http://maps.google.com/mapfiles/ms/icons/" + dotColor,
         animation: google.maps.Animation.DROP
     });
-
-    //Agregar html
-    $(".sidebar-menu ul").append("<li>\n" +
-        "            <a href='#'>\n" +
-        "              <i class=" + iconEvent + " aria-hidden='true'></i>\n" +
-        "              <span>" + varName + "</span>\n" +
-        "            </a>\n" +
-        "          </li>");
 
     // adds a listener to the marker
     // gets the coords when drag event ends
@@ -112,7 +93,15 @@ function addEvent(varName) {
 
     // SHOW MODAL
     vMarker.addListener('dblclick', function (e) {
-        $('#tntExplosionEvent').modal('show')
+        if (modalName == "poolFire") {
+            $('#poolFireEvent').modal('show')
+        }
+        if (modalName == "fireBall") {
+            $('#fireBallEvent').modal('show')
+        }
+        if (modalName == "tntExplosion") {
+            $('#tntExplosionEvent').modal('show')
+        }
     });
 
     map.addListener("click", function (e) {
@@ -120,7 +109,6 @@ function addEvent(varName) {
             menuBox.style.display = "none";
         }
     });
-
 }
 
 //TRAE LA POSICION ACTUAL LIGADA AL BOTON ACTUAL POSITION
