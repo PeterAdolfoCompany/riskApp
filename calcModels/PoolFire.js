@@ -519,3 +519,5 @@ console.log(`Radiación térmica: ${parseFloat(xnp).toFixed(1)} m ${x} m- ${pars
 // }
 
 console.log("Distancia a una radiacion: ", newPF.xTerm(5))
+
+module.exports = PoolFire;

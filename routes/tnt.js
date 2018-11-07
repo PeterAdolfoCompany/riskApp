@@ -42,7 +42,7 @@ router.post('/create', isLoggedIn, (req, res, next) => {
 
     TntExplosion.create(req.body)
         .then(tntExplosions => {
-            res.render('./home', {
+            res.render('home', {
                 tntExplosions
             });
         })
