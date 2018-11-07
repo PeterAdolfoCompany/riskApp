@@ -36,7 +36,7 @@ function addEvent(modalName) {
     } else if (modalName === "tntExplosion") {
         var dotColor = "yellow-dot.png"
     }
-    // crea un Mark en las coordenadas del ususario
+    //create mark for user coordinates
     var vMarker = new google.maps.Marker({
         position: new google.maps.LatLng(pos.lat, pos.lng),
         draggable: true,
@@ -48,9 +48,11 @@ function addEvent(modalName) {
     // gets the coords when drag event ends
     // then updates the input with the new coords
     google.maps.event.addListener(vMarker, 'dragend', function (evt) {
-        // Mandamos las coordenadas al partial
-        $("#latTnt").val(evt.latLng.lat());
-        $("#lngTnt").val(evt.latLng.lng());
+        // Set coordinates
+        pos = {
+            lat: evt.latLng.lat(),
+            lng: evt.latLng.lng()
+        };
         map.panTo(evt.latLng);
     });
 
@@ -95,6 +97,10 @@ function addEvent(modalName) {
         if (modalName === "tntExplosion") {
             $('#tntExplosionEvent').modal('show')
         }
+
+        // Set coordinates to modal
+        $("#latTnt").val(pos.lat);
+        $("#lngTnt").val(pos.lng);
     });
 
     map.addListener("click", function (e) {
