@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
 router.get('/home',  isLoggedIn, (req, res, next) => {
   TntExplosion.find({user: req.user._id})
       .then(tntExplosions =>{
-          res.render('./partials/sideBarPartial',{tntExplosions});
+          res.render('home',{tntExplosions});
       })
       .catch(err => {
           res.render('home', {err});
