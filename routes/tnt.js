@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const TntExplosion = require('../models/TntExplosionSchema');
-const tntModel = require('../calcModels/TntExplosion.js')
+const TntModel = require('../calcModels/TntExplosion.js')
 
 
 
@@ -15,6 +15,7 @@ function isLoggedIn(req, res, next) {
 router.post('/create', isLoggedIn, (req, res, next) => {
     /* Coordinates dummy for first save */
     let coordinates = [];
+    let tntResultsArray = [];
     coordinates.push(req.body.lngTnt);
     coordinates.push(req.body.latTnt);
     req.body.user = req.user._id;
@@ -22,24 +23,28 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         coordinates
     };
 
-    // RADIOS CALCS
+    //  --- CALCULATIONS -------
     let obj = {
         massRelease: parseFloat(req.body.massRelease),
         energyFraction: parseFloat(req.body.energyFraction),
         subsName: req.body.subsName,
         hckjkg: parseFloat(req.body.hckjkg)
     }
-    let TnT = new tntModel(obj)
-    
+    let TnT = new TntModel(obj)
     req.body.radio01 = TnT.overpressureToDistance(req.body.overPressure01)
     req.body.radio02 = TnT.overpressureToDistance(req.body.overPressure02)
     req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03)
 
+
+
     console.log("El BODY: ---- ", req.body)
+    // ------END CALCULATIONS ---------
 
     TntExplosion.create(req.body)
-        .then(() => {
-            res.redirect('/home')
+        .then(tntExplosions => {
+            res.render('./home', {
+                tntExplosions
+            });
         })
         .catch(err => {
             res.render('home', {
@@ -49,7 +54,13 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         })
 });
 
-// // GET DATA FROM MONGO
+// Delete icon in SideBar names
+// router.post('/deleteTnt', isLoggedIn, (req, res, next) =>{
+//     TntExplosion
+// }) 
+    
+
+// GET DATA FROM MONGO
 // router.get("/:id", (req, res) => {
 //     TntExplosion.findById(req.params.id)
 //         .then(tntEvent => {

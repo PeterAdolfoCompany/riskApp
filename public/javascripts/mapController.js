@@ -1,208 +1,153 @@
-    var map, infoWindow, pos, id;
-    var markers = [];
+var map, infoWindow, pos, id;
+var markers = [];
 
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 20,
-            center: {
-                lat: -34.397,
-                lng: 150.644
-            },
-            // mapTypeId: google.maps.MapTypeId.SATELLITE
-        });
+function initMap() {
+    console.log("llamo al init")
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 20,
+        center: {
+            lat: -34.397,
+            lng: 150.644
+        },
+        // mapTypeId: google.maps.MapTypeId.SATELLITE
+    });
 
-        infoWindow = new google.maps.InfoWindow;
+    infoWindow = new google.maps.InfoWindow;
 
-        actualPosition()
+    actualPosition()
+     if ($("#radioTnt01").val()) {
+        console.log("Init mapa: ", $("#latTnt1").val(), $("#lngTnt1").val(), "radio",$("#radioTnt01").val(), $("#radioTnt02").val(), $("#radioTnt03").val())
+        var drawRadios = new DrawCircles($("#latTnt1").val(), $("#lngTnt1").val(), $("#radioTnt01").val(), $("#radioTnt02").val(), $("#radioTnt03").val())
+     drawRadios.draw()
+     }
+}
 
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+}
+
+//ADD MARKER TO MAP
+function addEvent(varName) {
+    // Cambio de color del Pin para diferentes eventos
+    if (document.getElementById("PFButton").onclick) {
+        var dotColor = "blue-dot.png";
+        var iconEvent = "'fa fa-fire'";
+    } else if (document.getElementById("FBButton").onclick) {
+        var dotColor = "red-dot.png"
+        var iconEvent = "'fa fa-sun-o'";
+    } else if (document.getElementById("tntButton").onclick) {
+        var dotColor = "yellow-dot.png"
+        var iconEvent = "'fa fa-stop-circle-o'";
     }
+    // crea un Mark en las coordenadas del ususario
+    var vMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(pos.lat, pos.lng),
+        draggable: true,
+        icon: "http://maps.google.com/mapfiles/ms/icons/" + dotColor,
+        animation: google.maps.Animation.DROP
+    });
 
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-            'Error: The Geolocation service failed.' :
-            'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-    }
+    //Agregar html
+    $(".sidebar-menu ul").append("<li>\n" +
+        "            <a href='#'>\n" +
+        "              <i class=" + iconEvent + " aria-hidden='true'></i>\n" +
+        "              <span>" + varName + "</span>\n" +
+        "            </a>\n" +
+        "          </li>");
 
-    //ADD MARKER TO MAP
-    function addEvent(varName) {
-        // Cambio de color del Pin para diferentes eventos
-        if (document.getElementById("PFButton").onclick) {
-            var dotColor = "blue-dot.png";
-            var iconEvent = "'fa fa-fire'";
-        } else if (document.getElementById("FBButton").onclick) {
-            var dotColor = "red-dot.png"
-            var iconEvent = "'fa fa-sun-o'";
-        } else if (document.getElementById("tntButton").onclick) {
-            var dotColor = "yellow-dot.png"
-            var iconEvent = "'fa fa-stop-circle-o'";
-        }
-        // crea un Mark en las coordenadas del ususario
-        var vMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(pos.lat, pos.lng),
-            draggable: true,
-            icon: "http://maps.google.com/mapfiles/ms/icons/" + dotColor,
-            animation: google.maps.Animation.DROP
-        });
+    // adds a listener to the marker
+    // gets the coords when drag event ends
+    // then updates the input with the new coords
+    google.maps.event.addListener(vMarker, 'dragend', function (evt) {
+        // $("#txtLat").val(evt.latLng.lat().toFixed(6));
+        // $("#txtLng").val(evt.latLng.lng().toFixed(6));
+        // Mandamos las coordenadas al partial
+        $("#latTnt").val(evt.latLng.lat());
+        $("#lngTnt").val(evt.latLng.lng());
 
-        //Agregar html
-        $(".sidebar-menu ul").append("<li>\n" +
-            "            <a href='#'>\n" +
-            "              <i class=" + iconEvent + " aria-hidden='true'></i>\n" +
-            "              <span>" + varName + "</span>\n" +
-            "            </a>\n" +
-            "          </li>");
+        console.log("Coord lat: ", evt.latLng.lat())
 
-        // adds a listener to the marker
-        // gets the coords when drag event ends
-        // then updates the input with the new coords
-        google.maps.event.addListener(vMarker, 'dragend', function (evt) {
-            // $("#txtLat").val(evt.latLng.lat().toFixed(6));
-            // $("#txtLng").val(evt.latLng.lng().toFixed(6));
-            // Mandamos las coordenadas al partial
-            $("#latTnt").val(evt.latLng.lat());
-            $("#lngTnt").val(evt.latLng.lng());
-            map.panTo(evt.latLng);
-        });
+        map.panTo(evt.latLng);
+    });
 
-        // centers the map on markers coords
-        map.setCenter(vMarker.position);
+    // centers the map on markers coords
+    map.setCenter(vMarker.position);
 
-        // adds the marker on the map
-        vMarker.setMap(map);
+    // adds the marker on the map
+    vMarker.setMap(map);
 
-        id = vMarker.__gm_id;
+    id = vMarker.__gm_id;
 
-        markers.push(vMarker);
-        console.log(markers);
-        console.log(id);
+    markers.push(vMarker);
+    console.log(markers);
+    console.log(id);
 
 
-        vMarker.addListener("rightclick", function (e) {
-            for (prop in e) {
-                if (e[prop] instanceof MouseEvent) {
-                    mouseEvt = e[prop];
-                    var left = mouseEvt.clientX;
-                    var top = mouseEvt.clientY;
+    vMarker.addListener("rightclick", function (e) {
+        for (prop in e) {
+            if (e[prop] instanceof MouseEvent) {
+                mouseEvt = e[prop];
+                var left = mouseEvt.clientX;
+                var top = mouseEvt.clientY;
 
-                    menuBox = document.getElementById("menuev");
-                    menuBox.style.left = left + "px";
-                    menuBox.style.top = top + "px";
-                    menuBox.style.display = "block";
+                menuBox = document.getElementById("menuev");
+                menuBox.style.left = left + "px";
+                menuBox.style.top = top + "px";
+                menuBox.style.display = "block";
 
-                    mouseEvt.preventDefault();
+                mouseEvt.preventDefault();
 
-                    menuDisplayed = true;
-                }
+                menuDisplayed = true;
             }
-        });
-
-        // SHOW MODAL
-        vMarker.addListener('dblclick', function (e) {
-            $('#tntExplosionEvent').modal('show')
-        });
-
-        map.addListener("click", function (e) {
-            if (menuDisplayed == true) {
-                menuBox.style.display = "none";
-            }
-        });
-
-    }
-
-    //TRAE LA POSICION ACTUAL LIGADA AL BOTON ACTUAL POSITION
-    function actualPosition() {
-
-        if (navigator.geolocation) {
-            console.log("Soporta geolocalizacion")
-            navigator.geolocation.getCurrentPosition(function (position) {
-                pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                map.setCenter(pos);
-
-            }, function () {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
-        } else {
-            handleLocationError("No soporta geolocalizacion");
         }
+    });
 
-    }
+    // SHOW MODAL
+    vMarker.addListener('dblclick', function (e) {
+        $('#tntExplosionEvent').modal('show')
+    });
 
-    // FUNCION QUE BORRA TODOS LOS MARKERS.
-    function deleteMarker() {
-        setMapOnAll(null);
-        markers = [];
-    }
-
-    function setMapOnAll(map) {
-        for (var i = 0; i < markers.length; i++) {
-            markers[i].setMap(map);
+    map.addListener("click", function (e) {
+        if (menuDisplayed == true) {
+            menuBox.style.display = "none";
         }
-    }
+    });
 
-    // DRAW CIRCLES CLASS
-    class drawCircles {
-        constructor(lat, lng, radio01, radio02, radio03) {
-            this.lat = lat;
-            this.lng = lng;
-            this.radio01 = radio01;
-            this.radio02 = radio02;
-            this.radio03 = radio03;
-        }
+}
 
-        draw() {
-            var latLng = {
-                lat: this.lat,
-                lng: this.lng
+//TRAE LA POSICION ACTUAL LIGADA AL BOTON ACTUAL POSITION
+function actualPosition() {
+
+    if (navigator.geolocation) {
+        console.log("Soporta geolocalizacion")
+        navigator.geolocation.getCurrentPosition(function (position) {
+            pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
             };
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 20,
-                center: latLng,
-            });
-            map.setTilt(0); //Al acercarse el mapa no se pone en 45ª
-            var marker = new google.maps.Marker({
-                position: latLng,
-                map: map,
-                draggable: true
-            });
-            var circle01 = new google.maps.Circle({
-                strokeOpacity: 1,
-                strokeWeight: 1,
-                fillColor: "red",
-                fillOpacity: .8,
-                map: map,
-                draggable: true,
-                radius: this.radio01
-            })
+            map.setCenter(pos);
 
-            var circle02 = new google.maps.Circle({
-                strokeOpacity: 0.5,
-                strokeWeight: 1,
-                position: myLatLng,
-                fillColor: "yellow",
-                fillOpacity: .5,
-                map: map,
-                draggable: true,
-                radius: this.radio02
-            })
-
-            var circle03 = new google.maps.Circle({
-                strokeOpacity: 0.5,
-                strokeWeight: 1,
-                position: myLatLng,
-                fillColor: "green",
-                fillOpacity: .5,
-                map: map,
-                draggable: true,
-                radius: this.radio03
-            })
-            // Bind circles 
-            circle01.bindTo("center", marker, "position");
-            circle02.bindTo("center", marker, "position");
-            circle03.bindTo("center", marker, "position");
-        }
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        handleLocationError("No soporta geolocalizacion");
     }
+
+}
+
+// FUNCION QUE BORRA TODOS LOS MARKERS.
+function deleteMarker() {
+    setMapOnAll(null);
+    markers = [];
+}
+
+function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+}
