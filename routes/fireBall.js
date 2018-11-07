@@ -1,6 +1,8 @@
 const express = require('express');
 const router  = express.Router();
 const FireBall = require('../models/FireBallSchema');
+const FireBallModel = require('../calcModels/FireBall.js');
+
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
@@ -18,16 +20,25 @@ router.post('/create', isLoggedIn, (req, res, next) => {
 
     //  --- CALCULATIONS -------
     let obj = {
-        massRelease: parseFloat(req.body.massRelease),
-        energyFraction: parseFloat(req.body.energyFraction),
-        subsName: req.body.subsName,
-        hckjkg: parseFloat(req.body.hckjkg)
+        tempAmbC: parseFloat(req.body.fbAirTemp),
+        humedadRelativa: parseFloat(req.body.fbHumidity),
+        hckjkg: parseFloat(req.body.fbHckjkg),
+        mass: parseFloat(req.body.fbMassRelease),
+        radiationFraction: parseFloat(req.body.fbRadiationFraction),
+        rad01: parseFloat(req.body.fbRad01),
+        rad02: parseFloat(req.body.fbRad02),
+        rad03: parseFloat(req.body.fbRad03),
     };
-    let TnT = new TntModel(obj);
-    req.body.radio01 = TnT.overpressureToDistance(req.body.overPressure01);
-    req.body.radio02 = TnT.overpressureToDistance(req.body.overPressure02);
-    req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03);
+
+
+    let fireBall = new FireBallModel(obj);
+    req.body.radio01 = fireBall.xDistanceToQTerm(req.body.fbRad01);
+    req.body.radio02 = fireBall.xDistanceToQTerm(req.body.fbRad02);
+    req.body.radio03 = fireBall.xDistanceToQTerm(req.body.fbRad03);
     // ------END CALCULATIONS ---------
+
+    console.log("OBJETO: ", req.body)
+
 
     FireBall.create(req.body)
         .then(() => {
