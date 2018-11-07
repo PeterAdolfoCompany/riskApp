@@ -50,28 +50,17 @@
               <div class="row">
                 <div class="col-sm-2">
                   <a class="rgba-brown-light white-text" href=""><i class="fa fa-edit" aria-hidden="true"></i></a>
-                  <a class="rgba-brown-light white-text" href=""><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <a class="rgba-brown-light white-text" href="/tnt/delete/{{this._id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </div>
                 <div class="col-sm-10">
-                  <a class="rgba-brown-light white-text" href='#'>{{this.subsName}}</a>
+                  <a class="rgba-brown-light white-text" href='#'>{{this.eventName}}</a>
                 </div>
               </div>
             </div>
           </li>
           {{/each}}
         </ul>
-
-        <!-- sidebar-FOOTER - CALC BUTTON  -->
-        {{!-- <div class="sidebar-footer">
-          <div class="container">
-
-            <div class="col-12 col-md-auto">
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#fullHeightModalRight">
-                CALCULATION
-              </button> </div>
-          </div>
-        </div> --}}
-      {{!-- </div> --}}
+    </div>
   </nav>
 
   {{>mapSidePr}}
