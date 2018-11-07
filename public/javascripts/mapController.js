@@ -29,14 +29,14 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 //ADD MARKER TO MAP
 function addEvent(modalName) {
     // Cambio de color del Pin para diferentes eventos
-    if (modalName == "poolFire") {
+    if (modalName === "poolFire") {
         var dotColor = "blue-dot.png";
-    } else if (modalName == "fireBall") {
+    } else if (modalName === "fireBall") {
         var dotColor = "red-dot.png"
-    } else if (modalName == "tntExplosion") {
+    } else if (modalName === "tntExplosion") {
         var dotColor = "yellow-dot.png"
     }
-    // crea un Mark en las coordenadas del ususario
+    //create mark for user coordinates
     var vMarker = new google.maps.Marker({
         position: new google.maps.LatLng(pos.lat, pos.lng),
         draggable: true,
@@ -48,14 +48,11 @@ function addEvent(modalName) {
     // gets the coords when drag event ends
     // then updates the input with the new coords
     google.maps.event.addListener(vMarker, 'dragend', function (evt) {
-        // $("#txtLat").val(evt.latLng.lat().toFixed(6));
-        // $("#txtLng").val(evt.latLng.lng().toFixed(6));
-        // Mandamos las coordenadas al partial
-        $("#latTnt").val(evt.latLng.lat());
-        $("#lngTnt").val(evt.latLng.lng());
-
-        console.log("Coord lat: ", evt.latLng.lat())
-
+        // Set coordinates
+        pos = {
+            lat: evt.latLng.lat(),
+            lng: evt.latLng.lng()
+        };
         map.panTo(evt.latLng);
     });
 
@@ -68,8 +65,6 @@ function addEvent(modalName) {
     id = vMarker.__gm_id;
 
     markers.push(vMarker);
-    console.log(markers);
-    console.log(id);
 
 
     vMarker.addListener("rightclick", function (e) {
@@ -93,29 +88,30 @@ function addEvent(modalName) {
 
     // SHOW MODAL
     vMarker.addListener('dblclick', function (e) {
-        if (modalName == "poolFire") {
+        if (modalName === "poolFire") {
             $('#poolFireEvent').modal('show')
         }
-        if (modalName == "fireBall") {
+        if (modalName === "fireBall") {
             $('#fireBallEvent').modal('show')
         }
-        if (modalName == "tntExplosion") {
+        if (modalName === "tntExplosion") {
             $('#tntExplosionEvent').modal('show')
         }
+
+        // Set coordinates to modal
+        $("#latTnt").val(pos.lat);
+        $("#lngTnt").val(pos.lng);
     });
 
     map.addListener("click", function (e) {
-        if (menuDisplayed == true) {
+        if (menuDisplayed) {
             menuBox.style.display = "none";
         }
     });
 }
 
-//TRAE LA POSICION ACTUAL LIGADA AL BOTON ACTUAL POSITION
 function actualPosition() {
-
     if (navigator.geolocation) {
-        console.log("Soporta geolocalizacion")
         navigator.geolocation.getCurrentPosition(function (position) {
             pos = {
                 lat: position.coords.latitude,
@@ -128,18 +124,5 @@ function actualPosition() {
         });
     } else {
         handleLocationError("No soporta geolocalizacion");
-    }
-
-}
-
-// FUNCION QUE BORRA TODOS LOS MARKERS.
-function deleteMarker() {
-    setMapOnAll(null);
-    markers = [];
-}
-
-function setMapOnAll(map) {
-    for (var i = 0; i < markers.length; i++) {
-        markers[i].setMap(map);
     }
 }
