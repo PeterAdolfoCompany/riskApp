@@ -2,24 +2,28 @@ var map, infoWindow, pos, id;
 var markers = [];
 
 function initMap() {
-    console.log("llamo al init")
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 20,
-        center: {
-            lat: -34.397,
-            lng: 150.644
-        },
-        // mapTypeId: google.maps.MapTypeId.SATELLITE
-    });
+    map = document.getElementById('map');
+    if (typeof(map) !== 'undefined' && map != null) {
+        map = new google.maps.Map(map, {
+            zoom: 20,
+            center: {
+                lat: -34.397,
+                lng: 150.644
+            },
+        });
 
-    infoWindow = new google.maps.InfoWindow;
+        infoWindow = new google.maps.InfoWindow;
 
-    actualPosition()
-     if ($("#radioTnt01").val()) {
-        console.log("Init mapa: ", $("#latTnt1").val(), $("#lngTnt1").val(), "radio",$("#radioTnt01").val(), $("#radioTnt02").val(), $("#radioTnt03").val())
-        var drawRadios = new DrawCircles($("#latTnt1").val(), $("#lngTnt1").val(), $("#radioTnt01").val(), $("#radioTnt02").val(), $("#radioTnt03").val())
-     drawRadios.draw()
-     }
+        actualPosition();
+        const drawRadios = new DrawCircles(
+            parseFloat($("#latTnt1").val()),
+            parseFloat($("#lngTnt1").val()),
+            parseFloat($("#radioTnt01").val()),
+            parseFloat($("#radioTnt02").val()),
+            parseFloat($("#radioTnt03").val())
+        );
+        drawRadios.draw()
+    }
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
