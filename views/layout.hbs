@@ -24,7 +24,7 @@
   <!-- Libreria para DataTables -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/sl-1.2.6/datatables.min.css" />
   <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/r-2.2.2/sl-1.2.6/datatables.min.js"></script>
-  
+
 </head>
 
 <body>
@@ -57,16 +57,19 @@
   {{!--
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.js"></script> --}}
   {{!-- --------------------- --}}
-  <script src="/javascripts/validations.js"></script>
+  {{!--
+  <script src="/javascripts/validations.js"></script> --}}
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHbjOpf5fcJI5XBdjpEe4JJT7sCeN1gXM&callback=initMap"
+    async defer></script>
   <script src="/javascripts/script.js"></script>
+  <script src="/javascripts/drawCircles.js"></script>
   <script src="/javascripts/mapController.js"></script>
   <script src="/javascripts/login.js"></script>
-  <script src="/javascripts/tntEvent.js"></script>
-  <script src="/javascripts/poolFireEvent.js"></script>
-  <script src="/javascripts/fireBallEvent.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHbjOpf5fcJI5XBdjpEe4JJT7sCeN1gXM&callback=initMap"
-    async defer></script>
+{{!--<script src="/javascripts/tntEvent.js"></script>--}}
+<script src="/javascripts/poolFireEvent.js"></script>
+<script src="/javascripts/fireBallEvent.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 </body>
 
 </html>

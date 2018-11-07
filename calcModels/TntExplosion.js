@@ -17,7 +17,7 @@ const DHCTNT = 4760;; //Calor de combustion del TNT (kj/kg)
  */
 
 
-class TntExplosion {
+class TntExplosionModel {
 
   constructor(obj) {
     this.obj = obj; //Objeto que contiene la informacion a pasar en la clase
@@ -26,11 +26,11 @@ class TntExplosion {
     // Entalpia de Combustion (kJ/kg) - YAWS - pp582 
     this.hCombKJKG = this.sustancia.hckjkg;
     // Formula para SEP verifica si es o no hidrocarburo
-    this.name = this.sustancia.name;
+    this.name = this.sustancia.subsName;
 
     //-------DATOS DENTRO DEL OBJETO --------
     // Masa del gas inflamable
-    this.mass = obj.mass;
+    this.mass = obj.massRelease;
     this.fe = obj.energyFraction; //Fracciòn de energía de 0.01 a 0.1
 
 
@@ -112,23 +112,27 @@ class TntExplosion {
 }
 
 
+
+
 var objeto = {
-  mass: 9071.8474, //Masa del gas inflamable (kg)
+  massRelease: 9071.8474, //Masa del gas inflamable (kg)
   energyFraction: 0.05, //Fraccion de energía (0.01 a 0.1)
   // SUSTANCIAS
-  name: "GAS LP",
+  subsName: "GAS LP",
   hckjkg: 46088.6,
   //Localizacion geografica del punto de fuga
   lat: -99.212,
   lon: 19.4332
 }
 
-var newTNT = new TntExplosion(objeto); //211 - PROPANO - 127 Ethane  -130
+var newTNT = new TntExplosionModel(objeto); //211 - PROPANO - 127 Ethane  -130
 
 
 let distancia = 10; //(m)
-let pressure = 34.47; // 5 psi
+let pressure = 6.89; // 1 psi
 
 console.log(`Presion ${newTNT.xToOverpressure(distancia)} kPa a una distancia: de ${distancia} m`, )
 
 console.log(`Presion ${pressure} kPa a una distancia: de ${newTNT.overpressureToDistance(pressure)}m`, )
+ 
+module.exports = TntExplosionModel;

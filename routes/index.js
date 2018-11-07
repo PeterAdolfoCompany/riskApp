@@ -1,5 +1,7 @@
 const express = require('express');
 const router  = express.Router();
+const TntExplosion = require('../models/TntExplosionSchema');
+
 
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next();
@@ -12,7 +14,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/home',  isLoggedIn, (req, res, next) => {
-  res.render('home');
+  TntExplosion.find()
+      .then(tntExplosions =>{
+          res.render('./partials/sideBarPartial',{tntExplosions});
+      })
+  // res.render('home');
 });
 
 module.exports = router;
