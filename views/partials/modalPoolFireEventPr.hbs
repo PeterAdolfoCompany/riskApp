@@ -4,11 +4,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-      <form action="">
+      <form method="POST" id="poolFireExplosion" action="/poolFire/create">
         <div class="modal-header" style="background-color: #82b1ff">
           <h4 class="modal-title" id="modalEventName">
             <div class="md-form form-sm">
-              <input type="text" id="inputSMEx" class="form-control form-control-sm">
+              <input type="text" id="pfName" name="pfName" class="form-control form-control-sm">
               <label for="inputSMEx" style="color:black">Event name</label>
             </div>
             {{!-- Nombre de la sustancia en el modal --}}
@@ -46,20 +46,20 @@
               <div class="table">
                 <table id="data-tablePoolFire" class="table table-hover" width="100%"></table>
               </div>
-              <input id="nameChemPF" name="nameChemPF" type="hidden">
-              <input id="hvaPF" name="hvaPF" type="hidden">
-              <input id="hvnPF" name="hvnPF" type="hidden">
-              <input id="tcPF" name="tcPF" type="hidden">
-              <input id="mwPF" name="mwPF" type="hidden">
-              <input id="hckjkgChemPF" name="hckjkgChemPF" type="hidden">
-              <input id="tbPF" name="tbPF" type="hidden">
-              <input id="cplaPF" name="cplaPF" type="hidden">
-              <input id="cplbPF" name="cplbPF" type="hidden">
-              <input id="cplcPF" name="cplcPF" type="hidden">
-              <input id="cpldPF" name="cpldPF" type="hidden">
-              <input id="dlqiaPF" name="dlqiaPF" type="hidden">
-              <input id="dlqibPF" name="dlqibPF" type="hidden">
-              <input id="dlqinPF" name="dlqinPF" type="hidden">
+              <input id="pfSubstance" name="pfSubstance" type="hidden">
+              <input id="pfHva" name="pfHva" type="hidden">
+              <input id="pfHvn" name="pfHvn" type="hidden">
+              <input id="pfTc" name="pfTc" type="hidden">
+              <input id="pfMw" name="pfMw" type="hidden">
+              <input id="pfHckjkg" name="pfHckjkg" type="hidden">
+              <input id="pfTb" name="pfTb" type="hidden">
+              <input id="pfCpla" name="pfCpla" type="hidden">
+              <input id="pfCplb" name="pfCplb" type="hidden">
+              <input id="pfCplc" name="pfCplc" type="hidden">
+              <input id="pfCpld" name="pfCpld" type="hidden">
+              <input id="pfDliqa" name="pfDliqa" type="hidden">
+              <input id="pfDliqb" name="pfDliqb" type="hidden">
+              <input id="pfDliqn" name="pfDliqn" type="hidden">
 
             </div>
 
@@ -68,8 +68,8 @@
 
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Wind velocity</label>
-                <input id="wind-velocity" class="form-control col-3 text-center" type="text" placeholder="" value="1.5">
-                <select onchange="this.form.submit()" class="browser-default custom-select col-3">
+                <input id="windVelocity" name="windVelocity" class="form-control col-3 text-center" type="text" placeholder="" value="1.5">
+                <select id="unityVelocity" name="unityVelocity" class="browser-default custom-select col-3">
                   <option value="1">m/s</option>
                   <option value="2">km/h</option>
                   <option value="3">mph</option>
@@ -77,8 +77,8 @@
               </div>
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Air Temperature</label>
-                <input id="air-temp" class="form-control col-3 text-center" type="text" placeholder="" value="25">
-                <select onchange="this.form.submit()" class="browser-default custom-select col-3">
+                <input id="airTemp" name="airTemp" class="form-control col-3 text-center" type="text" placeholder="" value="25">
+                <select id="unityTemp" name="unityTemp" class="browser-default custom-select col-3">
                   <option value="1">C</option>
                   <option value="2">K</option>
                   <option value="3">F</option>
@@ -86,15 +86,15 @@
               </div>
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Humidity (%)</label>
-                <input id="humidity" class="form-control col-3 text-center" type="text" placeholder="" value="50">
-                <select class="browser-default custom-select col-3">
+                <input id="humidity" name="humidity" class="form-control col-3 text-center" type="text" placeholder="" value="50">
+                <select id="unityHumidity" name="unityHumidity" class="browser-default custom-select col-3">
                   <option value="1">%</option>
                 </select>
               </div>
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Altitude (msnm)</label>
-                <input id="altitude" class="form-control col-3 text-center" type="text" placeholder="" value="0">
-                <select class="browser-default custom-select col-3">
+                <input id="altitude" name="altitude" class="form-control col-3 text-center" type="text" placeholder="" value="0">
+                <select id="unityAltitude" name="unityAltitude" class="browser-default custom-select col-3">
                   <option value="1">msnm</option>
                 </select>
               </div>
@@ -107,26 +107,26 @@
               <h5>Type of Leak </h5>
               <!-- Default inline 1-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="continuosLeak" value="continuosLeak" name="radioTypeLeak"
+                <input type="radio" class="custom-control-input" id="continuosLeak" value="1" name="typeLeak"
                   checked>
                 <label class="custom-control-label" for="continuosLeak">Continuos leak</label>
               </div>
 
               <!-- Default inline 2-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="massiveLeak" value="massiveLeak" name="radioTypeLeak">
+                <input type="radio" class="custom-control-input" id="massiveLeak" value="2" name="typeLeak">
                 <label class="custom-control-label" for="massiveLeak">Massive leak</label>
               </div>
 
               <!-- Default inline 3-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="circularDike" value="circularDike" name="radioTypeLeak">
+                <input type="radio" class="custom-control-input" id="circularDike" value="3" name="typeLeak">
                 <label class="custom-control-label" for="circularDike">Circular dike</label>
               </div>
 
               <!-- Default inline 4-->
               <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="noCircularDike" value="noCircularDike" name="radioTypeLeak">
+                <input type="radio" class="custom-control-input" id="noCircularDike" value="4" name="typeLeak">
                 <label class="custom-control-label" for="noCircularDike">No Circular dike</label>
               </div>
               <hr>
@@ -134,8 +134,8 @@
               <div class="container">
                 <div id="continuosLakeDiv" class="row justify-content-center mt-2">
                   <label class="col-3 text-center" for="">Flow</label>
-                  <input id="flow" class="form-control col-3 text-center" type="text" placeholder="">
-                  <select class="browser-default custom-select col-3">
+                  <input id="flow" name="flow" class="form-control col-3 text-center" type="text" placeholder="">
+                  <select id="unityFlow" name="unityFlow" class="browser-default custom-select col-3">
                     <option value="1">m3/s</option>
                     <option value="2">kg/s</option>
                     <option value="3">l/s</option>
@@ -143,29 +143,29 @@
                 </div>
                 <div id="massiveLeakDiv" class="row justify-content-center mt-2">
                   <label class="col-3 text-center" for="">Mass release</label>
-                  <input id="mass-release" class="form-control col-3 text-center" type="text" placeholder="">
-                  <select class="browser-default custom-select col-3">
+                  <input id="massRelease" name="massRelease" class="form-control col-3 text-center" type="text" placeholder="">
+                  <select id="unityRelease" name="unityRelease" class="browser-default custom-select col-3">
                     <option value="1">m3</option>
                     <option value="2">l</option>
                     <option value="3">kg</option>
                   </select>
                 </div>
                 <div id="circularDikekDiv" class="row justify-content-center mt-2">
-                  <label class="col-3 text-center" for="">Radius</label>
-                  <input id="radius" class="form-control col-3 text-center" type="text" placeholder="">
+                  <label class="col-3 text-center" for="">Diameter</label>
+                  <input id="diameterCircularDike" name="diameterCircularDike" class="form-control col-3 text-center" type="text" placeholder="">
                   <select class="browser-default custom-select col-3">
                     <option value="1">m</option>
                   </select>
                 </div>
                 <div id="noCircularDikekDiv" class="row justify-content-center mt-2">
                   <label class="col-4 text-center" for="">Height</label>
-                  <input id="height-rect" class="form-control col-3 text-center" type="text" placeholder="">
+                  <input id="heightCircularDike" name="heightCircularDike" class="form-control col-3 text-center" type="text" placeholder="">
                   <select class="browser-default custom-select col-3">
                     <option value="1">m</option>
                   </select>
                   <hr>
                   <label class="col-4 text-center" for="">Width</label>
-                  <input id="width-rect" class="form-control col-3 text-center" type="text" placeholder="">
+                  <input id="widthCircularDike" name="widthCircularDike" class="form-control col-3 text-center" type="text" placeholder="">
                   <select class="browser-default custom-select col-3">
                     <option value="1">m</option>
                   </select>
@@ -176,13 +176,13 @@
                 <h5>Burning Rate Method </h5>
                 <!-- Default inline 1-->
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="strasser" name="radioBurningRateMethod" checked>
+                  <input type="radio" value="1" class="custom-control-input" id="strasser" name="burningRateMethod" checked>
                   <label class="custom-control-label" for="strasser">Strasser</label>
                 </div>
 
                 <!-- Default inline 2-->
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="mudan" name="radioBurningRateMethod">
+                  <input type="radio" value="2" class="custom-control-input" id="mudan" name="burningRateMethod">
                   <label class="custom-control-label" for="mudan">Mudan</label>
                 </div>
                 <hr>
@@ -190,13 +190,13 @@
                 <h5>Flame Height Method </h5>
                 <!-- Default inline 1-->
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="thomas" name="radioFlameHeightMethod" checked>
+                  <input type="radio" value="1" class="custom-control-input" id="thomas" name="flameHeightMethod" checked>
                   <label class="custom-control-label" for="thomas">Thomas</label>
                 </div>
 
                 <!-- Default inline 2-->
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="pritchard" name="radioFlameHeightMethod">
+                  <input type="radio" value="2" class="custom-control-input" id="pritchard" name="flameHeightMethod">
                   <label class="custom-control-label" for="pritchard">Pritchard</label>
                 </div>
                 <hr>
@@ -204,13 +204,13 @@
                 <h5>Calculation Method </h5>
                 <!-- Default inline 1-->
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="pointSource" name="radioCalcMethod" checked>
+                  <input type="radio" value="1" class="custom-control-input" id="pointSource" name="calculationMethod" checked>
                   <label class="custom-control-label" for="pointSource">Point Source</label>
                 </div>
 
                 <!-- Default inline 2-->
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" class="custom-control-input" id="solidSource" name="radioCalcMethod">
+                  <input type="radio" value="2" class="custom-control-input" id="solidSource" name="calculationMethod">
                   <label class="custom-control-label" for="solidSource">Solid Plume</label>
                 </div>
               </div>
@@ -219,8 +219,7 @@
               <div class="container">
                 <div class="row justify-content-md-center">
                   <div class="col-12 col-md-auto">
-                    <button type="button" class="btn btn-light-blue" data-toggle="modal" onclick=addEvent($('#inputSMEx').val())
-                      data-dismiss="modal">
+                    <button id="poolFireSubmit" type="submit" class="btn btn-light-blue">
                       Add Point
                     </button>
                   </div>
@@ -232,32 +231,32 @@
             <div class="tab-pane fade container " id="settings" role="tabpanel" aria-labelledby="profile-tab">
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Radiation 1</label>
-                <input id="rad01-val" class="form-control col-3 text-center" type="text" placeholder="" value="10">
-                <select onchange="this.form.submit()" class="browser-default custom-select col-3">
+                <input id="pfRad01" name="pfRad01" class="form-control col-3 text-center" type="text" placeholder="" value="10">
+                <select class="browser-default custom-select col-3">
                   <option value="1">kW/m2</option>
                   <option value="2">BTU/ft2</option>
                 </select>
               </div>
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Radiation 2</label>
-                <input id="rad02-val" class="form-control col-3 text-center" type="text" placeholder="" value="5">
-                <select onchange="this.form.submit()" class="browser-default custom-select col-3">
+                <input id="pfRad02" name="pfRad02" class="form-control col-3 text-center" type="text" placeholder="" value="5">
+                <select class="browser-default custom-select col-3">
                   <option value="1">kW/m2</option>
                   <option value="2">BTU/ft2</option>
                 </select>
               </div>
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Radiation 3</label>
-                <input id="rad03-val" class="form-control col-3 text-center" type="text" placeholder="" value="1.4">
-                <select onchange="this.form.submit()" class="browser-default custom-select col-3">
+                <input id="pfRad03" name="pfRad03" class="form-control col-3 text-center" type="text" placeholder="" value="1.4">
+                <select class="browser-default custom-select col-3">
                   <option value="1">kW/m2</option>
                   <option value="2">BTU/ft2</option>
                 </select>
               </div>
               <div class="row justify-content-center mt-2">
                 <label class="col-6 text-center" for="">Time exposition</label>
-                <input id="time-exposition" class="form-control col-3 text-center" type="text" placeholder="" value="10">
-                <select onchange="this.form.submit()" class="browser-default custom-select col-3">
+                <input id="timeExposition" name="timeExposition" class="form-control col-3 text-center" type="text" placeholder="" value="10">
+                <select class="browser-default custom-select col-3">
                   <option value="1">seg</option>
                 </select>
               </div>
@@ -267,10 +266,10 @@
 
         </div>
 
-        {{!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">NEXT</button>
-        </div> --}}
+          {{!-- COORDINATES --}}
+          {{!-- ADOLFO HAY QUE CAMBIAR ESTO --}}
+          <input id="pfLatTnt" name="pfLatTnt" type="hidden" value="3.56">
+          <input id="pfLngTnt" name="pfLngTnt" type="hidden" value="9.11">
       </form>
 
     </div>

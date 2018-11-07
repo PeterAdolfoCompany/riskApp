@@ -44,24 +44,24 @@ $(document).ready(function () {
   $("#massiveLeakDiv").hide();
   $("#circularDikekDiv").hide();
   $("#noCircularDikekDiv").hide();
-  $('input[type=radio][name=radioTypeLeak]').change(function () {
-    if (this.value == 'continuosLeak') {
+  $('input[type=radio][name=typeLeak]').change(function () {
+    if (this.value == '1') {
       $("#continuosLakeDiv").show();
       $("#massiveLeakDiv").hide();
       $("#circularDikekDiv").hide();
       $("#noCircularDikekDiv").hide();
-    } else if (this.value == 'massiveLeak') {
+    } else if (this.value == '2') {
       $("#continuosLakeDiv").hide();
       $("#massiveLeakDiv").show();
       $("#circularDikekDiv").hide();
       $("#noCircularDikekDiv").hide();
 
-    } else if (this.value == 'circularDike') {
+    } else if (this.value == '3') {
       $("#continuosLakeDiv").hide();
       $("#massiveLeakDiv").hide();
       $("#circularDikekDiv").show();
       $("#noCircularDikekDiv").hide();
-    } else if (this.value == 'noCircularDike') {
+    } else if (this.value == '4') {
       $("#continuosLakeDiv").hide();
       $("#massiveLeakDiv").hide();
       $("#circularDikekDiv").hide();

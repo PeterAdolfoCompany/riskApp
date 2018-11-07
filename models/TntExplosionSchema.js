@@ -3,11 +3,15 @@ const Schema = mongoose.Schema;
 
 const tntExplosionSchema = new Schema({
   eventName: String,
-  user_id: ObjectId, //FIXME: Duda en relacionar con user
+  user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+  },
   energyFraction: Number,
   massRelease: Number,
   // SUSTANCIA
-  name: String,
+  subsName: String,
   hckjkg: Number,
   // SETTINGS
   overPressure01: Number,
@@ -25,6 +29,11 @@ const tntExplosionSchema = new Schema({
     },
     coordinates: [Number]
   },
+},{
+    timestamps: {
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
+    }
 });
 
 tntExplosionSchema.index({
