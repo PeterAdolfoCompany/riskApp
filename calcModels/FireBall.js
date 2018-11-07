@@ -119,13 +119,12 @@ var objeto = {
   name: "GAS LP",
   hckjkg: 46088.6,
   //DATOS PARA EL SOURCE
-  mass: 21973, //Masa del gas inflamable (kg)
+  mass: 2500, //Masa del gas inflamable (kg)
   radiationFraction: 0.314, //Fracciòn de radiacion de 0.2 a 0.4
   // Settings
   rad01: 10,
   rad02: 5,
   rad03: 1.4,
-  timeExposition: 10,
   //DATOS DE LOCALIZACION
   lat: -99.212,
   lon: 19.4332
@@ -142,3 +141,6 @@ console.log(`Burning Rate ${newFB.burningRate()} SEP ${newFB.SEPmax()} Ta ${newF
 //console.log(`Radiacion ${radiacion} kW/m2 a una distancia: de ${newFB.xDistanceToQTerm(distancia)}m`, )
 
 console.log(`A la Radiacion termica: ${radiacion} kW/m2 la distancia es de: ${newFB.xDistanceToQTerm(radiacion)} m`)
+
+
+module.exports = FireBall;

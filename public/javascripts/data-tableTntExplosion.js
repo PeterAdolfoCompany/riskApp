@@ -37,12 +37,6 @@ function dataTableTntExplosion() {
     document.getElementById("name-chemTnt").innerHTML = dataForTntExplosion[table.row(this).index()].name;
     document.getElementById("subsName").value = dataForTntExplosion[table.row(this).index()].name;
     document.getElementById("hckjkg").value = dataForTntExplosion[table.row(this).index()].hckjkg;
-
-    // $('#modal-chemicals-db').modal('hide');
-
-    // $('#modal-second').modal('show');
-
-    // alert('Row index: ' + table.row(this).index());
   });
 }
 
