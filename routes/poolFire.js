@@ -12,8 +12,8 @@ function isLoggedIn(req, res, next) {
 router.post('/create', isLoggedIn, (req, res, next) => {
     /* Coordinates dummy for first save */
     let coordinates = [];
-    coordinates.push(req.body.pfLngTnt);
-    coordinates.push(req.body.pfLatTnt);
+    coordinates.push(req.body.pfLngPF);
+    coordinates.push(req.body.pfLatPF);
 
     req.body.user = req.user._id;
     req.body.location = {

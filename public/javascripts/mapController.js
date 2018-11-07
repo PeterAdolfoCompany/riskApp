@@ -90,17 +90,23 @@ function addEvent(modalName) {
     vMarker.addListener('dblclick', function (e) {
         if (modalName === "poolFire") {
             $('#poolFireEvent').modal('show')
+            // Set coordinates to modal
+            $("#pfLngPF").val(pos.lng);
+            $("#pfLatPF").val(pos.lat);
+
         }
         if (modalName === "fireBall") {
             $('#fireBallEvent').modal('show')
+            $("#latFb").val(pos.lat);
+            $("#lngFb").val(pos.lng);
         }
         if (modalName === "tntExplosion") {
             $('#tntExplosionEvent').modal('show')
+            $("#latTnt").val(pos.lat);
+            $("#lngTnt").val(pos.lng);
         }
 
-        // Set coordinates to modal
-        $("#latTnt").val(pos.lat);
-        $("#lngTnt").val(pos.lng);
+
     });
 
     map.addListener("click", function (e) {

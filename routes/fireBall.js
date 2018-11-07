@@ -15,6 +15,20 @@ router.post('/create', isLoggedIn, (req, res, next) => {
 
     req.body.user = req.user._id;
     req.body.location = {coordinates};
+
+    //  --- CALCULATIONS -------
+    let obj = {
+        massRelease: parseFloat(req.body.massRelease),
+        energyFraction: parseFloat(req.body.energyFraction),
+        subsName: req.body.subsName,
+        hckjkg: parseFloat(req.body.hckjkg)
+    };
+    let TnT = new TntModel(obj);
+    req.body.radio01 = TnT.overpressureToDistance(req.body.overPressure01);
+    req.body.radio02 = TnT.overpressureToDistance(req.body.overPressure02);
+    req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03);
+    // ------END CALCULATIONS ---------
+
     FireBall.create(req.body)
         .then(() => {
             res.redirect('/home')
