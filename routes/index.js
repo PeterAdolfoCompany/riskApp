@@ -22,7 +22,7 @@ router.get('/home',  isLoggedIn, (req, res, next) => {
               .then(poolFire => {
                   TntExplosion.find({user: req.user._id})
                       .then(tntExplosions =>{
-                          res.render('home',{tntExplosions, fireBall, poolFire});
+                          res.render('home',{tntExplosions, fireBall, poolFire, user: req.user});
                       })
                       .catch(err => {
                           res.render('home', {err});
