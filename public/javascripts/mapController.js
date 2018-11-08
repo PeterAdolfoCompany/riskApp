@@ -7,8 +7,8 @@ function initMap() {
         map = new google.maps.Map(map, {
             zoom: 20,
             center: {
-                lat: -34.397,
-                lng: 150.644
+                lat: -99.17182,
+                lng: 19.3979
             },
         });
 
@@ -47,14 +47,16 @@ function addEvent(modalName) {
     // adds a listener to the marker
     // gets the coords when drag event ends
     // then updates the input with the new coords
-    google.maps.event.addListener(vMarker, 'dragend', function (evt) {
-        // Set coordinates
-        pos = {
-            lat: evt.latLng.lat(),
-            lng: evt.latLng.lng()
-        };
-        map.panTo(evt.latLng);
-    });
+    if ($("#dragOnOff").prop("checked")) {
+        google.maps.event.addListener(vMarker, 'dragend', function (evt) {
+            // Set coordinates
+            pos = {
+                lat: evt.latLng.lat(),
+                lng: evt.latLng.lng()
+            };
+            map.panTo(evt.latLng);
+        });
+    }
 
     // centers the map on markers coords
     map.setCenter(vMarker.position);

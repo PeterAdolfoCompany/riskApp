@@ -44,7 +44,10 @@ router.post('/create', isLoggedIn, (req, res, next) => {
     req.body.radio01 = TnT.overpressureToDistance(req.body.overPressure01);
     req.body.radio02 = TnT.overpressureToDistance(req.body.overPressure02);
     req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03);
+    req.body.hola = "hola que tal";
     // ------END CALCULATIONS ---------
+
+    console.log("REQ BODY TNT: ",req.body)
 
     TntExplosion.create(req.body)
         .then(() => {
@@ -70,13 +73,4 @@ router.get('/delete/:id', isLoggedIn, checkIfOwner, (req, res) => {
     ;
 });
 
-
-// GET DATA FROM MONGO
-// router.get("/:id", (req, res) => {
-//     TntExplosion.findById(req.params.id)
-//         .then(tntEvent => {
-//             console.log("TNT: ", tntEvent.location.coordinates)
-//             //   res.render("detail",{tntEvent});
-//         })
-// });
 module.exports = router;
