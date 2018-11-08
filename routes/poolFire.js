@@ -130,6 +130,8 @@ router.post('/create', isLoggedIn, (req, res, next) => {
 
     console.log("El OBJETO: ---- ", obj)
     // ------END CALCULATIONS ---------
+ 
+    console.log("REQUEST DE POOLFIRE: ", req.body)
 
     PoolFire.create(req.body)
         .then(() => {
@@ -143,5 +145,15 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         })
 });
 
+router.get('/report/:id',isLoggedIn, checkIfOwner, (req, res) =>{
+    PoolFire
+    .findById(req.props.id)
+    .then(poolFireEvent => {
+        res.render('reportPoolF',{poolFireEvent});
+    })
+    .catch(err => {
+        res.render('home', {err});
+    })
+})
 
 module.exports = router;

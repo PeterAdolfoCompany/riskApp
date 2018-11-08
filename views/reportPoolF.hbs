@@ -1,0 +1,83 @@
+
+  <div class="container">
+    <div class="card border-warning" class="row">
+
+      <h5 class="card-header h3"> <img src="../public/images/logo.png" alt="" width="60px"> Pool Fire Model</h5>
+      <div class="card-body">
+        <p class="text-right">Id: {{poolFireEvent.user}}</p>
+        <h5 class="card-title">Event name: {{poolFireEvent.eventName}}</h5>
+        <hr>
+        <h5 class="card-title">Substance: {{poolFireEvent.pfSubstance}}</h5>
+        <p>Enthalpy of combustion {{poolFireEvent.hckjkg}} kJ/kg</p>
+        <hr>
+        <h5 class="card-title">Source data</h5>
+        <p>Leaked mass {{poolFireEvent.massRelease}} kg</p>
+        <p>Energy fraction: {{poolFireEvent.energyFraction}}</p>
+        <hr>
+        <table class="table table-bordered">
+          <thead>
+            <tr class="brown lighten-4">
+              <th scope="col">id Event</th>
+              <th scope="col">Pressure (kPa)</th>
+              <th scope="col">Distance (m)</th>
+              <th scope="col">Effects</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="danger-color">
+              <th scope="row">1</th>
+              <td>55.16</td>
+              <td>{{poolFireEvent.radio01}}</td>
+              <td>Building destruction</td>
+            </tr>
+            <tr class="warning-color">
+              <th scope="row">2</th>
+              <td>6.89</td>
+              <td>{{poolFireEvent.radio02}}</td>
+              <td>Major Injuries (Risk Zone)</td>
+            </tr>
+            <tr class="default-color">
+              <th scope="row">3</th>
+              <td>3.45</td>
+              <td>{{poolFireEvent.radio03}}</td>
+              <td>Minor Injuries (Buffer Zone</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-md-6" width="200">
+          <canvas id="lineChart" width="200" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+<a href="/home">Return</a>
+
+  {{!-- <script>
+  //line
+  var ctxL = document.getElementById("lineChart").getContext('2d');
+  var myLineChart = new Chart(ctxL, {
+    type: 'line',
+    data: {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [{
+          label: "My First dataset",
+          data: [65, 59, 80, 81, 56, 55, 40],
+          backgroundColor: [
+            'rgba(105, 0, 132, .2)',
+          ],
+          borderColor: [
+            'rgba(200, 99, 132, .7)',
+          ],
+          borderWidth: 2
+        }
+      ]
+    },
+    options: {
+      responsive: true
+    }
+  });
+
+</script>
+
+</body> --}}
+
