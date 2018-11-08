@@ -70,26 +70,6 @@ function addEvent(modalName) {
 
     markers.push(vMarker);
 
-
-    vMarker.addListener("rightclick", function (e) {
-        for (prop in e) {
-            if (e[prop] instanceof MouseEvent) {
-                mouseEvt = e[prop];
-                var left = mouseEvt.clientX;
-                var top = mouseEvt.clientY;
-
-                menuBox = document.getElementById("menuev");
-                menuBox.style.left = left + "px";
-                menuBox.style.top = top + "px";
-                menuBox.style.display = "block";
-
-                mouseEvt.preventDefault();
-
-                menuDisplayed = true;
-            }
-        }
-    });
-
     // SHOW MODAL
     vMarker.addListener('dblclick', function (e) {
         if (modalName === "poolFire") {
@@ -108,14 +88,6 @@ function addEvent(modalName) {
             $('#tntExplosionEvent').modal('show');
             $("#latTnt").val(pos.lat);
             $("#lngTnt").val(pos.lng);
-        }
-
-
-    });
-
-    map.addListener("click", function (e) {
-        if (menuDisplayed) {
-            menuBox.style.display = "none";
         }
     });
 }
