@@ -39,7 +39,6 @@ router.post('/create', isLoggedIn, (req, res, next) => {
 
     console.log("OBJETO: ", req.body)
 
-
     FireBall.create(req.body)
         .then(() => {
             res.redirect('/home')
@@ -48,6 +47,5 @@ router.post('/create', isLoggedIn, (req, res, next) => {
             res.render('home', {err, msg: 'No se pudo crear el punto'});
         })
 });
-
 
 module.exports = router;

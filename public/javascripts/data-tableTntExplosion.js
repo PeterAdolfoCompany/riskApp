@@ -1,8 +1,6 @@
 //----------------------------------------
-// TABLA DE DATOS - Usando Datatables.net
+//  Datatables.net
 //----------------------------------------
-
-//Se presenta en la tabla solo valores de gases inflamables:
 var dataForTntExplosion = data.filter(function (el) {
   return el.hckjkg > 1000 && el.uel !== "9999.0" && el.hcstate == "G"
 });
@@ -10,9 +8,8 @@ var dataForTntExplosion = data.filter(function (el) {
 function dataTableTntExplosion() {
   $('#data-tableTntExplosion').DataTable({
     data: dataForTntExplosion,
-
     "ordering": false,
-    "scrollY": "500px", //Aqui se puede modificar para moviles
+    "scrollY": "500px", 
     "scrollCollapse": true,
     "paging": false,
     language: {
@@ -20,8 +17,6 @@ function dataTableTntExplosion() {
       searchPlaceholder: "Search..."
     },
     "dom": ' <"search"f><"top"l>rt<"bottom"ip><"clear">',
-
-
     columns: [{
         data: "name"
       },

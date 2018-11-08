@@ -20,15 +20,14 @@ const userSchema = new Schema({
     enum:["ADMIN", "USER"],
     default: "USER"
   },
-  //Setting Usuario para Modelo PoolFire
+  //Setting User PoolFire
   bRateStrasser: Boolean, 
   bRateMudan: Boolean,
   altFlamaThomas: Boolean,
   altFlamaPritchard: Boolean,
   pointSourceModel: Boolean,
   solidPlumeModel: Boolean,
-  //S
-  //Radiaciones termicas(Q) y sobrepresiones(P) que escoge el usuario paraa dibujar en google maps
+  //Thermal radiations
   poolFireQ1: Number,
   poolFireQ2: Number,
   poolFireQ3: Number,
@@ -38,7 +37,6 @@ const userSchema = new Schema({
   explosionP1: Number,
   explosionP2: Number,
   explosionP3: Number,
-//TODO: Faltan campos hasta tener los 3 modelos (PoolFire, Explosion, FireBall)
 }, {timestamps: {
     createdAt: "created_at",
     updatedAt: "updated_at"

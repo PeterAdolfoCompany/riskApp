@@ -1,19 +1,17 @@
 //----------------------------------------
-// TABLA DE DATOS - Usando Datatables.net
+//  Datatables.net
 //----------------------------------------
 
-
-//Se presenta en la tabla solo valores con entalpias de combustion y sustancias inflamables:
 var dataForFireBall = data.filter(function(el){
   return el.hckjkg > 1000 && el.uel !== "9999.0"
 });
 
 function dataTableFireBall() {
   $('#data-tableFireBall').DataTable({
-    data: dataForFireBall, //data - para toda la tabla
+    data: dataForFireBall, 
     
     "ordering": false,
-    "scrollY": "500px", //Aqui se puede modificar para moviles
+    "scrollY": "500px", 
     "scrollCollapse": true,
     "paging": false,
     language: {
@@ -21,7 +19,6 @@ function dataTableFireBall() {
       searchPlaceholder: "Search..."
     },
     "dom": ' <"search"f><"top"l>rt<"bottom"ip><"clear">',
-
 
     columns: [{
         data: "name"
@@ -34,12 +31,9 @@ function dataTableFireBall() {
   var table = $('#data-tableFireBall').DataTable();
 
   $('#data-tableFireBall tbody').on('click', 'tr', function () {
-
     document.getElementById("name-chemFireBall").innerHTML = dataForFireBall[table.row(this).index()].name;
     document.getElementById("fbSubstance").value = dataForFireBall[table.row(this).index()].name;
     document.getElementById("fbHckjkg").value = dataForFireBall[table.row(this).index()].hckjkg;
-
-    // alert('Row index: ' + table.row(this).index());
   });
 }
 
