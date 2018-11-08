@@ -37,7 +37,7 @@ router.post('/create', isLoggedIn, (req, res, next) => {
     req.body.radio03 = fireBall.xDistanceToQTerm(req.body.fbRad03);
     // ------END CALCULATIONS ---------
 
-    console.log("OBJETO: ", req.body)
+    console.log("OBJETO FIRE BALL: ", req.body)
 
     FireBall.create(req.body)
         .then(() => {

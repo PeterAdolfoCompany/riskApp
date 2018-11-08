@@ -47,8 +47,6 @@ router.post('/create', isLoggedIn, (req, res, next) => {
     req.body.hola = "hola que tal";
     // ------END CALCULATIONS ---------
 
-    console.log("REQ BODY TNT: ",req.body)
-
     TntExplosion.create(req.body)
         .then(() => {
             res.redirect('/home');

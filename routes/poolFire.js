@@ -78,7 +78,6 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         typePoint = true
     }
 
-
     let obj = {
         tempAmbC: parseFloat(req.body.airTemp),
         velVientomseg: parseFloat(req.body.windVelocity),
@@ -119,16 +118,10 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         rad03: parseFloat(req.body.pfRad03),
         timeExposition: parseFloat(req.body.timeExposition)
     }
-
-
     let poolFireEvent = new PFModel(obj)
     req.body.radio01 = poolFireEvent.xTermAtQNivelPiso(req.body.pfRad01)
     req.body.radio02 = poolFireEvent.xTermAtQNivelPiso(req.body.pfRad02)
     req.body.radio03 = poolFireEvent.xTermAtQNivelPiso(req.body.pfRad03)
-
-
-
-    console.log("El OBJETO: ---- ", obj)
     // ------END CALCULATIONS ---------
  
     console.log("REQUEST DE POOLFIRE: ", req.body)

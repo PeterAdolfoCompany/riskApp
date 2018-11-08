@@ -198,12 +198,8 @@ class PoolFire {
 
   xTermAtQNivelPiso(q) {
     let x = this.xTerm(q);
-    console.log("Equis: ", x)
     let a = this.alturaFlama() / 2;
-    console.log("Equisa: ", a)
-
     let b = Math.sqrt(Math.pow(x, 2) - Math.pow(a, 2))
-    console.log("Equisb: ", b)
     return b
   }
 
