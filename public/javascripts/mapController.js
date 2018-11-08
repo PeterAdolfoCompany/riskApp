@@ -5,10 +5,14 @@ function initMap() {
     map = document.getElementById('map');
     if (typeof (map) !== 'undefined' && map != null) {
         map = new google.maps.Map(map, {
-            zoom: 20,
+            zoom: 10,
             center: {
                 lat: -99.17182,
                 lng: 19.3979
+            },
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.LEFT_CENTER
             },
         });
 
