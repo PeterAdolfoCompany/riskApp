@@ -28,10 +28,7 @@
                 <button id="tntButton" type="button" class="btn btn-yellow ml-3" onclick=addEvent("tntExplosion")>
                     <i class="fa fa-stop-circle-o" aria-hidden="true"></i> TNT Explosion
                 </button>
-                <label class="bs-switch">
-                    <input id="dragOnOff" type="checkbox" checked>
-                    <span class="slider round"></span>
-                </label>
+                
             </div>
 
             <!-- EVENTOS  -->
@@ -43,6 +40,8 @@
                         <div class="row">
                             <div class="col-sm-2">
                                 <a class="rgba-brown-light white-text" href=""><i class="fa fa-edit" aria-hidden="true"></i></a>
+                                <a class="rgba-brown-light white-text" href="/tnt/report/{{this._id}}"><i class="fa fa-file-text-o"
+                                        aria-hidden="true"></i></a>
                                 <a class="rgba-brown-light white-text" href="/tnt/delete/{{this._id}}"><i class="fa fa-trash"
                                         aria-hidden="true"></i></a>
                             </div>
