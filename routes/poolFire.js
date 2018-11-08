@@ -145,7 +145,7 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         })
 });
 
-router.get('/report/:id',isLoggedIn, checkIfOwner, (req, res) =>{
+router.get('/report/:id',isLoggedIn, (req, res) =>{
     PoolFire
     .findById(req.props.id)
     .then(poolFireEvent => {
