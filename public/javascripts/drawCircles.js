@@ -1,11 +1,12 @@
 // DRAW CIRCLES CLASS
 class DrawCircles {
-  constructor(lat, lng, radio01, radio02, radio03) {
+  constructor(lat, lng, radio01, radio02, radio03, icon) {
     this.lat = lat;
     this.lng = lng;
     this.radio01 = radio01;
     this.radio02 = radio02;
     this.radio03 = radio03;
+    this.icon = icon;
   }
 
   draw() {
@@ -17,6 +18,7 @@ class DrawCircles {
     var marker = new google.maps.Marker({
       position: latLng,
       map: map,
+      icon: this.icon,
       draggable: true
     });
     var circle01 = new google.maps.Circle({
