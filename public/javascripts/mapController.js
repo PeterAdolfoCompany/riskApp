@@ -51,7 +51,6 @@ function addEvent(modalName) {
     // adds a listener to the marker
     // gets the coords when drag event ends
     // then updates the input with the new coords
-    if ($("#dragOnOff").prop("checked")) {
         google.maps.event.addListener(vMarker, 'dragend', function (evt) {
             // Set coordinates
             pos = {
@@ -60,7 +59,6 @@ function addEvent(modalName) {
             };
             map.panTo(evt.latLng);
         });
-    }
 
     // centers the map on markers coords
     map.setCenter(vMarker.position);
