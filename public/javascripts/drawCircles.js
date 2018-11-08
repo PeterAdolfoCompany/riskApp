@@ -10,18 +10,19 @@ class DrawCircles {
   }
 
   draw() {
-    var latLng = {
+    let latLng = {
       lat: this.lat,
       lng: this.lng
     };
-    map.setTilt(0); //Al acercarse el mapa no se pone en 45ª
-    var marker = new google.maps.Marker({
+    map.setCenter(latLng);
+    map.setTilt(0);
+    let marker = new google.maps.Marker({
       position: latLng,
       map: map,
       icon: this.icon,
       draggable: true
     });
-    var circle01 = new google.maps.Circle({
+    let circle01 = new google.maps.Circle({
       strokeOpacity: 1,
       strokeWeight: 1,
       position: latLng,
@@ -32,7 +33,7 @@ class DrawCircles {
       radius: this.radio01
     });
 
-    var circle02 = new google.maps.Circle({
+    let circle02 = new google.maps.Circle({
       strokeOpacity: 0.5,
       strokeWeight: 1,
       position: latLng,
@@ -43,7 +44,7 @@ class DrawCircles {
       radius: this.radio02
     });
 
-    var circle03 = new google.maps.Circle({
+    let circle03 = new google.maps.Circle({
       strokeOpacity: 0.5,
       strokeWeight: 1,
       position: latLng,
