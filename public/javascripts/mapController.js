@@ -28,7 +28,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 //ADD MARKER TO MAP
 function addEvent(modalName) {
-    // Cambio de color del Pin para diferentes eventos
+    // Select pin, depending event
     if (modalName === "poolFire") {
         var dotColor = "blue-dot.png";
     } else if (modalName === "fireBall") {
@@ -89,19 +89,19 @@ function addEvent(modalName) {
     // SHOW MODAL
     vMarker.addListener('dblclick', function (e) {
         if (modalName === "poolFire") {
-            $('#poolFireEvent').modal('show')
+            $('#poolFireEvent').modal('show');
             // Set coordinates to modal
             $("#pfLngPF").val(pos.lng);
             $("#pfLatPF").val(pos.lat);
 
         }
         if (modalName === "fireBall") {
-            $('#fireBallEvent').modal('show')
+            $('#fireBallEvent').modal('show');
             $("#latFb").val(pos.lat);
             $("#lngFb").val(pos.lng);
         }
         if (modalName === "tntExplosion") {
-            $('#tntExplosionEvent').modal('show')
+            $('#tntExplosionEvent').modal('show');
             $("#latTnt").val(pos.lat);
             $("#lngTnt").val(pos.lng);
         }
