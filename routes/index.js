@@ -1,6 +1,8 @@
 const express = require('express');
 const router  = express.Router();
 const TntExplosion = require('../models/TntExplosionSchema');
+const FireBall = require('../models/FireBallSchema');
+const PoolFire = require('../models/PoolFireSchema');
 
 
 function isLoggedIn(req, res, next) {
@@ -14,9 +16,21 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/home',  isLoggedIn, (req, res, next) => {
-  TntExplosion.find({user: req.user._id})
-      .then(tntExplosions =>{
-          res.render('home',{tntExplosions});
+  FireBall.find({user: req.user._id})
+      .then(fireBall => {
+          PoolFire.find({user: req.user._id})
+              .then(poolFire => {
+                  TntExplosion.find({user: req.user._id})
+                      .then(tntExplosions =>{
+                          res.render('home',{tntExplosions, fireBall, poolFire});
+                      })
+                      .catch(err => {
+                          res.render('home', {err});
+                      })
+              })
+              .catch(err => {
+                  res.render('home', {err});
+              })
       })
       .catch(err => {
           res.render('home', {err});
