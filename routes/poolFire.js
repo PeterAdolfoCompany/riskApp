@@ -2,14 +2,9 @@ const express = require('express');
 const router = express.Router();
 const PoolFire = require('../models/PoolFireSchema');
 const PFModel = require('../calcModels/PoolFire.js')
+const validator = require('../helpers/validator');
 
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect('/auth/login');
-}
-
-router.post('/create', isLoggedIn, (req, res, next) => {
+router.post('/create', validator.isLoggedIn, (req, res, next) => {
     /* Coordinates dummy for first save */
     let coordinates = [];
     coordinates.push(req.body.pfLngPF);
@@ -143,5 +138,17 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         })
 });
 
+
+router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (req, res) => {
+    PoolFire
+        .findByIdAndRemove(req.element.id)
+        .then(() => {
+            res.redirect('/home');
+        })
+        .catch(err => {
+            res.render('home', {err});
+        })
+    ;
+});
 
 module.exports = router;

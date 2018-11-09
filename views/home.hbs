@@ -37,7 +37,6 @@
 
             <!-- EVENTOS  -->
             <ul>
-
                 {{#each tntExplosions}}
                     <li class="media list-group-item list-group-item-secondary rgba-brown-light">
                         <div class="container">
@@ -45,11 +44,45 @@
                                 <div class="col-sm-2">
                                     <a class="rgba-brown-light white-text" href=""><i class="fa fa-edit"
                                                                                       aria-hidden="true"></i></a>
-                                    <a class="rgba-brown-light white-text" href="/tnt/delete/{{this._id}}"><i
+                                    <a class="rgba-brown-light white-text" href="/tnt/delete/{{this._id}}/tnt"><i
                                             class="fa fa-trash" aria-hidden="true"></i></a>
                                 </div>
                                 <div class="col-sm-10">
-                                    <a class="rgba-brown-light white-text" href='#'>{{this.eventName}}</a>
+                                    <a class="rgba-brown-light white-text" href='#'>TNT-{{this.eventName}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {{/each}}
+                {{#each fireBall}}
+                    <li class="media list-group-item list-group-item-secondary rgba-brown-light">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <a class="rgba-brown-light white-text" href=""><i class="fa fa-edit"
+                                                                                      aria-hidden="true"></i></a>
+                                    <a class="rgba-brown-light white-text" href="/fireBall/delete/{{this._id}}/fb"><i
+                                            class="fa fa-trash" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="col-sm-10">
+                                    <a class="rgba-brown-light white-text" href='#'>FB-{{this.fbName}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {{/each}}
+                {{#each poolFire}}
+                    <li class="media list-group-item list-group-item-secondary rgba-brown-light">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <a class="rgba-brown-light white-text" href=""><i class="fa fa-edit"
+                                                                                      aria-hidden="true"></i></a>
+                                    <a class="rgba-brown-light white-text" href="/poolFire/delete/{{this._id}}/pf"><i
+                                            class="fa fa-trash" aria-hidden="true"></i></a>
+                                </div>
+                                <div class="col-sm-10">
+                                    <a class="rgba-brown-light white-text" href='#'>PF-{{this.pfName}}</a>
                                 </div>
                             </div>
                         </div>
