@@ -5,9 +5,7 @@ const TntModel = require('../calcModels/TntExplosion.js');
 const validator = require('../helpers/validator');
 
 router.post('/create', validator.isLoggedIn, (req, res, next) => {
-    /* Coordinates dummy for first save */
     let coordinates = [];
-    let tntResultsArray = [];
     coordinates.push(req.body.lngTnt);
     coordinates.push(req.body.latTnt);
     req.body.user = req.user._id;
