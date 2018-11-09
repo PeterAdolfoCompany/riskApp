@@ -53,7 +53,7 @@ router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (r
 
 router.get('/report/:id/:type',validator.isLoggedIn, validator.checkIfOwner, (req, res) =>{
     TntExplosion
-    .findById(req.tnt.id)
+    .findById(req.element.id)
     .then(tntEvent => {
         res.render('reportTNT',{tntEvent});
     })
