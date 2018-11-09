@@ -51,7 +51,7 @@ router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (r
         });
 });
 
-router.get('/report/:id',isLoggedIn, checkIfOwner, (req, res) =>{
+router.get('/report/:id/:type',validator.isLoggedIn, validator.checkIfOwner, (req, res) =>{
     TntExplosion
     .findById(req.tnt.id)
     .then(tntEvent => {
@@ -60,6 +60,6 @@ router.get('/report/:id',isLoggedIn, checkIfOwner, (req, res) =>{
     .catch(err => {
         res.render('home', {err});
     })
-})
+});
 
 module.exports = router;

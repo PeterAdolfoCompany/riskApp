@@ -133,7 +133,7 @@ router.post('/create', validator.isLoggedIn, (req, res, next) => {
         })
 });
 
-router.get('/report/:id',isLoggedIn, (req, res) =>{
+router.get('/report/:id/:type',validator.isLoggedIn, (req, res) =>{
     PoolFire
     .findById(req.props.id)
     .then(poolFireEvent => {
@@ -142,7 +142,7 @@ router.get('/report/:id',isLoggedIn, (req, res) =>{
     .catch(err => {
         res.render('home', {err});
     })
-})
+});
 
 router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (req, res) => {
     PoolFire
