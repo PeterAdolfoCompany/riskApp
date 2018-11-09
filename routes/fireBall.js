@@ -2,14 +2,9 @@ const express = require('express');
 const router  = express.Router();
 const FireBall = require('../models/FireBallSchema');
 const FireBallModel = require('../calcModels/FireBall.js');
+const validator = require('../helpers/validator');
 
-
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect('/auth/login');
-}
-
-router.post('/create', isLoggedIn, (req, res, next) => {
+router.post('/create', validator.isLoggedIn, (req, res, next) => {
     /* Coordinates dummy for first save */
     let coordinates = [];
     coordinates.push(req.body.lngFb);
@@ -46,6 +41,18 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         .catch(err => {
             res.render('home', {err, msg: 'No se pudo crear el punto'});
         })
+});
+
+router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (req, res) => {
+    FireBall
+        .findByIdAndRemove(req.element.id)
+        .then(() => {
+            res.redirect('/home');
+        })
+        .catch(err => {
+            res.render('home', {err});
+        })
+    ;
 });
 
 module.exports = router;

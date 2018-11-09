@@ -2,27 +2,9 @@ const express = require('express');
 const router = express.Router();
 const TntExplosion = require('../models/TntExplosionSchema');
 const TntModel = require('../calcModels/TntExplosion.js');
+const validator = require('../helpers/validator');
 
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) return next();
-    res.redirect('/auth/login');
-}
-
-function checkIfOwner(req, res, next) {
-    TntExplosion.findById(req.params.id)
-        .then(tnt => {
-            if (tnt.user.toString() === req.user._id.toString()) {
-                req.tnt = tnt;
-                return next();
-            }
-            res.redirect('/home');
-        })
-        .catch(err => {
-            res.render('home', {err});
-        })
-}
-
-router.post('/create', isLoggedIn, (req, res, next) => {
+router.post('/create', validator.isLoggedIn, (req, res, next) => {
     /* Coordinates dummy for first save */
     let coordinates = [];
     let tntResultsArray = [];
@@ -44,7 +26,6 @@ router.post('/create', isLoggedIn, (req, res, next) => {
     req.body.radio01 = TnT.overpressureToDistance(req.body.overPressure01);
     req.body.radio02 = TnT.overpressureToDistance(req.body.overPressure02);
     req.body.radio03 = TnT.overpressureToDistance(req.body.overPressure03);
-    req.body.hola = "hola que tal";
     // ------END CALCULATIONS ---------
 
     TntExplosion.create(req.body)
@@ -59,9 +40,9 @@ router.post('/create', isLoggedIn, (req, res, next) => {
         })
 });
 
-router.get('/delete/:id', isLoggedIn, checkIfOwner, (req, res) => {
+router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (req, res) => {
     TntExplosion
-        .findByIdAndRemove(req.tnt.id)
+        .findByIdAndRemove(req.element.id)
         .then(() => {
             res.redirect('/home');
         })
