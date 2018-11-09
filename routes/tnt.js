@@ -54,6 +54,7 @@ router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (r
 router.get('/report/:id/:type',validator.isLoggedIn, validator.checkIfOwner, (req, res) =>{
     TntExplosion
     .findById(req.element.id)
+    .populate('user', 'email')
     .then(tntEvent => {
         res.render('reportTNT',{tntEvent});
     })

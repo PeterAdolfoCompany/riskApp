@@ -3,7 +3,7 @@
 
     <h5 class="card-header h3"> <img src="/images/logo.png" alt="" width="60px"> Tnt Explosion Model</h5>
     <div class="card-body">
-      <p class="text-right">Id: {{tntEvent.user}}</p>
+      <p class="text-right">User: {{tntEvent.user.email}}</p>
       <h5 class="card-title">Event name: {{tntEvent.eventName}}</h5>
       <p>Coordinates: {{tntEvent.location.coordinates}}</p>
       <hr>
@@ -48,6 +48,7 @@
         <canvas id="lineChart" width="200" height="200"></canvas>
       </div>
     </div>
+    <p class="text-right">Creation date: {{tntEvent.created_at}}</p>
   </div>
 </div>
 <a href="/home">Return</a>

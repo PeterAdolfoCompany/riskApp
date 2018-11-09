@@ -119,8 +119,6 @@ router.post('/create', validator.isLoggedIn, (req, res, next) => {
     req.body.radio03 = poolFireEvent.xTermAtQNivelPiso(req.body.pfRad03)
     // ------END CALCULATIONS ---------
  
-    console.log("REQUEST DE POOLFIRE: ", req.body)
-
     PoolFire.create(req.body)
         .then(() => {
             res.redirect('/home')
@@ -133,16 +131,6 @@ router.post('/create', validator.isLoggedIn, (req, res, next) => {
         })
 });
 
-router.get('/report/:id/:type',validator.isLoggedIn, (req, res) =>{
-    PoolFire
-    .findById(req.props.id)
-    .then(poolFireEvent => {
-        res.render('reportPoolF',{poolFireEvent});
-    })
-    .catch(err => {
-        res.render('home', {err});
-    })
-});
 
 router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (req, res) => {
     PoolFire
@@ -155,5 +143,18 @@ router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (r
         })
     ;
 });
+
+router.get('/report/:id/:type',validator.isLoggedIn, validator.checkIfOwner, (req, res) =>{
+    PoolFire
+    .findById(req.element.id)
+    .populate('user', 'email')
+    .then(poolFireEvent => {
+        res.render('reportPoolF',{poolFireEvent});
+    })
+    .catch(err => {
+        res.render('home', {err});
+    })
+});
+
 
 module.exports = router;

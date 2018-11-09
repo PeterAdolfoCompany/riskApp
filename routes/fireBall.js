@@ -55,4 +55,17 @@ router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (r
     ;
 });
 
+router.get('/report/:id/:type',validator.isLoggedIn, validator.checkIfOwner, (req, res) =>{
+    FireBall
+    .findById(req.element.id)
+    .populate('user', 'email')
+    .then(fireBallEvent => {
+        console.log("FIRE BALL: ",fireBallEvent)
+        res.render('reportFireBall',{fireBallEvent});
+    })
+    .catch(err => {
+        res.render('home', {err});
+    })
+});
+
 module.exports = router;
