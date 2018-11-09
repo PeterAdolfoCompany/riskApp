@@ -38,8 +38,7 @@ router.post('/register', (req, res) => {
             res.redirect('/auth/login');
         })
         .catch(err => {
-            console.log(err);
-            res.status(500).render('register', {err, msg:'No pudimos registrar el usuario'})
+            res.status(500).render('register', {err, msg:'Error: The user could not be registered¡¡'})
         })
 });
 

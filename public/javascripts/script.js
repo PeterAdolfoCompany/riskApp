@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 }, false);
 
-// JS PARA EL NAV BAR -----------------------------
+// JS FOR NAV BAR -----------------------------
 
 $(".sidebar-dropdown > a").click(function () {
   $(".sidebar-submenu").slideUp(200);
@@ -38,7 +38,7 @@ $("#show-sidebar").click(function () {
 
 
 
-//DEL MODAL DE POOLFIRE
+//FROM MODAL POOLFIRE
 $(document).ready(function () {
   $("#continuosLakeDiv").show();
   $("#massiveLeakDiv").hide();

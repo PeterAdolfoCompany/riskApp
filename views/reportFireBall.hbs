@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="card border-warning" class="row">
+
+    <h5 class="card-header h3"> <img src="/images/logo.png" alt="" width="60px"> Fire Ball Model</h5>
+    <div class="card-body">
+      <p class="text-right">User: {{fireBallEvent.user.email}}</p>
+      <h5 class="card-title">Event name: {{fireBallEvent.fbName}}</h5>
+      <hr>
+      <h5 class="card-title">Substance: {{fireBallEvent.fbSubstance}}</h5>
+      <p>Enthalpy of combustion {{fireBallEvent.fbHckjkg}} kJ/kg</p>
+      <hr>
+      <h5 class="card-title">Atmospheric data</h5>
+      <p>Ambient temperature {{fireBallEvent.fbAirTemp}} C</p>
+      <p>Humidity {{fireBallEvent.fbHumidity}} %</p>
+      <hr>
+      <h5 class="card-title">Source data</h5>
+      <p>Leaked mass {{fireBallEvent.fbMassRelease}} kg</p>
+      <p>Radiation fraction {{fireBallEvent.fbRadiationFraction}}</p>
+
+      <hr>
+      <table class="table table-bordered">
+        <thead>
+          <tr class="brown lighten-4">
+            <th scope="col">id Event</th>
+            <th scope="col">Thermal Radiation (kJ/m2)</th>
+            <th scope="col">Distance (m)</th>
+            <th scope="col">Effects</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="danger-color">
+            <th scope="row">1</th>
+            <td>10</td>
+            <td>{{fireBallEvent.radio01}}</td>
+            <td>Building destruction</td>
+          </tr>
+          <tr class="warning-color">
+            <th scope="row">2</th>
+            <td>5</td>
+            <td>{{fireBallEvent.radio02}}</td>
+            <td>Major Injuries (Risk Zone)</td>
+          </tr>
+          <tr class="default-color">
+            <th scope="row">3</th>
+            <td>1.4</td>
+            <td>{{fireBallEvent.radio03}}</td>
+            <td>Minor Injuries (Buffer Zone</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-md-6" width="200">
+        <canvas id="lineChart" width="200" height="200"></canvas>
+      </div>
+    </div>
+    <p class="text-right">Creation date: {{fireBallEvent.created_at}}</p>
+  </div>
+</div>
+<a href="/home">Return</a>

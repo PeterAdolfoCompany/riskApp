@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-//mw - Peso Molecular
 
 const chemSchema = new Schema({
   name: String,
@@ -10,7 +9,7 @@ const chemSchema = new Schema({
   tb:Number,
   tc:Number,
   hckjkg:Number,
-  hcstate:String, //Verifica si el liquido o gas
+  hcstate:String, 
   hva: Number,
   hvn:Number,
   cpla:Number,

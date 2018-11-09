@@ -5,10 +5,14 @@ function initMap() {
     map = document.getElementById('map');
     if (typeof (map) !== 'undefined' && map != null) {
         map = new google.maps.Map(map, {
-            zoom: 20,
+            zoom: 17,
             center: {
-                lat: -34.397,
-                lng: 150.644
+                lat: -99.17182,
+                lng: 19.3979
+            },
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.LEFT_CENTER
             },
         });
 
@@ -47,14 +51,14 @@ function addEvent(modalName) {
     // adds a listener to the marker
     // gets the coords when drag event ends
     // then updates the input with the new coords
-    google.maps.event.addListener(vMarker, 'dragend', function (evt) {
-        // Set coordinates
-        pos = {
-            lat: evt.latLng.lat(),
-            lng: evt.latLng.lng()
-        };
-        map.panTo(evt.latLng);
-    });
+        google.maps.event.addListener(vMarker, 'dragend', function (evt) {
+            // Set coordinates
+            pos = {
+                lat: evt.latLng.lat(),
+                lng: evt.latLng.lng()
+            };
+            map.panTo(evt.latLng);
+        });
 
     // centers the map on markers coords
     map.setCenter(vMarker.position);
@@ -65,26 +69,6 @@ function addEvent(modalName) {
     id = vMarker.__gm_id;
 
     markers.push(vMarker);
-
-
-    vMarker.addListener("rightclick", function (e) {
-        for (prop in e) {
-            if (e[prop] instanceof MouseEvent) {
-                mouseEvt = e[prop];
-                var left = mouseEvt.clientX;
-                var top = mouseEvt.clientY;
-
-                menuBox = document.getElementById("menuev");
-                menuBox.style.left = left + "px";
-                menuBox.style.top = top + "px";
-                menuBox.style.display = "block";
-
-                mouseEvt.preventDefault();
-
-                menuDisplayed = true;
-            }
-        }
-    });
 
     // SHOW MODAL
     vMarker.addListener('dblclick', function (e) {
@@ -104,14 +88,6 @@ function addEvent(modalName) {
             $('#tntExplosionEvent').modal('show');
             $("#latTnt").val(pos.lat);
             $("#lngTnt").val(pos.lng);
-        }
-
-
-    });
-
-    map.addListener("click", function (e) {
-        if (menuDisplayed) {
-            menuBox.style.display = "none";
         }
     });
 }

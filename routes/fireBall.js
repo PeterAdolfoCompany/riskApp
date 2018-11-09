@@ -32,8 +32,7 @@ router.post('/create', validator.isLoggedIn, (req, res, next) => {
     req.body.radio03 = fireBall.xDistanceToQTerm(req.body.fbRad03);
     // ------END CALCULATIONS ---------
 
-    console.log("OBJETO: ", req.body)
-
+    console.log("OBJETO FIRE BALL: ", req.body)
 
     FireBall.create(req.body)
         .then(() => {
@@ -54,6 +53,19 @@ router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (r
             res.render('home', {err});
         })
     ;
+});
+
+router.get('/report/:id/:type',validator.isLoggedIn, validator.checkIfOwner, (req, res) =>{
+    FireBall
+    .findById(req.element.id)
+    .populate('user', 'email')
+    .then(fireBallEvent => {
+        console.log("FIRE BALL: ",fireBallEvent)
+        res.render('reportFireBall',{fireBallEvent});
+    })
+    .catch(err => {
+        res.render('home', {err});
+    })
 });
 
 module.exports = router;

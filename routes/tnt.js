@@ -48,8 +48,19 @@ router.get('/delete/:id/:type', validator.isLoggedIn, validator.checkIfOwner, (r
         })
         .catch(err => {
             res.render('home', {err});
-        })
-    ;
+        });
+});
+
+router.get('/report/:id/:type',validator.isLoggedIn, validator.checkIfOwner, (req, res) =>{
+    TntExplosion
+    .findById(req.element.id)
+    .populate('user', 'email')
+    .then(tntEvent => {
+        res.render('reportTNT',{tntEvent});
+    })
+    .catch(err => {
+        res.render('home', {err});
+    })
 });
 
 module.exports = router;

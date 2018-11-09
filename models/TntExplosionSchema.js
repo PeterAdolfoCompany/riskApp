@@ -10,16 +10,16 @@ const tntExplosionSchema = new Schema({
   },
   energyFraction: Number,
   massRelease: Number,
-  // SUSTANCIA
+  // SUBSTANCE
   subsName: String,
   hckjkg: Number,
   // SETTINGS
   overPressure01: Number,
   overPressure02: Number,
   overPressure03: Number,
-  //RESULTADOS
-  TntExplosionArray: [Number], //Array para graficar y reporte
-  radio01: Number, //Radios calculados en base a los datos de radiación del User Campos explosionP1 2 o 3
+  //RESULTS
+  TntExplosionArray: [Number], 
+  radio01: Number,
   radio02: Number,
   radio03: Number,
   location: {

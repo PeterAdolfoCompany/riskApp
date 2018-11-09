@@ -27,7 +27,7 @@ const poolFireSchema = new Schema({
         ref: 'User',
         required: true
     },
-    //DATOS SOURCE
+    //DATA SOURCE
     typeLeak: Number, //1 => continuosLeak, 2 => massiveLeak, 3 => circularDike, 4 => noCircularDike
     //Fraccion de combustion en PointSource
     combFractionPointSource: {
@@ -50,9 +50,9 @@ const poolFireSchema = new Schema({
     pfRad03: Number,
     timeExposition: Number,
 
-    //RESULTADOS
-    poolFireArray: [Number], //Array para graficar y reporte
-    radio01: Number, //Radios calculados en base a los datos de radiación del User Campos poolFireQX
+    //RESULTS
+    poolFireArray: [Number],
+    radio01: Number,
     radio02: Number,
     radio03: Number,
     location: {
