@@ -10,8 +10,13 @@ function isLoggedIn(req, res, next) {
     res.redirect('/auth/login');
 }
 
-/* GET home page */
+/* GET index page */
 router.get('/', (req, res, next) => {
+    res.render('index');
+  });
+
+/* GET login page */
+router.get('/login', (req, res, next) => {
   res.redirect('/auth/login');
 });
 
